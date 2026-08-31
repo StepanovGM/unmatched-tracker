@@ -269,7 +269,7 @@ function describeEntry(entry, match) {
     case 'ability':
       return `${heroName} — Special ability`;
     case 'return':
-      return `${heroName} — Card returns to play`;
+      return `${heroName} — Card returns: ${entry.cardName}`;
     default:
       return heroName + ' — ' + entry.type;
   }
@@ -289,10 +289,18 @@ const DISCARD_LEAF = {
   'd-defense': 'defense',
 };
 
+const RETURN_LEAF = {
+  'r-attack': 'attack',
+  'r-versatile': 'versatile',
+  'r-scheme': 'scheme',
+  'r-defense': 'defense',
+};
+
 const MENU_LABELS = {
-  play: 'Play', discard: 'Discard', hp: 'HP',
+  play: 'Play', discard: 'Discard', hp: 'HP', return: 'Card Returns',
   attack: 'Attack', versatile: 'Versatile', scheme: 'Scheme', defend: 'Defend',
   'd-attack': 'Attack', 'd-versatile': 'Versatile', 'd-scheme': 'Scheme', 'd-defense': 'Defense',
+  'r-attack': 'Attack', 'r-versatile': 'Versatile', 'r-scheme': 'Scheme', 'r-defense': 'Defense',
 };
 
 function bindTapOrHold(el, onTap, onHold, holdMs) {
@@ -338,7 +346,7 @@ function renderRootMenu(grid) {
   grid.appendChild(makeMenuButton('HP', () => { nav.path = ['hp']; renderMenu(); }));
   grid.appendChild(makeMenuButton('Sidekick Spawn', () => commitSimple({ type: 'spawn' })));
   grid.appendChild(makeMenuButton('Special Ability', () => commitSimple({ type: 'ability' })));
-  grid.appendChild(makeMenuButton('Card Returns', () => commitSimple({ type: 'return' })));
+  grid.appendChild(makeMenuButton('Card Returns', () => { nav.path = ['return']; renderMenu(); }));
 }
 
 function renderPlayMenu(grid) {
@@ -353,6 +361,13 @@ function renderDiscardMenu(grid) {
   grid.appendChild(makeMenuButton('Versatile', () => { nav.path = ['discard', 'd-versatile']; renderMenu(); }));
   grid.appendChild(makeMenuButton('Scheme', () => { nav.path = ['discard', 'd-scheme']; renderMenu(); }));
   grid.appendChild(makeMenuButton('Defense', () => { nav.path = ['discard', 'd-defense']; renderMenu(); }));
+}
+
+function renderReturnMenu(grid) {
+  grid.appendChild(makeMenuButton('Attack', () => { nav.path = ['return', 'r-attack']; renderMenu(); }));
+  grid.appendChild(makeMenuButton('Versatile', () => { nav.path = ['return', 'r-versatile']; renderMenu(); }));
+  grid.appendChild(makeMenuButton('Scheme', () => { nav.path = ['return', 'r-scheme']; renderMenu(); }));
+  grid.appendChild(makeMenuButton('Defense', () => { nav.path = ['return', 'r-defense']; renderMenu(); }));
 }
 
 function renderCardList(grid, cardType, opts) {
@@ -376,17 +391,20 @@ function renderCardList(grid, cardType, opts) {
     btn.appendChild(img);
     btn.appendChild(label);
 
-    if (opts.isDiscard) {
+    const payload = () => {
+      const base = { type: opts.commitType, cardType, cardId: card.id, cardName: card.name };
+      if (opts.commitType === 'play') base.mechanic = typeof opts.mechanic === 'function' ? opts.mechanic() : opts.mechanic;
+      return base;
+    };
+
+    if (opts.boostable) {
       bindTapOrHold(
         btn,
-        () => commitSimple({ type: 'discard', cardType, cardId: card.id, cardName: card.name, boosted: false }),
-        () => commitSimple({ type: 'discard', cardType, cardId: card.id, cardName: card.name, boosted: true })
+        () => commitSimple({ ...payload(), boosted: false }),
+        () => commitSimple({ ...payload(), boosted: true })
       );
     } else {
-      const mechanic = typeof opts.mechanic === 'function' ? opts.mechanic() : opts.mechanic;
-      btn.addEventListener('click', () =>
-        commitSimple({ type: 'play', mechanic, cardType, cardId: card.id, cardName: card.name })
-      );
+      btn.addEventListener('click', () => commitSimple(payload()));
     }
 
     grid.appendChild(btn);
@@ -469,7 +487,9 @@ function renderMenu() {
 
   const key = nav.path.join('.');
   const isCardList =
-    (nav.path[0] === 'play' && PLAY_LEAF[nav.path[1]]) || (nav.path[0] === 'discard' && DISCARD_LEAF[nav.path[1]]);
+    (nav.path[0] === 'play' && PLAY_LEAF[nav.path[1]]) ||
+    (nav.path[0] === 'discard' && DISCARD_LEAF[nav.path[1]]) ||
+    (nav.path[0] === 'return' && RETURN_LEAF[nav.path[1]]);
   grid.classList.toggle('card-grid', !!isCardList);
 
   if (key === '') {
@@ -478,11 +498,15 @@ function renderMenu() {
     renderPlayMenu(grid);
   } else if (key === 'discard') {
     renderDiscardMenu(grid);
+  } else if (key === 'return') {
+    renderReturnMenu(grid);
   } else if (nav.path[0] === 'play' && PLAY_LEAF[nav.path[1]]) {
     const leaf = PLAY_LEAF[nav.path[1]];
-    renderCardList(grid, leaf.cardType, { mechanic: leaf.mechanic });
+    renderCardList(grid, leaf.cardType, { commitType: 'play', mechanic: leaf.mechanic });
   } else if (nav.path[0] === 'discard' && DISCARD_LEAF[nav.path[1]]) {
-    renderCardList(grid, DISCARD_LEAF[nav.path[1]], { isDiscard: true });
+    renderCardList(grid, DISCARD_LEAF[nav.path[1]], { commitType: 'discard', boostable: true });
+  } else if (nav.path[0] === 'return' && RETURN_LEAF[nav.path[1]]) {
+    renderCardList(grid, RETURN_LEAF[nav.path[1]], { commitType: 'return' });
   } else if (key === 'hp') {
     renderHpPanel(grid);
   }
