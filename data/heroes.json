@@ -1,0 +1,1549 @@
+{
+  "_readme": "Hero/card reference data for the Unmatched tracker. Card and cover images are NOT stored in this repo — the `image` fields are live URLs to the-unmatched.club's public asset storage, loaded by the app at runtime. Card art and hero designs are property of Restoration Games, LLC; this data is for personal, non-commercial gameplay tracking only.",
+  "heroes": [
+    {
+      "slug": "dracula",
+      "name": "Dracula",
+      "subtitle": "& The Sisters",
+      "set": "Cobble & Fog",
+      "attackType": "Melee",
+      "hp": 13,
+      "move": 2,
+      "avatarImage": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/avatars/Z4LCYo_MOeJ9S2nkJMsL1.webp",
+      "specialAbility": "At the start of your turn, you may deal 1 damage to a fighter adjacent to Dracula. If you do, draw a card.",
+      "heroFigure": {
+        "count": 1,
+        "miniImage": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/minis/jhgwbg00y5So-428_BJm9.png"
+      },
+      "sidekick": {
+        "name": "The Sisters",
+        "count": 3,
+        "hp": 1,
+        "attackType": "Melee",
+        "tokenImages": [
+          "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/sidekicks/Sieq2amzgUkiAkkiSbYal.webp",
+          "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/sidekicks/wPJcRfNBRXAKcAp5BRSRI.webp",
+          "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/sidekicks/jdERxNTRgkKhl5P7sz49q.webp"
+        ]
+      },
+      "cardBackImage": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/card-covers/vI43Lyv3aAGgUa9vfv-uT.png",
+      "cards": [
+        {
+          "id": 53,
+          "name": "Beastform",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/6BP08cn7nsLPcSfsszMH7.webp",
+          "type": "attack"
+        },
+        {
+          "id": 59,
+          "name": "Thirst for Sustenance",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/eVBC7X2wJq5cF6N_gCOAq.webp",
+          "type": "attack"
+        },
+        {
+          "id": 9,
+          "name": "Ambush",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/lB_wRdJ7O6vaMggLV7Myp.webp",
+          "type": "attack"
+        },
+        {
+          "id": 51,
+          "name": "Feeding Frenzy",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/TofaAjr1joW172-NCHVWy.webp",
+          "type": "attack"
+        },
+        {
+          "id": 13,
+          "name": "Exploit",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/31euhPzOcGgFPAUmjWKAB.webp",
+          "type": "versatile"
+        },
+        {
+          "id": 11,
+          "name": "Dash",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/HOVky5pTZndIx5bFMFFj1.webp",
+          "type": "versatile"
+        },
+        {
+          "id": 2,
+          "name": "Feint",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/2k3JIwU4kw4YSemTYmIvO.webp",
+          "type": "versatile"
+        },
+        {
+          "id": 54,
+          "name": "Do My Bidding",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/vQytPFEBo8TIGx8wd1Izh.webp",
+          "type": "defense"
+        },
+        {
+          "id": 55,
+          "name": "Look Into My Eyes",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/Z_XEeMtV027k2ZfAO0rz2.webp",
+          "type": "defense"
+        },
+        {
+          "id": 57,
+          "name": "Prey Upon",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/Xz1hDgRRDlwBtXXZ1qsYu.webp",
+          "type": "scheme"
+        },
+        {
+          "id": 56,
+          "name": "Mistform",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/hX48E_mXnlsnvgsLdtamW.webp",
+          "type": "scheme"
+        },
+        {
+          "id": 58,
+          "name": "Baptism of Blood",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/Cmq0PgjLA22NhWzmmCY-0.webp",
+          "type": "scheme"
+        },
+        {
+          "id": 60,
+          "name": "Ravening Seduction",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/G02A_Og3IqMNrw7PC6ROc.webp",
+          "type": "scheme"
+        }
+      ]
+    },
+    {
+      "slug": "raptors",
+      "name": "Raptors",
+      "subtitle": null,
+      "set": "Jurassic Park - Ingen vs. Raptors",
+      "attackType": "Melee",
+      "hp": 7,
+      "move": 3,
+      "avatarImage": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/avatars/XK60vlQzY_BhoHHrmyzzu.webp",
+      "specialAbility": "Raptors add 1 to the value of their attack cards for each of your other Raptors adjacent to the defender.",
+      "heroFigure": {
+        "count": 3,
+        "miniImages": [
+          "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/minis/g5TYUnp2IFQW22nwxj8h6.webp",
+          "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/minis/VAVM8oNQz6jztV5uLFgU4.webp",
+          "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/minis/tY4_VEwTN35tX3g_siVOj.webp"
+        ]
+      },
+      "sidekick": null,
+      "cardBackImage": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/card-covers/591BE1ij7PVn6uzsqucd1.webp",
+      "cards": [
+        {
+          "id": 147,
+          "name": "Eviscerate",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/awpBWn8baMHeTEWz3PUeW.webp",
+          "type": "attack"
+        },
+        {
+          "id": 8,
+          "name": "Disengage",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/uqp4BOfqUgISO5zyf_I_r.webp",
+          "type": "attack"
+        },
+        {
+          "id": 134,
+          "name": "Pack Hunters",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/Wy2Af1esighREI63XHs4v.webp",
+          "type": "attack"
+        },
+        {
+          "id": 133,
+          "name": "Clever Girl",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/kmJ1lz9divvxfiPwL3pao.webp",
+          "type": "attack"
+        },
+        {
+          "id": 128,
+          "name": "They Remember",
+          "count": 4,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/mdcED5VFeplBBQIM-ZFRm.webp",
+          "type": "attack"
+        },
+        {
+          "id": 9,
+          "name": "Ambush",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/BOkONLMCr8D5vRYhtBlgP.webp",
+          "type": "attack"
+        },
+        {
+          "id": 135,
+          "name": "Eaten Alive",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/7r77d6pzmwXdsdfkpDVkf.webp",
+          "type": "versatile"
+        },
+        {
+          "id": 2,
+          "name": "Feint",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/oVTMEzf7MMgw2qDsr-9Aq.webp",
+          "type": "versatile"
+        },
+        {
+          "id": 136,
+          "name": "Decoy",
+          "count": 4,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/JIpOttCvrm-NCka3ft5-v.webp",
+          "type": "defense"
+        },
+        {
+          "id": 127,
+          "name": "Working Things Out",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/vA2TldzEqwqUblieTUcvQ.webp",
+          "type": "scheme"
+        },
+        {
+          "id": 125,
+          "name": "Coordinated Attack Pattern",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/3X9hQClV68-EDuSE9Fw41.webp",
+          "type": "scheme"
+        }
+      ]
+    },
+    {
+      "slug": "blackbeard",
+      "name": "Blackbeard",
+      "subtitle": "& Seadog",
+      "set": "Battle of Legends, Volume Three",
+      "attackType": "Range",
+      "hp": 13,
+      "move": 2,
+      "avatarImage": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/avatars/r3uOkimJegDYnEAu7cjz3.webp",
+      "specialAbility": "PRIVATEER TURNED PIRATE
+Start the game with 1 doubloon in the treasury, you have the other 2.
+- At the start of your turn, you may pay 1 doubloon to gain 1 action.
+- When Blackbeard takes combat damage, pay 1 doubloon.
+
+BLACKBEARD'S DOUBLOONS
+Doubloons that Blackbeard doesn't have are kept in the Treasury.
+
+Blackbeard pays a doubloon to the Treasury when he takes combat damage. He may also pay a doubloon at the start of his turn to gain an extra action.
+
+The effects on many of Blackbeard's cards can be ignored by paying a ransom. Any opponent can pay the amount of doubloons shown at the end of an effect to ignore that effect. These doubloons are taken from the Treasury and given to Blackbeard.",
+      "heroFigure": {
+        "count": 1,
+        "miniImage": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/minis/PL2zOdyCoWbpnYzjDbHLc.webp"
+      },
+      "sidekick": {
+        "name": "Seadog",
+        "count": 2,
+        "hp": 1,
+        "attackType": "Melee",
+        "tokenImages": [
+          "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/sidekicks/hIwnvFiEt-qguLvRoENRK.webp",
+          "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/sidekicks/QYPUl2leIgUSyklnUueb_.webp"
+        ]
+      },
+      "cardBackImage": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/card-covers/ZeiHZOD0yDLap-wB9yF_x.webp",
+      "cards": [
+        {
+          "id": 685,
+          "name": "Avast Ye!",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/Aq781zSk1MrYo2f0KkcSG.webp",
+          "type": "attack"
+        },
+        {
+          "id": 687,
+          "name": "Give no quarter",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/ojYfUDOnggCikmcgNrKMh.webp",
+          "type": "attack"
+        },
+        {
+          "id": 696,
+          "name": "Light the fuse",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/4Sk9hrIaAsT4F7ErrPt6f.webp",
+          "type": "attack"
+        },
+        {
+          "id": 686,
+          "name": "A brace of primed pistols",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/JVLIR75n_WAqqKlB7vdT5.webp",
+          "type": "attack"
+        },
+        {
+          "id": 689,
+          "name": "Queen Anne's revenge",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/maf53cKMLeLZCho3JmReg.webp",
+          "type": "versatile"
+        },
+        {
+          "id": 691,
+          "name": "Parley",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/5UIFoJN4-2gpDNF48jVzH.webp",
+          "type": "versatile"
+        },
+        {
+          "id": 690,
+          "name": "Fearsome and calculating",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/OGFti3U6hoWnqptOS-kTC.webp",
+          "type": "versatile"
+        },
+        {
+          "id": 693,
+          "name": "Show a leg!",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/8SoyWr4Qj0e-uN8MqmYrX.webp",
+          "type": "versatile"
+        },
+        {
+          "id": 692,
+          "name": "No prey, no pay",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/3y_XA0OkFGzidRdVRHu6O.webp",
+          "type": "versatile"
+        },
+        {
+          "id": 688,
+          "name": "Intimidating visage",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/ORpfO5sc7wUU_6t9-c59X.webp",
+          "type": "defense"
+        },
+        {
+          "id": 694,
+          "name": "Plunder",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/fEOSwLTi7todHOjqbaUKz.webp",
+          "type": "scheme"
+        },
+        {
+          "id": 695,
+          "name": "Scourge of the seven seas",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/RuDpm9b9ako83x78iTVIV.webp",
+          "type": "scheme"
+        }
+      ]
+    },
+    {
+      "slug": "hamlet",
+      "name": "Hamlet",
+      "subtitle": "& Rosencrantz & Guildenstern",
+      "set": "Slings and Arrows",
+      "attackType": "Melee",
+      "hp": 15,
+      "move": 2,
+      "avatarImage": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/avatars/h_TeY_o2t6e1Hc0PuUHq9.webp",
+      "specialAbility": "THE QUESTION
+At the start of your turn, choose TO BE or NOT TO BE. If you choose NOT TO BE, deal 2 damage to one of your fighters.
+TO BE: When you maneuver, draw 1 additional card.
+NOT TO BE: Add +2 to the value of Hamlet's attacks.",
+      "heroFigure": {
+        "count": 1,
+        "miniImage": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/minis/KCW4JwtH3WkcN6gO9YvM2.webp"
+      },
+      "sidekick": {
+        "name": "Rosencrantz & Guildenstern",
+        "count": 1,
+        "hp": 6,
+        "attackType": "Melee",
+        "tokenImages": [
+          "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/sidekicks/SgxYZQRA_yzaMm3IiCIaB.webp"
+        ]
+      },
+      "cardBackImage": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/card-covers/bg3s8IEdB07YlbFJQSGS5.webp",
+      "cards": [
+        {
+          "id": 580,
+          "name": "To Sleep, Perchance To Dream",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/lM0WKzH55Ur5v5KkqZgjZ.webp",
+          "type": "attack"
+        },
+        {
+          "id": 581,
+          "name": "Uncertain Doom",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/cGA-vDrB57IoqqO5U0oU3.webp",
+          "type": "attack"
+        },
+        {
+          "id": 571,
+          "name": "Cruel To Be Kind",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/G6V38iu8ARMU5MyZq5Pav.webp",
+          "type": "attack"
+        },
+        {
+          "id": 577,
+          "name": "The Play's The Thing",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/6PxGTnvST42FBgPy3sz75.webp",
+          "type": "versatile"
+        },
+        {
+          "id": 578,
+          "name": "The Readiness Is All",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/Pm9C38p3-uf2TLKXGijk2.webp",
+          "type": "versatile"
+        },
+        {
+          "id": 570,
+          "name": "Blood Will Have Blood",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/qtnfi1IYtpUmkmtoq9R3B.webp",
+          "type": "versatile"
+        },
+        {
+          "id": 575,
+          "name": "Outrageous Fortune",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/xdyWidG2Pg4tsiRrHiwKk.webp",
+          "type": "versatile"
+        },
+        {
+          "id": 574,
+          "name": "Nothing Either Good Or Bad",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/blxzNsD718YCE9EX486I9.webp",
+          "type": "defense"
+        },
+        {
+          "id": 579,
+          "name": "The Rest Is Silence",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/RzS4Bw4mx9a0BHex7qE_t.webp",
+          "type": "defense"
+        },
+        {
+          "id": 572,
+          "name": "Maddening Insight",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/5GYhShVUamcwDqdu3ZC17.webp",
+          "type": "defense"
+        },
+        {
+          "id": 576,
+          "name": "The Ghost",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/AlEL0DFCU2Oro23kVlVNd.webp",
+          "type": "scheme"
+        },
+        {
+          "id": 573,
+          "name": "Method In The Madness",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/TxWZIVg9K-WB-2n7x7ZRV.webp",
+          "type": "scheme"
+        }
+      ]
+    },
+    {
+      "slug": "sun-wukong",
+      "name": "Sun Wukong",
+      "subtitle": "& Clones",
+      "set": "Battle of Legends, Volume Two",
+      "attackType": "Melee",
+      "hp": 17,
+      "move": 2,
+      "avatarImage": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/avatars/1P5P0HatPvHwUvwJuPyAc.webp",
+      "specialAbility": "At the start of your turn, you may take 1 damage to summon a Clone in an empty space adjacent to Sun Wukong.
+Do not start with any Clones on the board.",
+      "heroFigure": {
+        "count": 1,
+        "miniImage": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/minis/OkS_VNxzdYn5EiVtS2AIF.png"
+      },
+      "sidekick": {
+        "name": "Clones",
+        "count": 3,
+        "hp": 1,
+        "attackType": "Melee",
+        "tokenImages": [
+          "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/sidekicks/lTECznDU1KVakYyjpL0UF.webp"
+        ]
+      },
+      "cardBackImage": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/card-covers/EoDLc4PNqSqST9akf5nVn.jpg",
+      "cards": [
+        {
+          "id": 306,
+          "name": "Ox Form",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/USelEZoxP6dw_zfUbxw0A.webp",
+          "type": "attack"
+        },
+        {
+          "id": 305,
+          "name": "Taunting Laughter",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/vxEcWXo5_aEbQhOxOBs-9.webp",
+          "type": "attack"
+        },
+        {
+          "id": 280,
+          "name": "Infinite Strikes",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/T3uLq0GA28OIoFtY8TJwx.webp",
+          "type": "attack"
+        },
+        {
+          "id": 279,
+          "name": "Ruyi Jingo Bang",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/uLoW5_8Mm30zPo6gX-5j6.webp",
+          "type": "attack"
+        },
+        {
+          "id": 6,
+          "name": "Wily Fighting",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/2gOzDDi4qLORSqRA6dpUu.webp",
+          "type": "versatile"
+        },
+        {
+          "id": 307,
+          "name": "72 Transformations",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/BDvpo6NCG8XrN4XpUY45p.webp",
+          "type": "versatile"
+        },
+        {
+          "id": 308,
+          "name": "Sly Monkey",
+          "count": 4,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/jMKhYm4rh75mo2HJETvo0.webp",
+          "type": "versatile"
+        },
+        {
+          "id": 310,
+          "name": "Tortoise Form",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/mYOVqdfM9hvAv1bx6qDsM.webp",
+          "type": "defense"
+        },
+        {
+          "id": 309,
+          "name": "Golden Chain Mail",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/G1ArkwrtK-TxW5fPHyrLb.webp",
+          "type": "defense"
+        },
+        {
+          "id": 23,
+          "name": "Bewilderment",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/1FPxyvPytZu7AmK0woEL-.webp",
+          "type": "defense"
+        },
+        {
+          "id": 311,
+          "name": "Fiery Eyes That See",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/54_2tlYADIbVdvNOcHzQK.webp",
+          "type": "scheme"
+        },
+        {
+          "id": 275,
+          "name": "Phoenix Form",
+          "count": 1,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/H7lSNMYXLHe68VHtwc5x6.webp",
+          "type": "scheme"
+        }
+      ]
+    },
+    {
+      "slug": "robin-hood",
+      "name": "Robin Hood",
+      "subtitle": "& Outlaws",
+      "set": "Robin Hood vs Bigfoot",
+      "attackType": "Range",
+      "hp": 13,
+      "move": 2,
+      "avatarImage": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/avatars/biGrBHVsYWTXjeEYTGqov.webp",
+      "specialAbility": "After you attack, you may move your attacking fighter up to 2 spaces.",
+      "heroFigure": {
+        "count": 1,
+        "miniImage": null
+      },
+      "sidekick": {
+        "name": "Outlaws",
+        "count": 4,
+        "hp": 1,
+        "attackType": "Melee",
+        "tokenImages": [
+          "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/sidekicks/KwI9DqW6Y6Je1Sj_ippng.webp"
+        ]
+      },
+      "cardBackImage": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/card-covers/nTLDla5Mkj_Hc2DfFQULj.jpg",
+      "cards": [
+        {
+          "id": 129,
+          "name": "A Hunter's Eye",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/6h4XaFv8RQBbzrL6DWdqG.png",
+          "type": "attack"
+        },
+        {
+          "id": 15,
+          "name": "Disarming Shot",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/l4w9h4RHqtr44BSEiHb5r.png",
+          "type": "attack"
+        },
+        {
+          "id": 132,
+          "name": "Highway Robbery",
+          "count": 4,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/vFr43cAiuTeSuonALEjhU.png",
+          "type": "attack"
+        },
+        {
+          "id": 9,
+          "name": "Ambush",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/1t3ZVP72MyWGWZx8QHhYe.png",
+          "type": "attack"
+        },
+        {
+          "id": 16,
+          "name": "Piercing Shot",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/gIXbyV3zLCF3oEGYXJmlz.png",
+          "type": "attack"
+        },
+        {
+          "id": 17,
+          "name": "Snark",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/l55xeh16xNlokk_ncOenW.png",
+          "type": "versatile"
+        },
+        {
+          "id": 6,
+          "name": "Wily Fighting",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/nN6NsP5nPGTW8rnkU2ebb.png",
+          "type": "versatile"
+        },
+        {
+          "id": 2,
+          "name": "Feint",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/3_qUTLTF8i6wmW7AUDfXB.png",
+          "type": "versatile"
+        },
+        {
+          "id": 3,
+          "name": "Regroup",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/8yVt75YUuexIavAER74NB.png",
+          "type": "versatile"
+        },
+        {
+          "id": 131,
+          "name": "Defenders of Sherwood",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/s6n5Yn14HcKXWjcH4H3Ov.png",
+          "type": "defense"
+        },
+        {
+          "id": 130,
+          "name": "Steal From the Rich",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/auH5Cm3BFTIA8U3YmlABM.png",
+          "type": "scheme"
+        }
+      ]
+    },
+    {
+      "slug": "little-red",
+      "name": "Little Red",
+      "subtitle": "& Huntsman",
+      "set": "Little Red Riding Hood vs. Beowulf",
+      "attackType": "Melee",
+      "hp": 14,
+      "move": 2,
+      "avatarImage": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/avatars/5W_7-ObJntAkPZUG1JMUF.webp",
+      "specialAbility": "Resolve an effect on a card you play if the symbol next to the effect matches the item in your basket. At the start of the game, place LITTLE RED's BASKET in your discard pile.
+Little Red's Basket: This starts in your discard pile. It does not count as a card.
+🌟 counts as any one 🐺🌹⚔️ symbol.",
+      "heroFigure": {
+        "count": 1,
+        "miniImage": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/minis/MBmHiJAwDSgFZTG-aUKSQ.webp"
+      },
+      "sidekick": {
+        "name": "Huntsman",
+        "count": 1,
+        "hp": 9,
+        "attackType": "Range",
+        "tokenImages": [
+          "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/sidekicks/VEXTjKWJLRGqwdY7_NCr5.webp"
+        ]
+      },
+      "cardBackImage": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/card-covers/xLyD7qzSKyz94f_F6QtEi.webp",
+      "cards": [
+        {
+          "id": 204,
+          "name": "What Big Ears You Have",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/O2_JGSYt-WCqkqDxhSdq9.webp",
+          "type": "attack"
+        },
+        {
+          "id": 208,
+          "name": "Long Have I Sought You",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/tPwXTaRvd97smA0qNHRAK.webp",
+          "type": "attack"
+        },
+        {
+          "id": 187,
+          "name": "What Large Hands You Have",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/bZ_2InTU7elCGo1wxbAoW.webp",
+          "type": "attack"
+        },
+        {
+          "id": 222,
+          "name": "What's That In My Basket?",
+          "count": 4,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/ixYx-aN0Sq76KAPM3tM9Q.webp",
+          "type": "versatile"
+        },
+        {
+          "id": 211,
+          "name": "Once Upon a Time",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/UMlgFXCLxLAqNX8YNF3wz.webp",
+          "type": "versatile"
+        },
+        {
+          "id": 205,
+          "name": "What Big Eyes You Have",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/Bw34A8eSA9vWRq1MYEhwO.webp",
+          "type": "versatile"
+        },
+        {
+          "id": 210,
+          "name": "Stones in the Belly",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/B7mKmB491GA_iqCXE7W4w.webp",
+          "type": "versatile"
+        },
+        {
+          "id": 207,
+          "name": "The Wolf's Skin",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/8qTW6rNcONaMGVHZIOXQd.webp",
+          "type": "defense"
+        },
+        {
+          "id": 203,
+          "name": "What a Terrible Big Mouth You Have",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/MFk-_yPhM6jcizrUuYdYu.webp",
+          "type": "defense"
+        },
+        {
+          "id": 206,
+          "name": "Never Leave the Path",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/rBFJyAYYcJv8l_mG4E3p0.webp",
+          "type": "scheme"
+        },
+        {
+          "id": 209,
+          "name": "A Grimm Tale",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/Z_vhyAWFFIwqE5Y9JHiHi.webp",
+          "type": "scheme"
+        },
+        {
+          "id": 212,
+          "name": "Into the Woods",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/zbor2pw7IucurrmUXBHLP.webp",
+          "type": "scheme"
+        }
+      ]
+    },
+    {
+      "slug": "bigfoot",
+      "name": "Bigfoot",
+      "subtitle": "& The Jackalope",
+      "set": "Robin Hood vs Bigfoot",
+      "attackType": "Melee",
+      "hp": 16,
+      "move": 3,
+      "avatarImage": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/avatars/mUid6ngk5qXZJQcZM0d6C.webp",
+      "specialAbility": "At the end of your turn, if there are no opposing fighters in Bigfoot's zone, you may draw 1 card.",
+      "heroFigure": {
+        "count": 1,
+        "miniImage": null
+      },
+      "sidekick": {
+        "name": "The Jackalope",
+        "count": 1,
+        "hp": 6,
+        "attackType": "Melee",
+        "tokenImages": [
+          "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/sidekicks/brjO1wbtbusXfYkfTDsZ6.webp"
+        ]
+      },
+      "cardBackImage": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/card-covers/mbjF8pursj8AYkalODyXa.jpg",
+      "cards": [
+        {
+          "id": 47,
+          "name": "Larger Than Life",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/fDrxsznCi3qYCediQHeom.png",
+          "type": "attack"
+        },
+        {
+          "id": 333,
+          "name": "Savagery",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/dvW4SgFX44eZbsXkfZUJN.png",
+          "type": "attack"
+        },
+        {
+          "id": 8,
+          "name": "Disengage",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/AcEoowMwF7g8rv2yJtj4V.png",
+          "type": "attack"
+        },
+        {
+          "id": 99,
+          "name": "Hoax",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/YfKwvNbyAZivP60QROf0C.png",
+          "type": "versatile"
+        },
+        {
+          "id": 4,
+          "name": "Skirmish",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/B1gktwtX71Q7CFI9g0JDJ.png",
+          "type": "versatile"
+        },
+        {
+          "id": 5,
+          "name": "Momentous Shift",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/_cSnaMXnYEo1ZDZrLUjIx.png",
+          "type": "versatile"
+        },
+        {
+          "id": 2,
+          "name": "Feint",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/mdwcQ12hMJSfzRnsXlqer.png",
+          "type": "versatile"
+        },
+        {
+          "id": 3,
+          "name": "Regroup",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/DuJisutuNYBuB51zPCDq9.png",
+          "type": "versatile"
+        },
+        {
+          "id": 49,
+          "name": "It's Just Your Imagination",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/VgxMQeKN4Mo91Ws-lrwz8.png",
+          "type": "defense"
+        },
+        {
+          "id": 52,
+          "name": "Jackalope Horns",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/clS7OW-VsK3I3bc4R75dM.png",
+          "type": "scheme"
+        },
+        {
+          "id": 48,
+          "name": "Crash Through the Trees",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/IPakEd-Z5GQTF6JQ3Bpbp.png",
+          "type": "scheme"
+        }
+      ]
+    },
+    {
+      "slug": "sinbad",
+      "name": "Sinbad",
+      "subtitle": "& The Porter",
+      "set": "Battle of Legends, Volume One",
+      "attackType": "Melee",
+      "hp": 15,
+      "move": 2,
+      "avatarImage": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/avatars/2RiCcBVu5Tk09amVSf6BO.webp",
+      "specialAbility": "When you maneuver, you may move fighters +1 space for each VOYAGE card in your discard pile.",
+      "heroFigure": {
+        "count": 1,
+        "miniImage": null
+      },
+      "sidekick": {
+        "name": "The Porter",
+        "count": 1,
+        "hp": 6,
+        "attackType": "Melee",
+        "tokenImages": [
+          "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/sidekicks/2SD817c0HhsliZ40hRdB8.webp"
+        ]
+      },
+      "cardBackImage": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/card-covers/iX3R40hAP80XJ-UalPt6E.png",
+      "cards": [
+        {
+          "id": 7,
+          "name": "Commanding Impact",
+          "count": 1,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/_jpB9222Bw2GwzjnvTBFj.png",
+          "type": "attack"
+        },
+        {
+          "id": 163,
+          "name": "By Fortune and Fate",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/kBvJfJX8qAvFHSQMm8g6y.png",
+          "type": "attack"
+        },
+        {
+          "id": 167,
+          "name": "Voyage to the Cannibals With the Root of Madness",
+          "count": 1,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/s8N8SIQotcO3kGxz7omgV.png",
+          "type": "attack"
+        },
+        {
+          "id": 166,
+          "name": "Voyage to the Creature With Eyes Like Coals of Fire",
+          "count": 1,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/m6cVkxlnOyjeG68qawGxZ.png",
+          "type": "attack"
+        },
+        {
+          "id": 169,
+          "name": "Voyage to the City of the King of Serendib",
+          "count": 1,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/Q-N4hjLRKYvizLcnmzNIM.png",
+          "type": "attack"
+        },
+        {
+          "id": 165,
+          "name": "Voyage to the Valley of the Giant Snakes",
+          "count": 1,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/QaLnVYXz2_m917vyRMUvh.png",
+          "type": "attack"
+        },
+        {
+          "id": 161,
+          "name": "Voyage Home",
+          "count": 1,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/QDPY2vqrgCde8hqFhuWCc.png",
+          "type": "attack"
+        },
+        {
+          "id": 168,
+          "name": "Voyage to the City of the Man-Eating Apes",
+          "count": 1,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/QS6XLldxWu_PM5-87C94s.png",
+          "type": "attack"
+        },
+        {
+          "id": 164,
+          "name": "Voyage to the Island That Was a Whale",
+          "count": 1,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/IJZ-AAchFZLaGLcVO_IiI.png",
+          "type": "attack"
+        },
+        {
+          "id": 13,
+          "name": "Exploit",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/UhlUFXr74L339Pm2PdGgz.png",
+          "type": "versatile"
+        },
+        {
+          "id": 12,
+          "name": "Leap Away",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/u4EIl-QkbvWJ9zlhduf2A.webp",
+          "type": "versatile"
+        },
+        {
+          "id": 5,
+          "name": "Momentous Shift",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/IWdliMRNJdPs8fbhcfO_8.png",
+          "type": "versatile"
+        },
+        {
+          "id": 160,
+          "name": "Toil and Danger",
+          "count": 4,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/5Yz2eME1ZJNq7E5tmGJoK.png",
+          "type": "versatile"
+        },
+        {
+          "id": 2,
+          "name": "Feint",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/fCrz_yRzBhWOZ1kR799zH.png",
+          "type": "versatile"
+        },
+        {
+          "id": 3,
+          "name": "Regroup",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/u9cvvtmTiByln765B1mic.png",
+          "type": "versatile"
+        },
+        {
+          "id": 162,
+          "name": "Riches Beyond Compare",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/ildknUF_12a15pdfcX6IY.png",
+          "type": "scheme"
+        }
+      ]
+    },
+    {
+      "slug": "medusa",
+      "name": "Medusa",
+      "subtitle": "& Harpies",
+      "set": "Battle of Legends, Volume One",
+      "attackType": "Range",
+      "hp": 16,
+      "move": 3,
+      "avatarImage": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/avatars/bI206lUtJUQru-FOD8A74.webp",
+      "specialAbility": "At the start of your turn, you may deal 1 damage to an opposing fighter in Medusa's zone.",
+      "heroFigure": {
+        "count": 1,
+        "miniImage": null
+      },
+      "sidekick": {
+        "name": "Harpies",
+        "count": 3,
+        "hp": 1,
+        "attackType": "Melee",
+        "tokenImages": [
+          "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/sidekicks/G42WIKYZ1cmwACVwMggzM.webp"
+        ]
+      },
+      "cardBackImage": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/card-covers/ROSMO3sRi6Jh1o7S_riGI.png",
+      "cards": [
+        {
+          "id": 170,
+          "name": "Second Shot",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/QX8jIcNWWchG0LH4-Wx2A.png",
+          "type": "attack"
+        },
+        {
+          "id": 14,
+          "name": "Gaze of Stone",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/dDKLFFrQCU3LSvzUl9bp4.png",
+          "type": "attack"
+        },
+        {
+          "id": 122,
+          "name": "The Hounds of Mighty Zeus",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/xGLsMbYto7YoNAt3RA45A.png",
+          "type": "versatile"
+        },
+        {
+          "id": 126,
+          "name": "Snipe",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/fhUdyrvTn_Zb5lTyVzWEa.png",
+          "type": "versatile"
+        },
+        {
+          "id": 123,
+          "name": "Clutching Claws",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/Qre7TFvmMq68AngOsCeFw.png",
+          "type": "versatile"
+        },
+        {
+          "id": 11,
+          "name": "Dash",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/cOvxOF9B439EZxLEzfikf.webp",
+          "type": "versatile"
+        },
+        {
+          "id": 2,
+          "name": "Feint",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/ZD9U8bSiANWAnoqRIJVsd.png",
+          "type": "versatile"
+        },
+        {
+          "id": 3,
+          "name": "Regroup",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/Wphnfqps0JrMOGuF8p4_A.png",
+          "type": "versatile"
+        },
+        {
+          "id": 94,
+          "name": "Hiss and Slither",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/1RJzwMo_7NUp2I4ay-Ry3.png",
+          "type": "defense"
+        },
+        {
+          "id": 93,
+          "name": "A Momentary Glance",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/vFHm4dsYKGOKlV_QEF715.png",
+          "type": "scheme"
+        },
+        {
+          "id": 124,
+          "name": "Winged Frenzy",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/tMn-Qj6hEIQKIx9jQyklL.png",
+          "type": "scheme"
+        }
+      ]
+    },
+    {
+      "slug": "chupacabra",
+      "name": "Chupacabra",
+      "subtitle": null,
+      "set": "Battle of Legends, Volume Three",
+      "attackType": "Melee",
+      "hp": 14,
+      "move": 3,
+      "avatarImage": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/avatars/W03sz0_dGlPDN4M67p2nj.webp",
+      "specialAbility": "After you attack, you may draw a card.",
+      "heroFigure": {
+        "count": 1,
+        "miniImage": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/minis/xZt3ZMNBE54rJTXyQ5j7U.webp"
+      },
+      "sidekick": null,
+      "cardBackImage": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/card-covers/5U0kpiJx-RzRDYQ-FulgJ.webp",
+      "cards": [
+        {
+          "id": 678,
+          "name": "Blood in the air",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/vgh0_Hn0b5zQC1SwnyhOw.webp",
+          "type": "attack"
+        },
+        {
+          "id": 677,
+          "name": "Feeding",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/kiXTdTPCFRUZ0RJbiDovf.webp",
+          "type": "attack"
+        },
+        {
+          "id": 9,
+          "name": "Ambush",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/oVPCqrDcFepHp5c0kUNO5.webp",
+          "type": "attack"
+        },
+        {
+          "id": 676,
+          "name": "The more they struggle",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/w8zyNZuufT9inSHFlL7U3.webp",
+          "type": "attack"
+        },
+        {
+          "id": 682,
+          "name": "Wounded beast",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/r4QYT9ZzjxnUvI_Tgck7e.webp",
+          "type": "versatile"
+        },
+        {
+          "id": 680,
+          "name": "Ravenous lunge",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/H-bX_sYc8pUbhHYW4tCmJ.webp",
+          "type": "versatile"
+        },
+        {
+          "id": 2,
+          "name": "Feint",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/08SXlLQ1PLVwWN2oP0IVJ.webp",
+          "type": "versatile"
+        },
+        {
+          "id": 681,
+          "name": "Tooth and tail",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/ELsH_WhayW_vpgOhKUSRN.webp",
+          "type": "versatile"
+        },
+        {
+          "id": 679,
+          "name": "Natural toughness",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/q7Gjkf0ExHrrBhDiv8xIQ.webp",
+          "type": "defense"
+        },
+        {
+          "id": 683,
+          "name": "Traveler of the night",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/aiS83lHi7bhTbQyq1MI9O.webp",
+          "type": "scheme"
+        },
+        {
+          "id": 684,
+          "name": "Unsettle",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/H9wxqJEY4cay7ohCvOlf1.webp",
+          "type": "scheme"
+        }
+      ]
+    },
+    {
+      "slug": "oda-nobunaga",
+      "name": "Oda Nobunaga",
+      "subtitle": "& Honor Guard",
+      "set": "Sun's Origin",
+      "attackType": "Melee",
+      "hp": 13,
+      "move": 2,
+      "avatarImage": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/avatars/0ciiTDm6RZnI7Yul_t3oN.webp",
+      "specialAbility": "Other friendly fighters in Oda Nobunaga's zone add +1 to the value of their played combat cards. (Oda Nobunaga does not benefit from this ability.)",
+      "heroFigure": {
+        "count": 1,
+        "miniImage": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/minis/_yMu4Yc9LeQ6ipWoH-aSJ.webp"
+      },
+      "sidekick": {
+        "name": "Honor Guard",
+        "count": 2,
+        "hp": 6,
+        "attackType": "Melee",
+        "tokenImages": [
+          "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/sidekicks/ZlI0yBS6cYzLAUtBW3bUm.webp",
+          "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/sidekicks/eMvbI3i99GtNmhcdnu-9W.webp"
+        ]
+      },
+      "cardBackImage": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/card-covers/_hVP2Ah-uMSD_kH5-LUol.webp",
+      "cards": [
+        {
+          "id": 405,
+          "name": "Student of War",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/6FcELjOg09cR5NTDpw-Nw.webp",
+          "type": "attack"
+        },
+        {
+          "id": 406,
+          "name": "Lightning and Thunder",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/oW5E1ZjncnnIWBtdaQlBy.webp",
+          "type": "attack"
+        },
+        {
+          "id": 432,
+          "name": "Fire and Flames",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/hM8lsNlKgXuyc0c5gmKFN.webp",
+          "type": "attack"
+        },
+        {
+          "id": 380,
+          "name": "Sun and Moon",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/JBFsMF7GgRp_C6MPm56Vh.webp",
+          "type": "attack"
+        },
+        {
+          "id": 5,
+          "name": "Momentous Shift",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/xLtenBYt6Jzezu_6DkFEd.webp",
+          "type": "versatile"
+        },
+        {
+          "id": 433,
+          "name": "Battle Maneuvers",
+          "count": 4,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/K-COKV71z7oL1ZbOKcMKT.webp",
+          "type": "versatile"
+        },
+        {
+          "id": 514,
+          "name": "Patience and Strategy",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/_uRX9GZXjYI1kacXUV8xQ.webp",
+          "type": "versatile"
+        },
+        {
+          "id": 408,
+          "name": "Pragmatism",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/ohrdTFtVusW8h1Vk-tKD6.webp",
+          "type": "defense"
+        },
+        {
+          "id": 518,
+          "name": "Spring the Trap",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/R7id0Dm0DLYq8zkIDrHxh.webp",
+          "type": "defense"
+        },
+        {
+          "id": 530,
+          "name": "Reinforce",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/_UjQWLFU10zuJigd2dXV7.webp",
+          "type": "scheme"
+        },
+        {
+          "id": 407,
+          "name": "Demon King of the Sixth Heaven",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/WX-zT5B00aBwYjCKrQcNY.webp",
+          "type": "scheme"
+        }
+      ]
+    },
+    {
+      "slug": "t-rex",
+      "name": "T. Rex",
+      "subtitle": null,
+      "set": "Jurassic Park - Sattler vs. T-Rex",
+      "attackType": "Melee",
+      "hp": 27,
+      "move": 1,
+      "avatarImage": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/avatars/9z9iaYFxdQpstwDftty0r.webp",
+      "specialAbility": "T-Rex is a large fighter. (She can attack up to 2 spaces away.) At the end of your turn, draw a card.",
+      "heroFigure": {
+        "count": 1,
+        "miniImage": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/minis/WtQqhW1m7pXp494PtRk8G.webp"
+      },
+      "sidekick": null,
+      "cardBackImage": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/card-covers/mURpEFDw_zxQRn19mYXgG.webp",
+      "cards": [
+        {
+          "id": 7,
+          "name": "Commanding Impact",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/-GaTw_eq1gfLo3ruXsZNk.webp",
+          "type": "attack"
+        },
+        {
+          "id": 353,
+          "name": "15,000 Pounds of Muscle",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/EW4jRFVf2mxCnslnWB8nv.webp",
+          "type": "attack"
+        },
+        {
+          "id": 338,
+          "name": "Reckless Lunge",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/ePGahQLl6XFtYIqk3zV_k.webp",
+          "type": "attack"
+        },
+        {
+          "id": 339,
+          "name": "When Dinosaurs Ruled the Earth",
+          "count": 4,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/D5kEd71Wf1CzYzjOX2QFB.webp",
+          "type": "attack"
+        },
+        {
+          "id": 5,
+          "name": "Momentous Shift",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/H1q7AupwvyXAVa7cTsBa1.webp",
+          "type": "versatile"
+        },
+        {
+          "id": 21,
+          "name": "Terrifying Roar",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/FSV7wVDdir3K2IaTtx9h7.webp",
+          "type": "versatile"
+        },
+        {
+          "id": 337,
+          "name": "Thrash",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/mDPX69OyY5e11I6lWdkpS.webp",
+          "type": "versatile"
+        },
+        {
+          "id": 352,
+          "name": "You're Just Making Her Angry",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/QmWnpYfB_h5HNgj-Sw61s.webp",
+          "type": "defense"
+        },
+        {
+          "id": 341,
+          "name": "Ripples in the Water",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/V671yFXGLvBhixe2JKgFK.webp",
+          "type": "scheme"
+        },
+        {
+          "id": 340,
+          "name": "65 Million Years of Gut Instinct",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/ZBvY4lqNRVWC__zjPAoKw.webp",
+          "type": "scheme"
+        },
+        {
+          "id": 22,
+          "name": "Closer Than She Appears",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/HOQ-sOXfoUNQ1J47Cx8lJ.webp",
+          "type": "scheme"
+        }
+      ]
+    },
+    {
+      "slug": "achilles",
+      "name": "Achilles",
+      "subtitle": "& Patroclus",
+      "set": "Battle of Legends, Volume Two",
+      "attackType": "Melee",
+      "hp": 18,
+      "move": 2,
+      "avatarImage": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/avatars/GVUVfvLlonuST8-fUwbnU.webp",
+      "specialAbility": "When Patroclus is defeated, discard 2 random cards.
+
+While Patroclus is defeated:
+- Add +2 to the value of all Achilles' attacks.
+- If Achilles wins combat, draw 1 card.",
+      "heroFigure": {
+        "count": 1,
+        "miniImage": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/minis/tX4mC2uFjsi-ZAXbCM1KK.png"
+      },
+      "sidekick": {
+        "name": "Patroclus",
+        "count": 1,
+        "hp": 6,
+        "attackType": "Melee",
+        "tokenImages": [
+          "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/sidekicks/PQzBXj7JAn0vanxqXAJtz.webp"
+        ]
+      },
+      "cardBackImage": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/card-covers/INWx-zVx8tsyrlQD4gFE2.gif",
+      "cards": [
+        {
+          "id": 298,
+          "name": "Brothers In Arms",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/oC5YZ2RscAp3WecXfGpd8.webp",
+          "type": "attack"
+        },
+        {
+          "id": 332,
+          "name": "Battle Frenzy",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/N2cgR0MJdVlbO46Dd-W74.webp",
+          "type": "attack"
+        },
+        {
+          "id": 294,
+          "name": "The Day of Your Doom",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/xxx5l7rKKdvypYApWNoja.webp",
+          "type": "attack"
+        },
+        {
+          "id": 297,
+          "name": "Test For Weakness",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/2hM9U-X2zA9y99SNIhq0W.webp",
+          "type": "attack"
+        },
+        {
+          "id": 4,
+          "name": "Skirmish",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/0XMmCuefYmduTbRDqfu9f.webp",
+          "type": "versatile"
+        },
+        {
+          "id": 6,
+          "name": "Wily Fighting",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/K-T70Fh6ygr5ohjhj0rEr.webp",
+          "type": "versatile"
+        },
+        {
+          "id": 300,
+          "name": "Blessed By Hermes",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/jTDnOy8Y4y6BnVMJayWTW.webp",
+          "type": "versatile"
+        },
+        {
+          "id": 2,
+          "name": "Feint",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/r8mTfsPTPIM9Tm3LG_ejL.webp",
+          "type": "versatile"
+        },
+        {
+          "id": 299,
+          "name": "Battle Hardened",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/COm9UZzAQ-FWoWPUTM5ye.webp",
+          "type": "versatile"
+        },
+        {
+          "id": 276,
+          "name": "Achilles' Heel",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/HkIoTHIHLphfN1E4Jzlr9.webp",
+          "type": "defense"
+        },
+        {
+          "id": 301,
+          "name": "Under Achilles' Helm",
+          "count": 3,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/zFiXIy6c_ro4J77SL0tB7.webp",
+          "type": "defense"
+        },
+        {
+          "id": 302,
+          "name": "Spear Throw",
+          "count": 2,
+          "image": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/kmBFeB9U3SiEvNj3h6NL3.webp",
+          "type": "scheme"
+        }
+      ]
+    }
+  ]
+}
