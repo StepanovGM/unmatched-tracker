@@ -9,25 +9,66 @@
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <link rel="stylesheet" href="css/style.css?v=5" />
+  <link rel="stylesheet" href="css/style.css?v=6" />
 </head>
 <body>
   <main class="app">
     <h1>Unmatched Tracker</h1>
 
-    <section class="card">
-      <h2>Persistence test</h2>
-      <p class="hint">This count is saved to localStorage. Reload the page — it should not reset.</p>
-      <div class="counter-row">
-        <button id="decrement" class="btn btn-secondary">-</button>
-        <span id="counter-value" class="counter-value">0</span>
-        <button id="increment" class="btn btn-secondary">+</button>
+    <section id="setup-screen" class="card">
+      <h2>Start a Match</h2>
+      <p class="hint">Pick a hero for each player, then start.</p>
+
+      <div class="player-setup">
+        <h3 class="player-setup-title">Player 1</h3>
+        <div id="hero-grid-0" class="hero-grid"></div>
       </div>
+
+      <div class="player-setup">
+        <h3 class="player-setup-title">Player 2</h3>
+        <div id="hero-grid-1" class="hero-grid"></div>
+      </div>
+
+      <button id="start-match-btn" class="btn btn-primary btn-stack" disabled>Start Match</button>
+    </section>
+
+    <section id="match-screen" class="card" hidden>
+      <div class="turn-banner">
+        <span id="turn-number-label"></span>
+        <span id="active-player-label"></span>
+      </div>
+
+      <div class="players-row">
+        <div id="player-panel-0" class="player-panel">
+          <img id="player-avatar-0" class="player-avatar" alt="" />
+          <div id="player-name-0" class="player-name"></div>
+        </div>
+        <div id="player-panel-1" class="player-panel">
+          <img id="player-avatar-1" class="player-avatar" alt="" />
+          <div id="player-name-1" class="player-name"></div>
+        </div>
+      </div>
+
+      <div class="action-grid">
+        <button class="btn btn-action" data-action="maneuver">Maneuver</button>
+        <button class="btn btn-action" data-action="attack">Attack</button>
+        <button class="btn btn-action" data-action="scheme">Scheme</button>
+      </div>
+
+      <div class="control-row">
+        <button id="undo-btn" class="btn btn-secondary" disabled>Undo</button>
+        <button id="pass-turn-btn" class="btn btn-primary">Pass Turn</button>
+      </div>
+
+      <button id="new-match-btn" class="btn btn-secondary btn-stack">New Match</button>
+
+      <h2 class="log-heading">Log</h2>
+      <ul id="action-log" class="action-log"></ul>
     </section>
 
     <section class="card">
-      <h2>Share test</h2>
-      <p class="hint">Copies the current state as JSON to your clipboard — paste it into a Telegram chat to share it.</p>
+      <h2>Share / Backup</h2>
+      <p class="hint">Copies the full tracker state (current match + history) as JSON to your clipboard.</p>
       <button id="share-btn" class="btn btn-primary">Copy JSON</button>
       <button id="paste-btn" class="btn btn-secondary btn-stack">Paste JSON</button>
       <textarea id="paste-area" class="paste-area btn-stack" hidden placeholder="Paste JSON here (Ctrl+V)"></textarea>
@@ -40,6 +81,16 @@
     </section>
   </main>
 
-  <script src="js/app.js"></script>
+  <div id="confirm-overlay" class="overlay" hidden>
+    <div class="overlay-card">
+      <p id="confirm-message"></p>
+      <div class="control-row">
+        <button id="confirm-cancel-btn" class="btn btn-secondary">Cancel</button>
+        <button id="confirm-ok-btn" class="btn btn-primary">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app.js?v=3"></script>
 </body>
 </html>

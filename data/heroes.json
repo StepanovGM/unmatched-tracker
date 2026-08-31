@@ -230,17 +230,7 @@
       "hp": 13,
       "move": 2,
       "avatarImage": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/avatars/r3uOkimJegDYnEAu7cjz3.webp",
-      "specialAbility": "PRIVATEER TURNED PIRATE
-Start the game with 1 doubloon in the treasury, you have the other 2.
-- At the start of your turn, you may pay 1 doubloon to gain 1 action.
-- When Blackbeard takes combat damage, pay 1 doubloon.
-
-BLACKBEARD'S DOUBLOONS
-Doubloons that Blackbeard doesn't have are kept in the Treasury.
-
-Blackbeard pays a doubloon to the Treasury when he takes combat damage. He may also pay a doubloon at the start of his turn to gain an extra action.
-
-The effects on many of Blackbeard's cards can be ignored by paying a ransom. Any opponent can pay the amount of doubloons shown at the end of an effect to ignore that effect. These doubloons are taken from the Treasury and given to Blackbeard.",
+      "specialAbility": "PRIVATEER TURNED PIRATE\nStart the game with 1 doubloon in the treasury, you have the other 2.\n- At the start of your turn, you may pay 1 doubloon to gain 1 action.\n- When Blackbeard takes combat damage, pay 1 doubloon.\n\nBLACKBEARD'S DOUBLOONS\nDoubloons that Blackbeard doesn't have are kept in the Treasury.\n\nBlackbeard pays a doubloon to the Treasury when he takes combat damage. He may also pay a doubloon at the start of his turn to gain an extra action.\n\nThe effects on many of Blackbeard's cards can be ignored by paying a ransom. Any opponent can pay the amount of doubloons shown at the end of an effect to ignore that effect. These doubloons are taken from the Treasury and given to Blackbeard.",
       "heroFigure": {
         "count": 1,
         "miniImage": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/minis/PL2zOdyCoWbpnYzjDbHLc.webp"
@@ -352,10 +342,7 @@ The effects on many of Blackbeard's cards can be ignored by paying a ransom. Any
       "hp": 15,
       "move": 2,
       "avatarImage": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/avatars/h_TeY_o2t6e1Hc0PuUHq9.webp",
-      "specialAbility": "THE QUESTION
-At the start of your turn, choose TO BE or NOT TO BE. If you choose NOT TO BE, deal 2 damage to one of your fighters.
-TO BE: When you maneuver, draw 1 additional card.
-NOT TO BE: Add +2 to the value of Hamlet's attacks.",
+      "specialAbility": "At the start of each turn, choose TO BE (maneuvering draws 1 extra card) or NOT TO BE (deal 2 damage to one of your own fighters, then Hamlet's attacks get +2 value for the turn).",
       "heroFigure": {
         "count": 1,
         "miniImage": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/minis/KCW4JwtH3WkcN6gO9YvM2.webp"
@@ -466,8 +453,7 @@ NOT TO BE: Add +2 to the value of Hamlet's attacks.",
       "hp": 17,
       "move": 2,
       "avatarImage": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/avatars/1P5P0HatPvHwUvwJuPyAc.webp",
-      "specialAbility": "At the start of your turn, you may take 1 damage to summon a Clone in an empty space adjacent to Sun Wukong.
-Do not start with any Clones on the board.",
+      "specialAbility": "At the start of your turn, you may take 1 damage to summon a Clone in an empty space adjacent to Sun Wukong.\nDo not start with any Clones on the board.",
       "heroFigure": {
         "count": 1,
         "miniImage": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/minis/OkS_VNxzdYn5EiVtS2AIF.png"
@@ -682,9 +668,7 @@ Do not start with any Clones on the board.",
       "hp": 14,
       "move": 2,
       "avatarImage": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/avatars/5W_7-ObJntAkPZUG1JMUF.webp",
-      "specialAbility": "Resolve an effect on a card you play if the symbol next to the effect matches the item in your basket. At the start of the game, place LITTLE RED's BASKET in your discard pile.
-Little Red's Basket: This starts in your discard pile. It does not count as a card.
-🌟 counts as any one 🐺🌹⚔️ symbol.",
+      "specialAbility": "Resolve an effect on a card you play if the symbol next to the effect matches the item in your basket. At the start of the game, place LITTLE RED's BASKET in your discard pile.\nLittle Red's Basket: This starts in your discard pile. It does not count as a card.\n🌟 counts as any one 🐺🌹⚔️ symbol.",
       "heroFigure": {
         "count": 1,
         "miniImage": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/minis/MBmHiJAwDSgFZTG-aUKSQ.webp"
@@ -1439,11 +1423,7 @@ Little Red's Basket: This starts in your discard pile. It does not count as a ca
       "hp": 18,
       "move": 2,
       "avatarImage": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/avatars/GVUVfvLlonuST8-fUwbnU.webp",
-      "specialAbility": "When Patroclus is defeated, discard 2 random cards.
-
-While Patroclus is defeated:
-- Add +2 to the value of all Achilles' attacks.
-- If Achilles wins combat, draw 1 card.",
+      "specialAbility": "When Patroclus is defeated, discard 2 random cards.\n\nWhile Patroclus is defeated:\n- Add +2 to the value of all Achilles' attacks.\n- If Achilles wins combat, draw 1 card.",
       "heroFigure": {
         "count": 1,
         "miniImage": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/minis/tX4mC2uFjsi-ZAXbCM1KK.png"
