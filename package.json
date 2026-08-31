@@ -1,0 +1,12 @@
+{
+  "name": "unmatched-tracker",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Unmatched board game tracker - static site, no backend, no build step",
+  "scripts": {
+    "dev": "http-server . -p 3000 -c-1"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}
