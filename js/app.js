@@ -41,28 +41,40 @@ document.getElementById('decrement').addEventListener('click', () => {
 
 document.getElementById('share-btn').addEventListener('click', async () => {
   const json = JSON.stringify(state, null, 2);
-  const file = new File([json], `unmatched-tracker-${Date.now()}.json`, {
-    type: 'application/json',
-  });
-
-  if (navigator.canShare && navigator.canShare({ files: [file] })) {
-    try {
-      await navigator.share({
-        files: [file],
-        title: 'Unmatched Tracker state',
-      });
-      setStatus('Shared.');
-    } catch (e) {
-      if (e.name !== 'AbortError') setStatus('Share failed: ' + e.message);
-    }
-    return;
-  }
-
   try {
     await navigator.clipboard.writeText(json);
-    setStatus('Sharing not supported here — copied JSON to clipboard instead.');
+    setStatus('Copied JSON to clipboard.');
   } catch (e) {
     setStatus('Copy failed: ' + e.message);
+  }
+});
+
+function applyImportedState(text) {
+  const imported = JSON.parse(text);
+  state = imported;
+  saveState(state);
+  render();
+}
+
+const pasteArea = document.getElementById('paste-area');
+const loadPastedBtn = document.getElementById('load-pasted-btn');
+
+document.getElementById('paste-btn').addEventListener('click', () => {
+  const show = pasteArea.hidden;
+  pasteArea.hidden = !show;
+  loadPastedBtn.hidden = !show;
+  if (show) pasteArea.focus();
+});
+
+loadPastedBtn.addEventListener('click', () => {
+  try {
+    applyImportedState(pasteArea.value);
+    pasteArea.value = '';
+    pasteArea.hidden = true;
+    loadPastedBtn.hidden = true;
+    setStatus('Imported state from pasted text.');
+  } catch (e) {
+    setStatus('Import failed: ' + e.message);
   }
 });
 
@@ -70,11 +82,7 @@ document.getElementById('import-input').addEventListener('change', async (event)
   const file = event.target.files[0];
   if (!file) return;
   try {
-    const text = await file.text();
-    const imported = JSON.parse(text);
-    state = imported;
-    saveState(state);
-    render();
+    applyImportedState(await file.text());
     setStatus('Imported state from ' + file.name);
   } catch (e) {
     setStatus('Import failed: ' + e.message);
