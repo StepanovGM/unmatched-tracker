@@ -5,6 +5,14 @@ let heroes = [];
 let state = loadState();
 const draft = { 0: null, 1: null };
 
+let nav = { path: [], reply: false, hp: { sign: '-', targets: new Set(['hero']) } };
+
+function resetNav() {
+  nav.path = [];
+  nav.reply = false;
+  nav.hp = { sign: '-', targets: new Set(['hero']) };
+}
+
 function loadState() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
@@ -47,6 +55,50 @@ function deriveTurnState(log) {
   return { turnNumber, activePlayer };
 }
 
+function actingPlayer() {
+  const { activePlayer } = deriveTurnState(state.current.log);
+  return nav.reply ? 1 - activePlayer : activePlayer;
+}
+
+function fightersForPlayer(player) {
+  const hero = heroBySlug(state.current.players[player].heroSlug);
+  const list = [{ fighter: 'hero', label: hero ? hero.name : 'Hero' }];
+  if (hero && hero.sidekick && hero.sidekick.count > 0) {
+    const count = hero.sidekick.count;
+    for (let i = 0; i < count; i++) {
+      list.push({ fighter: i, label: count > 1 ? `${hero.sidekick.name} ${i + 1}` : hero.sidekick.name });
+    }
+  }
+  return list;
+}
+
+function fighterLabel(player, fighterKey) {
+  const hero = heroBySlug(state.current.players[player].heroSlug);
+  if (!hero) return String(fighterKey);
+  if (fighterKey === 'hero') return hero.name;
+  const count = hero.sidekick ? hero.sidekick.count : 1;
+  const name = hero.sidekick ? hero.sidekick.name : 'Sidekick';
+  return count > 1 ? `${name} ${fighterKey + 1}` : name;
+}
+
+function startingHp(player, fighter) {
+  const hero = heroBySlug(state.current.players[player].heroSlug);
+  if (!hero) return 0;
+  return fighter === 'hero' ? hero.hp : (hero.sidekick && hero.sidekick.hp ? hero.sidekick.hp : 1);
+}
+
+function currentHp(player, fighter) {
+  const log = state.current.log;
+  const delta = log
+    .filter((e) => e.type === 'hp' && e.player === player && e.target.fighter === fighter)
+    .reduce((sum, e) => sum + e.delta, 0);
+  return startingHp(player, fighter) + delta;
+}
+
+function isDead(player, fighter) {
+  return state.current.log.some((e) => e.type === 'death' && e.player === player && e.target.fighter === fighter);
+}
+
 function startMatch(slugA, slugB) {
   if (state.current) {
     state.history.unshift(state.current);
@@ -60,27 +112,52 @@ function startMatch(slugA, slugB) {
   };
   draft[0] = null;
   draft[1] = null;
+  resetNav();
   saveState();
   render();
 }
 
-function logAction(type) {
+function commitSimple(partial) {
   const match = state.current;
-  if (!match) return;
-  const { turnNumber, activePlayer } = deriveTurnState(match.log);
-  match.log.push({ type, player: activePlayer, turnNumber, at: new Date().toISOString() });
+  const { turnNumber } = deriveTurnState(match.log);
+  const player = actingPlayer();
+  match.log.push({ ...partial, player, turnNumber, at: new Date().toISOString() });
+  resetNav();
   saveState();
   render();
 }
 
-function passTurn() {
-  logAction('pass');
+function commitHp(amount) {
+  const match = state.current;
+  const { turnNumber } = deriveTurnState(match.log);
+  const player = actingPlayer();
+  const sign = nav.hp.sign === '-' ? -1 : 1;
+  const at = new Date().toISOString();
+  const groupId = at + '-' + Math.random().toString(36).slice(2, 8);
+
+  nav.hp.targets.forEach((fighter) => {
+    match.log.push({ type: 'hp', target: { fighter }, delta: sign * amount, player, turnNumber, at, groupId });
+    if (!isDead(player, fighter) && currentHp(player, fighter) < 1) {
+      match.log.push({ type: 'death', target: { fighter }, player, turnNumber, at, groupId });
+    }
+  });
+
+  resetNav();
+  saveState();
+  render();
 }
 
 function undoLast() {
   const match = state.current;
   if (!match || match.log.length === 0) return;
-  match.log.pop();
+  const last = match.log[match.log.length - 1];
+  if (last.groupId) {
+    while (match.log.length && match.log[match.log.length - 1].groupId === last.groupId) {
+      match.log.pop();
+    }
+  } else {
+    match.log.pop();
+  }
   saveState();
   render();
 }
@@ -119,6 +196,7 @@ function requestNewMatch() {
     state.history.unshift(state.current);
     state.history = state.history.slice(0, MAX_HISTORY);
     state.current = null;
+    resetNav();
     saveState();
     render();
   });
@@ -165,13 +243,253 @@ function renderSetup() {
   startBtn.disabled = !(draft[0] && draft[1] && draft[0] !== draft[1]);
 }
 
-function actionLabel(entry) {
+function describeEntry(entry, match) {
+  const hero = heroBySlug(match.players[entry.player].heroSlug);
+  const heroName = hero ? hero.name : 'P' + (entry.player + 1);
   switch (entry.type) {
-    case 'maneuver': return 'Maneuver';
-    case 'attack': return 'Attack';
-    case 'scheme': return 'Scheme';
-    case 'pass': return 'Passed turn';
-    default: return entry.type;
+    case 'pass':
+      return heroName + ' passed turn';
+    case 'action':
+      return heroName + ' — Maneuver';
+    case 'play': {
+      const mechLabel = { attack: 'Attack', scheme: 'Scheme', defense: 'Defense' }[entry.mechanic] || entry.mechanic;
+      return `${heroName} — ${mechLabel}: ${entry.cardName}`;
+    }
+    case 'discard':
+      return `${heroName} — Discard: ${entry.cardName}${entry.boosted ? ' (Boost)' : ''}`;
+    case 'hp': {
+      const who = fighterLabel(entry.player, entry.target.fighter);
+      const sign = entry.delta >= 0 ? '+' : '';
+      return `${who} ${sign}${entry.delta} HP`;
+    }
+    case 'death':
+      return `${fighterLabel(entry.player, entry.target.fighter)} defeated`;
+    case 'spawn':
+      return `${heroName} — Sidekick spawn`;
+    case 'ability':
+      return `${heroName} — Special ability`;
+    case 'return':
+      return `${heroName} — Card returns to play`;
+    default:
+      return heroName + ' — ' + entry.type;
+  }
+}
+
+const PLAY_LEAF = {
+  attack: { cardType: 'attack', mechanic: 'attack' },
+  versatile: { cardType: 'versatile', mechanic: () => (nav.reply ? 'defense' : 'attack') },
+  scheme: { cardType: 'scheme', mechanic: 'scheme' },
+  defend: { cardType: 'defense', mechanic: 'defense' },
+};
+
+const DISCARD_LEAF = {
+  'd-attack': 'attack',
+  'd-versatile': 'versatile',
+  'd-scheme': 'scheme',
+  'd-defense': 'defense',
+};
+
+const MENU_LABELS = {
+  play: 'Play', discard: 'Discard', hp: 'HP',
+  attack: 'Attack', versatile: 'Versatile', scheme: 'Scheme', defend: 'Defend',
+  'd-attack': 'Attack', 'd-versatile': 'Versatile', 'd-scheme': 'Scheme', 'd-defense': 'Defense',
+};
+
+function bindTapOrHold(el, onTap, onHold, holdMs) {
+  let timer = null;
+  let held = false;
+  const start = () => {
+    held = false;
+    timer = setTimeout(() => {
+      held = true;
+      onHold();
+    }, holdMs || 500);
+  };
+  const cancel = () => {
+    if (timer) clearTimeout(timer);
+    timer = null;
+  };
+  const end = () => {
+    const wasHeld = held;
+    cancel();
+    if (!wasHeld) onTap();
+  };
+  el.addEventListener('pointerdown', start);
+  el.addEventListener('pointerup', end);
+  el.addEventListener('pointerleave', cancel);
+  el.addEventListener('pointercancel', cancel);
+  el.addEventListener('contextmenu', (e) => e.preventDefault());
+}
+
+function makeMenuButton(label, onClick) {
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'menu-btn';
+  btn.textContent = label;
+  btn.addEventListener('click', onClick);
+  return btn;
+}
+
+function renderRootMenu(grid) {
+  grid.appendChild(makeMenuButton('End Turn', () => commitSimple({ type: 'pass' })));
+  grid.appendChild(makeMenuButton('Maneuver', () => commitSimple({ type: 'action', mechanic: 'maneuver' })));
+  grid.appendChild(makeMenuButton('Play', () => { nav.path = ['play']; renderMenu(); }));
+  grid.appendChild(makeMenuButton('Discard', () => { nav.path = ['discard']; renderMenu(); }));
+  grid.appendChild(makeMenuButton('HP', () => { nav.path = ['hp']; renderMenu(); }));
+  grid.appendChild(makeMenuButton('Sidekick Spawn', () => commitSimple({ type: 'spawn' })));
+  grid.appendChild(makeMenuButton('Special Ability', () => commitSimple({ type: 'ability' })));
+  grid.appendChild(makeMenuButton('Card Returns', () => commitSimple({ type: 'return' })));
+}
+
+function renderPlayMenu(grid) {
+  if (!nav.reply) grid.appendChild(makeMenuButton('Attack', () => { nav.path = ['play', 'attack']; renderMenu(); }));
+  grid.appendChild(makeMenuButton('Versatile', () => { nav.path = ['play', 'versatile']; renderMenu(); }));
+  if (!nav.reply) grid.appendChild(makeMenuButton('Scheme', () => { nav.path = ['play', 'scheme']; renderMenu(); }));
+  if (nav.reply) grid.appendChild(makeMenuButton('Defend', () => { nav.path = ['play', 'defend']; renderMenu(); }));
+}
+
+function renderDiscardMenu(grid) {
+  grid.appendChild(makeMenuButton('Attack', () => { nav.path = ['discard', 'd-attack']; renderMenu(); }));
+  grid.appendChild(makeMenuButton('Versatile', () => { nav.path = ['discard', 'd-versatile']; renderMenu(); }));
+  grid.appendChild(makeMenuButton('Scheme', () => { nav.path = ['discard', 'd-scheme']; renderMenu(); }));
+  grid.appendChild(makeMenuButton('Defense', () => { nav.path = ['discard', 'd-defense']; renderMenu(); }));
+}
+
+function renderCardList(grid, cardType, opts) {
+  const player = actingPlayer();
+  const hero = heroBySlug(state.current.players[player].heroSlug);
+  const cards = (hero && hero.cards ? hero.cards : []).filter((c) => c.type === cardType);
+
+  cards.forEach((card) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'card-item';
+
+    const img = document.createElement('img');
+    img.src = card.image || '';
+    img.alt = card.name;
+    img.loading = 'lazy';
+
+    const label = document.createElement('span');
+    label.textContent = card.name;
+
+    btn.appendChild(img);
+    btn.appendChild(label);
+
+    if (opts.isDiscard) {
+      bindTapOrHold(
+        btn,
+        () => commitSimple({ type: 'discard', cardType, cardId: card.id, cardName: card.name, boosted: false }),
+        () => commitSimple({ type: 'discard', cardType, cardId: card.id, cardName: card.name, boosted: true })
+      );
+    } else {
+      const mechanic = typeof opts.mechanic === 'function' ? opts.mechanic() : opts.mechanic;
+      btn.addEventListener('click', () =>
+        commitSimple({ type: 'play', mechanic, cardType, cardId: card.id, cardName: card.name })
+      );
+    }
+
+    grid.appendChild(btn);
+  });
+}
+
+function renderHpPanel(grid) {
+  const player = actingPlayer();
+  const fighters = fightersForPlayer(player);
+
+  const wrap = document.createElement('div');
+  wrap.className = 'hp-panel';
+
+  const targetsRow = document.createElement('div');
+  targetsRow.className = 'hp-targets';
+  fighters.forEach((f) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'fighter-toggle';
+    if (nav.hp.targets.has(f.fighter)) btn.classList.add('selected');
+    btn.textContent = f.label;
+    btn.addEventListener('click', () => {
+      if (nav.hp.targets.has(f.fighter)) nav.hp.targets.delete(f.fighter);
+      else nav.hp.targets.add(f.fighter);
+      renderMenu();
+    });
+    targetsRow.appendChild(btn);
+  });
+
+  const signRow = document.createElement('div');
+  signRow.className = 'hp-sign-row';
+  [
+    ['-', '− Damage'],
+    ['+', '+ Heal'],
+  ].forEach(([sign, label]) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'sign-btn' + (nav.hp.sign === sign ? ' active' : '');
+    btn.textContent = label;
+    btn.addEventListener('click', () => {
+      nav.hp.sign = sign;
+      renderMenu();
+    });
+    signRow.appendChild(btn);
+  });
+
+  const amountGrid = document.createElement('div');
+  amountGrid.className = 'hp-amount-grid';
+  for (let n = 1; n <= 10; n++) {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'menu-btn';
+    btn.textContent = String(n);
+    btn.disabled = nav.hp.targets.size === 0;
+    btn.addEventListener('click', () => commitHp(n));
+    amountGrid.appendChild(btn);
+  }
+
+  wrap.appendChild(targetsRow);
+  wrap.appendChild(signRow);
+  wrap.appendChild(amountGrid);
+  grid.appendChild(wrap);
+}
+
+function breadcrumbText() {
+  const parts = nav.path.map((id) => MENU_LABELS[id] || id);
+  const text = parts.join(' › ');
+  return nav.reply ? (text ? text + ' (Reply)' : 'Reply mode') : text;
+}
+
+function renderMenu() {
+  const grid = document.getElementById('menu-grid');
+  const header = document.getElementById('menu-header');
+  const breadcrumb = document.getElementById('menu-breadcrumb');
+  grid.innerHTML = '';
+
+  const showHeader = nav.path.length > 0 || nav.reply;
+  header.hidden = !showHeader;
+  breadcrumb.textContent = breadcrumbText();
+
+  const key = nav.path.join('.');
+  const isCardList =
+    (nav.path[0] === 'play' && PLAY_LEAF[nav.path[1]]) || (nav.path[0] === 'discard' && DISCARD_LEAF[nav.path[1]]);
+  grid.classList.toggle('card-grid', !!isCardList);
+
+  if (key === '') {
+    renderRootMenu(grid);
+  } else if (key === 'play') {
+    renderPlayMenu(grid);
+  } else if (key === 'discard') {
+    renderDiscardMenu(grid);
+  } else if (nav.path[0] === 'play' && PLAY_LEAF[nav.path[1]]) {
+    const leaf = PLAY_LEAF[nav.path[1]];
+    renderCardList(grid, leaf.cardType, { mechanic: leaf.mechanic });
+  } else if (nav.path[0] === 'discard' && DISCARD_LEAF[nav.path[1]]) {
+    renderCardList(grid, DISCARD_LEAF[nav.path[1]], { isDiscard: true });
+  } else if (key === 'hp') {
+    renderHpPanel(grid);
+  }
+
+  const { activePlayer } = deriveTurnState(state.current.log);
+  for (let i = 0; i < 2; i++) {
+    document.getElementById('player-panel-' + i).classList.toggle('replying', nav.reply && i !== activePlayer);
   }
 }
 
@@ -194,10 +512,11 @@ function renderMatch() {
 
   document.getElementById('undo-btn').disabled = match.log.length === 0;
 
+  renderMenu();
+
   const logEl = document.getElementById('action-log');
   logEl.innerHTML = '';
   match.log.forEach((entry) => {
-    const hero = heroBySlug(match.players[entry.player].heroSlug);
     const li = document.createElement('li');
 
     const turnSpan = document.createElement('span');
@@ -205,7 +524,7 @@ function renderMatch() {
     turnSpan.textContent = 'T' + entry.turnNumber;
 
     const textSpan = document.createElement('span');
-    textSpan.textContent = (hero ? hero.name : entry.player) + ' — ' + actionLabel(entry);
+    textSpan.textContent = describeEntry(entry, match);
 
     li.appendChild(turnSpan);
     li.appendChild(textSpan);
@@ -231,13 +550,24 @@ function wireEvents() {
     }
   });
 
-  document.querySelectorAll('.btn-action').forEach((btn) => {
-    btn.addEventListener('click', () => logAction(btn.dataset.action));
-  });
-
-  document.getElementById('pass-turn-btn').addEventListener('click', passTurn);
   document.getElementById('undo-btn').addEventListener('click', undoLast);
   document.getElementById('new-match-btn').addEventListener('click', requestNewMatch);
+
+  document.getElementById('menu-cancel-btn').addEventListener('click', () => {
+    resetNav();
+    render();
+  });
+
+  [0, 1].forEach((i) => {
+    document.getElementById('player-panel-' + i).addEventListener('click', () => {
+      if (!state.current) return;
+      const { activePlayer } = deriveTurnState(state.current.log);
+      if (i === activePlayer) return;
+      nav.reply = !nav.reply;
+      nav.path = [];
+      render();
+    });
+  });
 
   document.getElementById('share-btn').addEventListener('click', async () => {
     const json = JSON.stringify(state, null, 2);
@@ -262,6 +592,7 @@ function wireEvents() {
   function applyImportedState(text) {
     const imported = JSON.parse(text);
     state = imported;
+    resetNav();
     saveState();
     render();
   }

@@ -9,7 +9,7 @@
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <link rel="stylesheet" href="css/style.css?v=6" />
+  <link rel="stylesheet" href="css/style.css?v=7" />
 </head>
 <body>
   <main class="app">
@@ -48,19 +48,20 @@
           <div id="player-name-1" class="player-name"></div>
         </div>
       </div>
+      <p class="hint">Tap the other player's portrait to log their reply (defense/versatile).</p>
 
-      <div class="action-grid">
-        <button class="btn btn-action" data-action="maneuver">Maneuver</button>
-        <button class="btn btn-action" data-action="attack">Attack</button>
-        <button class="btn btn-action" data-action="scheme">Scheme</button>
+      <div class="menu-area">
+        <div id="menu-header" class="menu-header" hidden>
+          <button id="menu-cancel-btn" class="btn btn-secondary btn-cancel">&larr; Cancel</button>
+          <span id="menu-breadcrumb" class="menu-breadcrumb"></span>
+        </div>
+        <div id="menu-grid" class="menu-grid"></div>
       </div>
 
       <div class="control-row">
         <button id="undo-btn" class="btn btn-secondary" disabled>Undo</button>
-        <button id="pass-turn-btn" class="btn btn-primary">Pass Turn</button>
+        <button id="new-match-btn" class="btn btn-secondary">New Match</button>
       </div>
-
-      <button id="new-match-btn" class="btn btn-secondary btn-stack">New Match</button>
 
       <h2 class="log-heading">Log</h2>
       <ul id="action-log" class="action-log"></ul>
@@ -91,6 +92,6 @@
     </div>
   </div>
 
-  <script src="js/app.js?v=3"></script>
+  <script src="js/app.js?v=4"></script>
 </body>
 </html>
