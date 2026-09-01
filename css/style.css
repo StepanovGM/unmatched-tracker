@@ -78,7 +78,8 @@ h2 {
 .fighter-toggle,
 .sign-btn,
 .status-chip,
-.type-tile {
+.type-tile,
+.history-row {
   transition: transform 0.08s ease, filter 0.08s ease;
 }
 
@@ -89,7 +90,8 @@ h2 {
 .fighter-toggle.pressed,
 .sign-btn.pressed,
 .status-chip.pressed,
-.type-tile.pressed {
+.type-tile.pressed,
+.history-row.pressed {
   transform: scale(0.95);
   filter: brightness(0.8);
 }
@@ -632,6 +634,16 @@ h2 {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  cursor: pointer;
+}
+
+.history-row.open {
+  border-color: var(--accent);
+}
+
+.history-log {
+  max-height: 220px;
+  margin-top: 4px;
 }
 
 .history-players {

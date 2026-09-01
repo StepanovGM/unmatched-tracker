@@ -1,5 +1,4 @@
 const STORAGE_KEY = 'unmatched-tracker-state';
-const MAX_HISTORY = 5;
 
 let heroes = [];
 let state = loadState();
@@ -93,8 +92,8 @@ function isHeroFighter(fighterKey) {
   return fighterKey === 'hero' || (typeof fighterKey === 'string' && fighterKey.indexOf('hero-') === 0);
 }
 
-function fighterLabel(player, fighterKey) {
-  const hero = heroBySlug(state.current.players[player].heroSlug);
+function fighterLabel(match, player, fighterKey) {
+  const hero = heroBySlug(match.players[player].heroSlug);
   if (!hero) return String(fighterKey);
   if (fighterKey === 'hero') return hero.name;
   if (typeof fighterKey === 'string' && fighterKey.indexOf('hero-') === 0) {
@@ -126,7 +125,6 @@ function isDead(player, fighter) {
 function startMatch(slugA, slugB) {
   if (state.current) {
     state.history.unshift(state.current);
-    state.history = state.history.slice(0, MAX_HISTORY);
   }
   state.current = {
     id: 'match-' + Date.now(),
@@ -218,7 +216,6 @@ function requestNewMatch() {
   }
   showConfirm('Archive the current match and start a new one?', () => {
     state.history.unshift(state.current);
-    state.history = state.history.slice(0, MAX_HISTORY);
     state.current = null;
     resetNav();
     saveState();
@@ -345,12 +342,12 @@ function describeEntry(entry, match) {
     case 'discard':
       return `${heroName} — Discard: ${entry.cardName}${entry.boosted ? ' (Boost)' : ''}`;
     case 'hp': {
-      const who = fighterLabel(entry.player, entry.target.fighter);
+      const who = fighterLabel(match, entry.player, entry.target.fighter);
       const sign = entry.delta >= 0 ? '+' : '';
       return `${who} ${sign}${entry.delta} HP`;
     }
     case 'death':
-      return `${fighterLabel(entry.player, entry.target.fighter)} defeated`;
+      return `${fighterLabel(match, entry.player, entry.target.fighter)} defeated`;
     case 'spawn':
       return `${heroName} — Sidekick spawn`;
     case 'ability':
@@ -715,6 +712,8 @@ function matchWinner(match) {
   return null;
 }
 
+let expandedHistoryId = null;
+
 function renderHistory() {
   const card = document.getElementById('history-card');
   const list = document.getElementById('history-list');
@@ -724,9 +723,15 @@ function renderHistory() {
   state.history.forEach((match) => {
     const winner = matchWinner(match);
     const { turnNumber } = deriveTurnState(match.log);
+    const isOpen = match.id === expandedHistoryId;
 
     const row = document.createElement('div');
-    row.className = 'history-row';
+    row.className = 'history-row' + (isOpen ? ' open' : '');
+    row.addEventListener('click', () => {
+      expandedHistoryId = isOpen ? null : match.id;
+      renderHistory();
+    });
+    bindPress(row);
 
     const playersRow = document.createElement('div');
     playersRow.className = 'history-players';
@@ -765,6 +770,34 @@ function renderHistory() {
 
     row.appendChild(playersRow);
     row.appendChild(meta);
+
+    if (isOpen) {
+      const logEl = document.createElement('ul');
+      logEl.className = 'action-log history-log';
+      match.log.slice().reverse().forEach((entry) => {
+        const li = document.createElement('li');
+
+        const turnSpan = document.createElement('span');
+        turnSpan.className = 'log-turn';
+        turnSpan.textContent = 'T' + entry.turnNumber;
+
+        const textSpan = document.createElement('span');
+        textSpan.textContent = describeEntry(entry, match);
+
+        li.appendChild(turnSpan);
+        li.appendChild(textSpan);
+        logEl.appendChild(li);
+      });
+      if (match.log.length === 0) {
+        const empty = document.createElement('p');
+        empty.className = 'hint';
+        empty.textContent = 'No actions logged in this match.';
+        row.appendChild(empty);
+      } else {
+        row.appendChild(logEl);
+      }
+    }
+
     list.appendChild(row);
   });
 }
@@ -799,6 +832,17 @@ function wireEvents() {
   const newMatchBtn = document.getElementById('new-match-btn');
   newMatchBtn.addEventListener('click', requestNewMatch);
   bindPress(newMatchBtn);
+
+  const clearHistoryBtn = document.getElementById('clear-history-btn');
+  clearHistoryBtn.addEventListener('click', () => {
+    showConfirm('Delete all match history? This cannot be undone.', () => {
+      state.history = [];
+      expandedHistoryId = null;
+      saveState();
+      render();
+    });
+  });
+  bindPress(clearHistoryBtn);
 
   const cancelBtn = document.getElementById('menu-cancel-btn');
   cancelBtn.addEventListener('click', () => {
@@ -881,7 +925,6 @@ function wireEvents() {
       // current match, archiving whatever was already in progress here.
       if (state.current) {
         state.history.unshift(state.current);
-        state.history = state.history.slice(0, MAX_HISTORY);
       }
       state.current = imported;
     } else {
