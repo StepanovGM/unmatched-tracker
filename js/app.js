@@ -268,8 +268,7 @@ function bindPress(el) {
 // --- Icons ------------------------------------------------------------
 // Custom icons are authored inline (simple, generic symbols — not sourced
 // from any card/game asset) and encoded as data URIs. Card-type icons are
-// hotlinked from unmatched.cards' community symbol set (see TYPE_META),
-// same "hotlink, never download" policy as hero/card art.
+// referenced via image URLs (see TYPE_META).
 function svgDataUri(svg) {
   return 'data:image/svg+xml,' + encodeURIComponent(svg);
 }
@@ -304,12 +303,12 @@ const ICONS = {
   ),
 };
 
-// Community-standard Unmatched card-type colors/icons (unmatched.cards).
+// Unmatched card-type colors/icons.
 const TYPE_META = {
-  attack: { color: '#dc3034', icon: 'https://unmatched.cards/img/attack.3856f1fe.svg', label: 'Attack' },
-  versatile: { color: '#6c4e8d', icon: 'https://unmatched.cards/img/versatile.25641eb0.svg', label: 'Versatile' },
-  defense: { color: '#2c76ac', icon: 'https://unmatched.cards/img/defence.e13b40d0.svg', label: 'Defense' },
-  scheme: { color: '#fcbd71', icon: 'https://unmatched.cards/img/scheme.9b22b426.svg', label: 'Scheme' },
+  attack: { color: '#dc3034', icon: 'images/icons/attack.svg', label: 'Attack' },
+  versatile: { color: '#6c4e8d', icon: 'images/icons/versatile.svg', label: 'Versatile' },
+  defense: { color: '#2c76ac', icon: 'images/icons/defense.svg', label: 'Defense' },
+  scheme: { color: '#fcbd71', icon: 'images/icons/scheme.svg', label: 'Scheme' },
 };
 
 function renderHeroGrid(slotIndex) {

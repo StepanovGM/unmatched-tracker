@@ -1,0 +1,902 @@
+[
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/avatars/Z4LCYo_MOeJ9S2nkJMsL1.webp",
+    "path": "images/heroes/dracula/avatar.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/card-covers/vI43Lyv3aAGgUa9vfv-uT.png",
+    "path": "images/heroes/dracula/card-back.png"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/minis/jhgwbg00y5So-428_BJm9.png",
+    "path": "images/heroes/dracula/mini.png"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/sidekicks/Sieq2amzgUkiAkkiSbYal.webp",
+    "path": "images/heroes/dracula/sidekick-1.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/sidekicks/wPJcRfNBRXAKcAp5BRSRI.webp",
+    "path": "images/heroes/dracula/sidekick-2.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/sidekicks/jdERxNTRgkKhl5P7sz49q.webp",
+    "path": "images/heroes/dracula/sidekick-3.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/6BP08cn7nsLPcSfsszMH7.webp",
+    "path": "images/heroes/dracula/cards/53.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/eVBC7X2wJq5cF6N_gCOAq.webp",
+    "path": "images/heroes/dracula/cards/59.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/lB_wRdJ7O6vaMggLV7Myp.webp",
+    "path": "images/heroes/dracula/cards/9.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/TofaAjr1joW172-NCHVWy.webp",
+    "path": "images/heroes/dracula/cards/51.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/31euhPzOcGgFPAUmjWKAB.webp",
+    "path": "images/heroes/dracula/cards/13.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/HOVky5pTZndIx5bFMFFj1.webp",
+    "path": "images/heroes/dracula/cards/11.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/2k3JIwU4kw4YSemTYmIvO.webp",
+    "path": "images/heroes/dracula/cards/2.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/vQytPFEBo8TIGx8wd1Izh.webp",
+    "path": "images/heroes/dracula/cards/54.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/Z_XEeMtV027k2ZfAO0rz2.webp",
+    "path": "images/heroes/dracula/cards/55.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/Xz1hDgRRDlwBtXXZ1qsYu.webp",
+    "path": "images/heroes/dracula/cards/57.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/hX48E_mXnlsnvgsLdtamW.webp",
+    "path": "images/heroes/dracula/cards/56.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/Cmq0PgjLA22NhWzmmCY-0.webp",
+    "path": "images/heroes/dracula/cards/58.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/G02A_Og3IqMNrw7PC6ROc.webp",
+    "path": "images/heroes/dracula/cards/60.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/avatars/XK60vlQzY_BhoHHrmyzzu.webp",
+    "path": "images/heroes/raptors/avatar.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/card-covers/591BE1ij7PVn6uzsqucd1.webp",
+    "path": "images/heroes/raptors/card-back.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/minis/g5TYUnp2IFQW22nwxj8h6.webp",
+    "path": "images/heroes/raptors/mini-1.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/minis/VAVM8oNQz6jztV5uLFgU4.webp",
+    "path": "images/heroes/raptors/mini-2.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/minis/tY4_VEwTN35tX3g_siVOj.webp",
+    "path": "images/heroes/raptors/mini-3.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/awpBWn8baMHeTEWz3PUeW.webp",
+    "path": "images/heroes/raptors/cards/147.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/uqp4BOfqUgISO5zyf_I_r.webp",
+    "path": "images/heroes/raptors/cards/8.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/Wy2Af1esighREI63XHs4v.webp",
+    "path": "images/heroes/raptors/cards/134.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/kmJ1lz9divvxfiPwL3pao.webp",
+    "path": "images/heroes/raptors/cards/133.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/mdcED5VFeplBBQIM-ZFRm.webp",
+    "path": "images/heroes/raptors/cards/128.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/BOkONLMCr8D5vRYhtBlgP.webp",
+    "path": "images/heroes/raptors/cards/9.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/7r77d6pzmwXdsdfkpDVkf.webp",
+    "path": "images/heroes/raptors/cards/135.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/oVTMEzf7MMgw2qDsr-9Aq.webp",
+    "path": "images/heroes/raptors/cards/2.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/JIpOttCvrm-NCka3ft5-v.webp",
+    "path": "images/heroes/raptors/cards/136.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/vA2TldzEqwqUblieTUcvQ.webp",
+    "path": "images/heroes/raptors/cards/127.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/3X9hQClV68-EDuSE9Fw41.webp",
+    "path": "images/heroes/raptors/cards/125.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/avatars/r3uOkimJegDYnEAu7cjz3.webp",
+    "path": "images/heroes/blackbeard/avatar.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/card-covers/ZeiHZOD0yDLap-wB9yF_x.webp",
+    "path": "images/heroes/blackbeard/card-back.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/minis/PL2zOdyCoWbpnYzjDbHLc.webp",
+    "path": "images/heroes/blackbeard/mini.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/sidekicks/hIwnvFiEt-qguLvRoENRK.webp",
+    "path": "images/heroes/blackbeard/sidekick-1.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/sidekicks/QYPUl2leIgUSyklnUueb_.webp",
+    "path": "images/heroes/blackbeard/sidekick-2.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/Aq781zSk1MrYo2f0KkcSG.webp",
+    "path": "images/heroes/blackbeard/cards/685.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/ojYfUDOnggCikmcgNrKMh.webp",
+    "path": "images/heroes/blackbeard/cards/687.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/4Sk9hrIaAsT4F7ErrPt6f.webp",
+    "path": "images/heroes/blackbeard/cards/696.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/JVLIR75n_WAqqKlB7vdT5.webp",
+    "path": "images/heroes/blackbeard/cards/686.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/maf53cKMLeLZCho3JmReg.webp",
+    "path": "images/heroes/blackbeard/cards/689.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/5UIFoJN4-2gpDNF48jVzH.webp",
+    "path": "images/heroes/blackbeard/cards/691.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/OGFti3U6hoWnqptOS-kTC.webp",
+    "path": "images/heroes/blackbeard/cards/690.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/8SoyWr4Qj0e-uN8MqmYrX.webp",
+    "path": "images/heroes/blackbeard/cards/693.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/3y_XA0OkFGzidRdVRHu6O.webp",
+    "path": "images/heroes/blackbeard/cards/692.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/ORpfO5sc7wUU_6t9-c59X.webp",
+    "path": "images/heroes/blackbeard/cards/688.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/fEOSwLTi7todHOjqbaUKz.webp",
+    "path": "images/heroes/blackbeard/cards/694.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/RuDpm9b9ako83x78iTVIV.webp",
+    "path": "images/heroes/blackbeard/cards/695.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/avatars/h_TeY_o2t6e1Hc0PuUHq9.webp",
+    "path": "images/heroes/hamlet/avatar.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/card-covers/bg3s8IEdB07YlbFJQSGS5.webp",
+    "path": "images/heroes/hamlet/card-back.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/minis/KCW4JwtH3WkcN6gO9YvM2.webp",
+    "path": "images/heroes/hamlet/mini.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/sidekicks/SgxYZQRA_yzaMm3IiCIaB.webp",
+    "path": "images/heroes/hamlet/sidekick-1.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/lM0WKzH55Ur5v5KkqZgjZ.webp",
+    "path": "images/heroes/hamlet/cards/580.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/cGA-vDrB57IoqqO5U0oU3.webp",
+    "path": "images/heroes/hamlet/cards/581.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/G6V38iu8ARMU5MyZq5Pav.webp",
+    "path": "images/heroes/hamlet/cards/571.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/6PxGTnvST42FBgPy3sz75.webp",
+    "path": "images/heroes/hamlet/cards/577.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/Pm9C38p3-uf2TLKXGijk2.webp",
+    "path": "images/heroes/hamlet/cards/578.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/qtnfi1IYtpUmkmtoq9R3B.webp",
+    "path": "images/heroes/hamlet/cards/570.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/xdyWidG2Pg4tsiRrHiwKk.webp",
+    "path": "images/heroes/hamlet/cards/575.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/blxzNsD718YCE9EX486I9.webp",
+    "path": "images/heroes/hamlet/cards/574.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/RzS4Bw4mx9a0BHex7qE_t.webp",
+    "path": "images/heroes/hamlet/cards/579.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/5GYhShVUamcwDqdu3ZC17.webp",
+    "path": "images/heroes/hamlet/cards/572.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/AlEL0DFCU2Oro23kVlVNd.webp",
+    "path": "images/heroes/hamlet/cards/576.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/TxWZIVg9K-WB-2n7x7ZRV.webp",
+    "path": "images/heroes/hamlet/cards/573.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/avatars/1P5P0HatPvHwUvwJuPyAc.webp",
+    "path": "images/heroes/sun-wukong/avatar.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/card-covers/EoDLc4PNqSqST9akf5nVn.jpg",
+    "path": "images/heroes/sun-wukong/card-back.jpg"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/minis/OkS_VNxzdYn5EiVtS2AIF.png",
+    "path": "images/heroes/sun-wukong/mini.png"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/sidekicks/lTECznDU1KVakYyjpL0UF.webp",
+    "path": "images/heroes/sun-wukong/sidekick-1.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/USelEZoxP6dw_zfUbxw0A.webp",
+    "path": "images/heroes/sun-wukong/cards/306.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/vxEcWXo5_aEbQhOxOBs-9.webp",
+    "path": "images/heroes/sun-wukong/cards/305.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/T3uLq0GA28OIoFtY8TJwx.webp",
+    "path": "images/heroes/sun-wukong/cards/280.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/uLoW5_8Mm30zPo6gX-5j6.webp",
+    "path": "images/heroes/sun-wukong/cards/279.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/2gOzDDi4qLORSqRA6dpUu.webp",
+    "path": "images/heroes/sun-wukong/cards/6.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/BDvpo6NCG8XrN4XpUY45p.webp",
+    "path": "images/heroes/sun-wukong/cards/307.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/jMKhYm4rh75mo2HJETvo0.webp",
+    "path": "images/heroes/sun-wukong/cards/308.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/mYOVqdfM9hvAv1bx6qDsM.webp",
+    "path": "images/heroes/sun-wukong/cards/310.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/G1ArkwrtK-TxW5fPHyrLb.webp",
+    "path": "images/heroes/sun-wukong/cards/309.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/1FPxyvPytZu7AmK0woEL-.webp",
+    "path": "images/heroes/sun-wukong/cards/23.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/54_2tlYADIbVdvNOcHzQK.webp",
+    "path": "images/heroes/sun-wukong/cards/311.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/H7lSNMYXLHe68VHtwc5x6.webp",
+    "path": "images/heroes/sun-wukong/cards/275.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/avatars/biGrBHVsYWTXjeEYTGqov.webp",
+    "path": "images/heroes/robin-hood/avatar.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/card-covers/nTLDla5Mkj_Hc2DfFQULj.jpg",
+    "path": "images/heroes/robin-hood/card-back.jpg"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/sidekicks/KwI9DqW6Y6Je1Sj_ippng.webp",
+    "path": "images/heroes/robin-hood/sidekick-1.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/6h4XaFv8RQBbzrL6DWdqG.png",
+    "path": "images/heroes/robin-hood/cards/129.png"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/l4w9h4RHqtr44BSEiHb5r.png",
+    "path": "images/heroes/robin-hood/cards/15.png"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/vFr43cAiuTeSuonALEjhU.png",
+    "path": "images/heroes/robin-hood/cards/132.png"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/1t3ZVP72MyWGWZx8QHhYe.png",
+    "path": "images/heroes/robin-hood/cards/9.png"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/gIXbyV3zLCF3oEGYXJmlz.png",
+    "path": "images/heroes/robin-hood/cards/16.png"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/l55xeh16xNlokk_ncOenW.png",
+    "path": "images/heroes/robin-hood/cards/17.png"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/nN6NsP5nPGTW8rnkU2ebb.png",
+    "path": "images/heroes/robin-hood/cards/6.png"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/3_qUTLTF8i6wmW7AUDfXB.png",
+    "path": "images/heroes/robin-hood/cards/2.png"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/8yVt75YUuexIavAER74NB.png",
+    "path": "images/heroes/robin-hood/cards/3.png"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/s6n5Yn14HcKXWjcH4H3Ov.png",
+    "path": "images/heroes/robin-hood/cards/131.png"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/auH5Cm3BFTIA8U3YmlABM.png",
+    "path": "images/heroes/robin-hood/cards/130.png"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/avatars/5W_7-ObJntAkPZUG1JMUF.webp",
+    "path": "images/heroes/little-red/avatar.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/card-covers/xLyD7qzSKyz94f_F6QtEi.webp",
+    "path": "images/heroes/little-red/card-back.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/minis/MBmHiJAwDSgFZTG-aUKSQ.webp",
+    "path": "images/heroes/little-red/mini.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/sidekicks/VEXTjKWJLRGqwdY7_NCr5.webp",
+    "path": "images/heroes/little-red/sidekick-1.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/O2_JGSYt-WCqkqDxhSdq9.webp",
+    "path": "images/heroes/little-red/cards/204.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/tPwXTaRvd97smA0qNHRAK.webp",
+    "path": "images/heroes/little-red/cards/208.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/bZ_2InTU7elCGo1wxbAoW.webp",
+    "path": "images/heroes/little-red/cards/187.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/ixYx-aN0Sq76KAPM3tM9Q.webp",
+    "path": "images/heroes/little-red/cards/222.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/UMlgFXCLxLAqNX8YNF3wz.webp",
+    "path": "images/heroes/little-red/cards/211.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/Bw34A8eSA9vWRq1MYEhwO.webp",
+    "path": "images/heroes/little-red/cards/205.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/B7mKmB491GA_iqCXE7W4w.webp",
+    "path": "images/heroes/little-red/cards/210.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/8qTW6rNcONaMGVHZIOXQd.webp",
+    "path": "images/heroes/little-red/cards/207.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/MFk-_yPhM6jcizrUuYdYu.webp",
+    "path": "images/heroes/little-red/cards/203.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/rBFJyAYYcJv8l_mG4E3p0.webp",
+    "path": "images/heroes/little-red/cards/206.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/Z_vhyAWFFIwqE5Y9JHiHi.webp",
+    "path": "images/heroes/little-red/cards/209.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/zbor2pw7IucurrmUXBHLP.webp",
+    "path": "images/heroes/little-red/cards/212.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/avatars/mUid6ngk5qXZJQcZM0d6C.webp",
+    "path": "images/heroes/bigfoot/avatar.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/card-covers/mbjF8pursj8AYkalODyXa.jpg",
+    "path": "images/heroes/bigfoot/card-back.jpg"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/sidekicks/brjO1wbtbusXfYkfTDsZ6.webp",
+    "path": "images/heroes/bigfoot/sidekick-1.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/fDrxsznCi3qYCediQHeom.png",
+    "path": "images/heroes/bigfoot/cards/47.png"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/dvW4SgFX44eZbsXkfZUJN.png",
+    "path": "images/heroes/bigfoot/cards/333.png"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/AcEoowMwF7g8rv2yJtj4V.png",
+    "path": "images/heroes/bigfoot/cards/8.png"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/YfKwvNbyAZivP60QROf0C.png",
+    "path": "images/heroes/bigfoot/cards/99.png"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/B1gktwtX71Q7CFI9g0JDJ.png",
+    "path": "images/heroes/bigfoot/cards/4.png"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/_cSnaMXnYEo1ZDZrLUjIx.png",
+    "path": "images/heroes/bigfoot/cards/5.png"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/mdwcQ12hMJSfzRnsXlqer.png",
+    "path": "images/heroes/bigfoot/cards/2.png"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/DuJisutuNYBuB51zPCDq9.png",
+    "path": "images/heroes/bigfoot/cards/3.png"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/VgxMQeKN4Mo91Ws-lrwz8.png",
+    "path": "images/heroes/bigfoot/cards/49.png"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/clS7OW-VsK3I3bc4R75dM.png",
+    "path": "images/heroes/bigfoot/cards/52.png"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/IPakEd-Z5GQTF6JQ3Bpbp.png",
+    "path": "images/heroes/bigfoot/cards/48.png"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/avatars/2RiCcBVu5Tk09amVSf6BO.webp",
+    "path": "images/heroes/sinbad/avatar.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/card-covers/iX3R40hAP80XJ-UalPt6E.png",
+    "path": "images/heroes/sinbad/card-back.png"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/sidekicks/2SD817c0HhsliZ40hRdB8.webp",
+    "path": "images/heroes/sinbad/sidekick-1.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/_jpB9222Bw2GwzjnvTBFj.png",
+    "path": "images/heroes/sinbad/cards/7.png"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/kBvJfJX8qAvFHSQMm8g6y.png",
+    "path": "images/heroes/sinbad/cards/163.png"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/s8N8SIQotcO3kGxz7omgV.png",
+    "path": "images/heroes/sinbad/cards/167.png"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/m6cVkxlnOyjeG68qawGxZ.png",
+    "path": "images/heroes/sinbad/cards/166.png"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/Q-N4hjLRKYvizLcnmzNIM.png",
+    "path": "images/heroes/sinbad/cards/169.png"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/QaLnVYXz2_m917vyRMUvh.png",
+    "path": "images/heroes/sinbad/cards/165.png"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/QDPY2vqrgCde8hqFhuWCc.png",
+    "path": "images/heroes/sinbad/cards/161.png"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/QS6XLldxWu_PM5-87C94s.png",
+    "path": "images/heroes/sinbad/cards/168.png"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/IJZ-AAchFZLaGLcVO_IiI.png",
+    "path": "images/heroes/sinbad/cards/164.png"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/UhlUFXr74L339Pm2PdGgz.png",
+    "path": "images/heroes/sinbad/cards/13.png"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/u4EIl-QkbvWJ9zlhduf2A.webp",
+    "path": "images/heroes/sinbad/cards/12.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/IWdliMRNJdPs8fbhcfO_8.png",
+    "path": "images/heroes/sinbad/cards/5.png"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/5Yz2eME1ZJNq7E5tmGJoK.png",
+    "path": "images/heroes/sinbad/cards/160.png"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/fCrz_yRzBhWOZ1kR799zH.png",
+    "path": "images/heroes/sinbad/cards/2.png"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/u9cvvtmTiByln765B1mic.png",
+    "path": "images/heroes/sinbad/cards/3.png"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/ildknUF_12a15pdfcX6IY.png",
+    "path": "images/heroes/sinbad/cards/162.png"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/avatars/bI206lUtJUQru-FOD8A74.webp",
+    "path": "images/heroes/medusa/avatar.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/card-covers/ROSMO3sRi6Jh1o7S_riGI.png",
+    "path": "images/heroes/medusa/card-back.png"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/sidekicks/G42WIKYZ1cmwACVwMggzM.webp",
+    "path": "images/heroes/medusa/sidekick-1.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/QX8jIcNWWchG0LH4-Wx2A.png",
+    "path": "images/heroes/medusa/cards/170.png"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/dDKLFFrQCU3LSvzUl9bp4.png",
+    "path": "images/heroes/medusa/cards/14.png"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/xGLsMbYto7YoNAt3RA45A.png",
+    "path": "images/heroes/medusa/cards/122.png"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/fhUdyrvTn_Zb5lTyVzWEa.png",
+    "path": "images/heroes/medusa/cards/126.png"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/Qre7TFvmMq68AngOsCeFw.png",
+    "path": "images/heroes/medusa/cards/123.png"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/cOvxOF9B439EZxLEzfikf.webp",
+    "path": "images/heroes/medusa/cards/11.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/ZD9U8bSiANWAnoqRIJVsd.png",
+    "path": "images/heroes/medusa/cards/2.png"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/Wphnfqps0JrMOGuF8p4_A.png",
+    "path": "images/heroes/medusa/cards/3.png"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/1RJzwMo_7NUp2I4ay-Ry3.png",
+    "path": "images/heroes/medusa/cards/94.png"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/vFHm4dsYKGOKlV_QEF715.png",
+    "path": "images/heroes/medusa/cards/93.png"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/tMn-Qj6hEIQKIx9jQyklL.png",
+    "path": "images/heroes/medusa/cards/124.png"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/avatars/W03sz0_dGlPDN4M67p2nj.webp",
+    "path": "images/heroes/chupacabra/avatar.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/card-covers/5U0kpiJx-RzRDYQ-FulgJ.webp",
+    "path": "images/heroes/chupacabra/card-back.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/minis/xZt3ZMNBE54rJTXyQ5j7U.webp",
+    "path": "images/heroes/chupacabra/mini.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/vgh0_Hn0b5zQC1SwnyhOw.webp",
+    "path": "images/heroes/chupacabra/cards/678.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/kiXTdTPCFRUZ0RJbiDovf.webp",
+    "path": "images/heroes/chupacabra/cards/677.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/oVPCqrDcFepHp5c0kUNO5.webp",
+    "path": "images/heroes/chupacabra/cards/9.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/w8zyNZuufT9inSHFlL7U3.webp",
+    "path": "images/heroes/chupacabra/cards/676.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/r4QYT9ZzjxnUvI_Tgck7e.webp",
+    "path": "images/heroes/chupacabra/cards/682.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/H-bX_sYc8pUbhHYW4tCmJ.webp",
+    "path": "images/heroes/chupacabra/cards/680.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/08SXlLQ1PLVwWN2oP0IVJ.webp",
+    "path": "images/heroes/chupacabra/cards/2.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/ELsH_WhayW_vpgOhKUSRN.webp",
+    "path": "images/heroes/chupacabra/cards/681.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/q7Gjkf0ExHrrBhDiv8xIQ.webp",
+    "path": "images/heroes/chupacabra/cards/679.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/aiS83lHi7bhTbQyq1MI9O.webp",
+    "path": "images/heroes/chupacabra/cards/683.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/H9wxqJEY4cay7ohCvOlf1.webp",
+    "path": "images/heroes/chupacabra/cards/684.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/avatars/0ciiTDm6RZnI7Yul_t3oN.webp",
+    "path": "images/heroes/oda-nobunaga/avatar.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/card-covers/_hVP2Ah-uMSD_kH5-LUol.webp",
+    "path": "images/heroes/oda-nobunaga/card-back.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/minis/_yMu4Yc9LeQ6ipWoH-aSJ.webp",
+    "path": "images/heroes/oda-nobunaga/mini.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/sidekicks/ZlI0yBS6cYzLAUtBW3bUm.webp",
+    "path": "images/heroes/oda-nobunaga/sidekick-1.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/sidekicks/eMvbI3i99GtNmhcdnu-9W.webp",
+    "path": "images/heroes/oda-nobunaga/sidekick-2.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/6FcELjOg09cR5NTDpw-Nw.webp",
+    "path": "images/heroes/oda-nobunaga/cards/405.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/oW5E1ZjncnnIWBtdaQlBy.webp",
+    "path": "images/heroes/oda-nobunaga/cards/406.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/hM8lsNlKgXuyc0c5gmKFN.webp",
+    "path": "images/heroes/oda-nobunaga/cards/432.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/JBFsMF7GgRp_C6MPm56Vh.webp",
+    "path": "images/heroes/oda-nobunaga/cards/380.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/xLtenBYt6Jzezu_6DkFEd.webp",
+    "path": "images/heroes/oda-nobunaga/cards/5.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/K-COKV71z7oL1ZbOKcMKT.webp",
+    "path": "images/heroes/oda-nobunaga/cards/433.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/_uRX9GZXjYI1kacXUV8xQ.webp",
+    "path": "images/heroes/oda-nobunaga/cards/514.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/ohrdTFtVusW8h1Vk-tKD6.webp",
+    "path": "images/heroes/oda-nobunaga/cards/408.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/R7id0Dm0DLYq8zkIDrHxh.webp",
+    "path": "images/heroes/oda-nobunaga/cards/518.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/_UjQWLFU10zuJigd2dXV7.webp",
+    "path": "images/heroes/oda-nobunaga/cards/530.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/WX-zT5B00aBwYjCKrQcNY.webp",
+    "path": "images/heroes/oda-nobunaga/cards/407.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/avatars/9z9iaYFxdQpstwDftty0r.webp",
+    "path": "images/heroes/t-rex/avatar.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/card-covers/mURpEFDw_zxQRn19mYXgG.webp",
+    "path": "images/heroes/t-rex/card-back.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/minis/WtQqhW1m7pXp494PtRk8G.webp",
+    "path": "images/heroes/t-rex/mini.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/-GaTw_eq1gfLo3ruXsZNk.webp",
+    "path": "images/heroes/t-rex/cards/7.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/EW4jRFVf2mxCnslnWB8nv.webp",
+    "path": "images/heroes/t-rex/cards/353.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/ePGahQLl6XFtYIqk3zV_k.webp",
+    "path": "images/heroes/t-rex/cards/338.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/D5kEd71Wf1CzYzjOX2QFB.webp",
+    "path": "images/heroes/t-rex/cards/339.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/H1q7AupwvyXAVa7cTsBa1.webp",
+    "path": "images/heroes/t-rex/cards/5.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/FSV7wVDdir3K2IaTtx9h7.webp",
+    "path": "images/heroes/t-rex/cards/21.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/mDPX69OyY5e11I6lWdkpS.webp",
+    "path": "images/heroes/t-rex/cards/337.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/QmWnpYfB_h5HNgj-Sw61s.webp",
+    "path": "images/heroes/t-rex/cards/352.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/V671yFXGLvBhixe2JKgFK.webp",
+    "path": "images/heroes/t-rex/cards/341.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/ZBvY4lqNRVWC__zjPAoKw.webp",
+    "path": "images/heroes/t-rex/cards/340.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/HOQ-sOXfoUNQ1J47Cx8lJ.webp",
+    "path": "images/heroes/t-rex/cards/22.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/avatars/GVUVfvLlonuST8-fUwbnU.webp",
+    "path": "images/heroes/achilles/avatar.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/card-covers/INWx-zVx8tsyrlQD4gFE2.gif",
+    "path": "images/heroes/achilles/card-back.gif"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/minis/tX4mC2uFjsi-ZAXbCM1KK.png",
+    "path": "images/heroes/achilles/mini.png"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/heroes/sidekicks/PQzBXj7JAn0vanxqXAJtz.webp",
+    "path": "images/heroes/achilles/sidekick-1.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/oC5YZ2RscAp3WecXfGpd8.webp",
+    "path": "images/heroes/achilles/cards/298.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/N2cgR0MJdVlbO46Dd-W74.webp",
+    "path": "images/heroes/achilles/cards/332.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/xxx5l7rKKdvypYApWNoja.webp",
+    "path": "images/heroes/achilles/cards/294.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/2hM9U-X2zA9y99SNIhq0W.webp",
+    "path": "images/heroes/achilles/cards/297.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/0XMmCuefYmduTbRDqfu9f.webp",
+    "path": "images/heroes/achilles/cards/4.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/K-T70Fh6ygr5ohjhj0rEr.webp",
+    "path": "images/heroes/achilles/cards/6.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/jTDnOy8Y4y6BnVMJayWTW.webp",
+    "path": "images/heroes/achilles/cards/300.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/r8mTfsPTPIM9Tm3LG_ejL.webp",
+    "path": "images/heroes/achilles/cards/2.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/COm9UZzAQ-FWoWPUTM5ye.webp",
+    "path": "images/heroes/achilles/cards/299.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/HkIoTHIHLphfN1E4Jzlr9.webp",
+    "path": "images/heroes/achilles/cards/276.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/zFiXIy6c_ro4J77SL0tB7.webp",
+    "path": "images/heroes/achilles/cards/301.webp"
+  },
+  {
+    "url": "https://yptpnirqgfmxphjvsdjz.supabase.co/storage/v1/object/public/decks/kmBFeB9U3SiEvNj3h6NL3.webp",
+    "path": "images/heroes/achilles/cards/302.webp"
+  },
+  {
+    "url": "https://unmatched.cards/img/attack.3856f1fe.svg",
+    "path": "images/icons/attack.svg"
+  },
+  {
+    "url": "https://unmatched.cards/img/versatile.25641eb0.svg",
+    "path": "images/icons/versatile.svg"
+  },
+  {
+    "url": "https://unmatched.cards/img/defence.e13b40d0.svg",
+    "path": "images/icons/defense.svg"
+  },
+  {
+    "url": "https://unmatched.cards/img/scheme.9b22b426.svg",
+    "path": "images/icons/scheme.svg"
+  }
+]
