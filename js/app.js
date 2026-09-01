@@ -366,42 +366,6 @@ const MENU_LABELS = {
   'r-attack': 'Attack', 'r-versatile': 'Versatile', 'r-scheme': 'Scheme', 'r-defense': 'Defense',
 };
 
-function bindTapOrHold(el, onTap, onHold, holdMs) {
-  let timer = null;
-  let held = false;
-  const start = (e) => {
-    held = false;
-    el.classList.add('pressed');
-    // Suppress the browser's compatibility "click" event that follows a
-    // touch pointerup — without this, that click fires slightly later
-    // against whatever now occupies the same screen position, since
-    // onTap()/onHold() below re-render the whole menu synchronously and
-    // replace this element. On mobile that stray click was landing on
-    // root-menu tiles (e.g. HP) that ended up at this card's coordinates.
-    if (e.cancelable) e.preventDefault();
-    timer = setTimeout(() => {
-      held = true;
-      onHold();
-    }, holdMs || 500);
-  };
-  const cancel = () => {
-    if (timer) clearTimeout(timer);
-    timer = null;
-    el.classList.remove('pressed');
-  };
-  const end = (e) => {
-    if (e.cancelable) e.preventDefault();
-    const wasHeld = held;
-    cancel();
-    if (!wasHeld) onTap();
-  };
-  el.addEventListener('pointerdown', start);
-  el.addEventListener('pointerup', end);
-  el.addEventListener('pointerleave', cancel);
-  el.addEventListener('pointercancel', cancel);
-  el.addEventListener('contextmenu', (e) => e.preventDefault());
-}
-
 function makeMenuButton(label, onClick) {
   const btn = document.createElement('button');
   btn.type = 'button';
@@ -541,19 +505,15 @@ function renderCardList(grid, cardType, opts) {
     const payload = () => {
       const base = { type: opts.commitType, cardType, cardId: card.id, cardName: card.name };
       if (opts.commitType === 'play') base.mechanic = typeof opts.mechanic === 'function' ? opts.mechanic() : opts.mechanic;
+      // Boost (long-press to discard with boosted:true) is disabled for
+      // now — the hold gesture wasn't reliably registering on mobile.
+      // Keep the field so old/new log entries stay the same shape.
+      if (opts.commitType === 'discard') base.boosted = false;
       return base;
     };
 
-    if (opts.boostable) {
-      bindTapOrHold(
-        btn,
-        () => commitSimple({ ...payload(), boosted: false }),
-        () => commitSimple({ ...payload(), boosted: true })
-      );
-    } else {
-      btn.addEventListener('click', () => commitSimple(payload()));
-      bindPress(btn);
-    }
+    btn.addEventListener('click', () => commitSimple(payload()));
+    bindPress(btn);
 
     grid.appendChild(btn);
   });
@@ -658,7 +618,7 @@ function renderMenu() {
     const leaf = PLAY_LEAF[nav.path[1]];
     renderCardList(grid, leaf.cardType, { commitType: 'play', mechanic: leaf.mechanic });
   } else if (nav.path[0] === 'discard' && DISCARD_LEAF[nav.path[1]]) {
-    renderCardList(grid, DISCARD_LEAF[nav.path[1]], { commitType: 'discard', boostable: true });
+    renderCardList(grid, DISCARD_LEAF[nav.path[1]], { commitType: 'discard' });
   } else if (nav.path[0] === 'return' && RETURN_LEAF[nav.path[1]]) {
     renderCardList(grid, RETURN_LEAF[nav.path[1]], { commitType: 'return' });
   } else if (key === 'hp') {
