@@ -9,7 +9,7 @@
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <link rel="stylesheet" href="css/style.css?v=9" />
+  <link rel="stylesheet" href="css/style.css?v=10" />
 </head>
 <body>
   <main class="app">
@@ -61,10 +61,17 @@
       <ul id="action-log" class="action-log"></ul>
     </section>
 
+    <section id="history-card" class="card" hidden>
+      <h2>Match History</h2>
+      <p class="hint">Last 5 completed matches on this device.</p>
+      <div id="history-list" class="history-list"></div>
+    </section>
+
     <section class="card">
       <h2>Share / Backup</h2>
-      <p class="hint">Copies the full tracker state (current match + history) as JSON to your clipboard.</p>
-      <button id="share-btn" class="btn btn-primary">Copy JSON</button>
+      <p class="hint">"Copy Current Match" shares just the match in progress. "Copy Full Backup" includes match history too — use it for restoring on another device.</p>
+      <button id="share-current-btn" class="btn btn-primary" disabled>Copy Current Match</button>
+      <button id="share-btn" class="btn btn-secondary btn-stack">Copy Full Backup</button>
       <button id="paste-btn" class="btn btn-secondary btn-stack">Paste JSON</button>
       <textarea id="paste-area" class="paste-area btn-stack" hidden placeholder="Paste JSON here (Ctrl+V)"></textarea>
       <button id="load-pasted-btn" class="btn btn-primary btn-stack" hidden>Load pasted JSON</button>
@@ -86,6 +93,6 @@
     </div>
   </div>
 
-  <script src="js/app.js?v=6"></script>
+  <script src="js/app.js?v=7"></script>
 </body>
 </html>

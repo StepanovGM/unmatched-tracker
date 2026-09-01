@@ -703,11 +703,79 @@ function renderMatch() {
   logEl.scrollTop = 0;
 }
 
+// A match counts as decided if exactly one player's hero died (pack
+// heroes use 'hero-0'/'hero-1'/... — isHeroFighter covers those too).
+// Undetermined (e.g. abandoned mid-game via New Match) shows no winner.
+function matchWinner(match) {
+  const deadPlayers = new Set();
+  match.log.forEach((e) => {
+    if (e.type === 'death' && isHeroFighter(e.target.fighter)) deadPlayers.add(e.player);
+  });
+  if (deadPlayers.size === 1) return 1 - Array.from(deadPlayers)[0];
+  return null;
+}
+
+function renderHistory() {
+  const card = document.getElementById('history-card');
+  const list = document.getElementById('history-list');
+  card.hidden = state.history.length === 0;
+  list.innerHTML = '';
+
+  state.history.forEach((match) => {
+    const winner = matchWinner(match);
+    const { turnNumber } = deriveTurnState(match.log);
+
+    const row = document.createElement('div');
+    row.className = 'history-row';
+
+    const playersRow = document.createElement('div');
+    playersRow.className = 'history-players';
+
+    [0, 1].forEach((i) => {
+      const hero = heroBySlug(match.players[i].heroSlug);
+      const side = document.createElement('div');
+      side.className = 'history-side' + (winner === i ? ' winner' : '');
+
+      const img = document.createElement('img');
+      img.className = 'history-avatar';
+      img.src = hero ? hero.avatarImage || '' : '';
+      img.alt = '';
+
+      const name = document.createElement('span');
+      name.className = 'history-side-name';
+      name.textContent = hero ? hero.name : match.players[i].heroSlug;
+
+      side.appendChild(img);
+      side.appendChild(name);
+      playersRow.appendChild(side);
+
+      if (i === 0) {
+        const vs = document.createElement('span');
+        vs.className = 'history-vs';
+        vs.textContent = 'vs';
+        playersRow.appendChild(vs);
+      }
+    });
+
+    const meta = document.createElement('div');
+    meta.className = 'history-meta';
+    const started = new Date(match.startedAt);
+    const dateStr = isNaN(started) ? '' : started.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+    meta.textContent = `T${turnNumber} · ${dateStr}`;
+
+    row.appendChild(playersRow);
+    row.appendChild(meta);
+    list.appendChild(row);
+  });
+}
+
 function render() {
   const hasMatch = !!state.current;
   document.getElementById('app-title').hidden = hasMatch;
   document.getElementById('setup-screen').hidden = hasMatch;
   document.getElementById('match-screen').hidden = !hasMatch;
+  document.getElementById('share-current-btn').disabled = !hasMatch;
+  renderHistory();
   if (hasMatch) {
     renderMatch();
   } else {
@@ -763,12 +831,25 @@ function wireEvents() {
     bindPress(panel);
   });
 
+  const shareCurrentBtn = document.getElementById('share-current-btn');
+  shareCurrentBtn.addEventListener('click', async () => {
+    if (!state.current) return;
+    const json = JSON.stringify(state.current, null, 2);
+    try {
+      await navigator.clipboard.writeText(json);
+      setStatus('Copied current match JSON to clipboard.');
+    } catch (e) {
+      setStatus('Copy failed: ' + e.message);
+    }
+  });
+  bindPress(shareCurrentBtn);
+
   const shareBtn = document.getElementById('share-btn');
   shareBtn.addEventListener('click', async () => {
     const json = JSON.stringify(state, null, 2);
     try {
       await navigator.clipboard.writeText(json);
-      setStatus('Copied JSON to clipboard.');
+      setStatus('Copied full backup (current match + history) JSON to clipboard.');
     } catch (e) {
       setStatus('Copy failed: ' + e.message);
     }
@@ -789,7 +870,23 @@ function wireEvents() {
 
   function applyImportedState(text) {
     const imported = JSON.parse(text);
-    state = imported;
+    if (imported && (imported.current !== undefined || Array.isArray(imported.history))) {
+      // Full backup shape: { current, history }.
+      state = {
+        current: imported.current || null,
+        history: Array.isArray(imported.history) ? imported.history : [],
+      };
+    } else if (imported && Array.isArray(imported.players) && Array.isArray(imported.log)) {
+      // Single-match shape (from "Copy Current Match") — drop it in as the
+      // current match, archiving whatever was already in progress here.
+      if (state.current) {
+        state.history.unshift(state.current);
+        state.history = state.history.slice(0, MAX_HISTORY);
+      }
+      state.current = imported;
+    } else {
+      throw new Error('Unrecognized JSON — expected a tracker backup or a single match.');
+    }
     resetNav();
     saveState();
     render();
