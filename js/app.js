@@ -60,9 +60,26 @@ function actingPlayer() {
   return nav.reply ? 1 - activePlayer : activePlayer;
 }
 
+// Most heroes are one hero figure (+ optional sidekicks), but a few
+// (e.g. Raptors) are a *pack*: several identical fighters and no single
+// "hero" figure at all (heroFigure.count > 1, sidekick: null). Those get
+// fighter keys 'hero-0', 'hero-1', ... instead of the single 'hero' key,
+// so each pack member is tracked/damaged independently.
+function heroFigureCount(hero) {
+  return hero && hero.heroFigure && hero.heroFigure.count > 1 ? hero.heroFigure.count : 1;
+}
+
 function fightersForPlayer(player) {
   const hero = heroBySlug(state.current.players[player].heroSlug);
-  const list = [{ fighter: 'hero', label: hero ? hero.name : 'Hero' }];
+  const figureCount = heroFigureCount(hero);
+  const list = [];
+  if (figureCount > 1) {
+    for (let i = 0; i < figureCount; i++) {
+      list.push({ fighter: 'hero-' + i, label: `${hero ? hero.name : 'Hero'} ${i + 1}` });
+    }
+  } else {
+    list.push({ fighter: 'hero', label: hero ? hero.name : 'Hero' });
+  }
   if (hero && hero.sidekick && hero.sidekick.count > 0) {
     const count = hero.sidekick.count;
     for (let i = 0; i < count; i++) {
@@ -72,10 +89,17 @@ function fightersForPlayer(player) {
   return list;
 }
 
+function isHeroFighter(fighterKey) {
+  return fighterKey === 'hero' || (typeof fighterKey === 'string' && fighterKey.indexOf('hero-') === 0);
+}
+
 function fighterLabel(player, fighterKey) {
   const hero = heroBySlug(state.current.players[player].heroSlug);
   if (!hero) return String(fighterKey);
   if (fighterKey === 'hero') return hero.name;
+  if (typeof fighterKey === 'string' && fighterKey.indexOf('hero-') === 0) {
+    return `${hero.name} ${Number(fighterKey.slice(5)) + 1}`;
+  }
   const count = hero.sidekick ? hero.sidekick.count : 1;
   const name = hero.sidekick ? hero.sidekick.name : 'Sidekick';
   return count > 1 ? `${name} ${fighterKey + 1}` : name;
@@ -84,7 +108,7 @@ function fighterLabel(player, fighterKey) {
 function startingHp(player, fighter) {
   const hero = heroBySlug(state.current.players[player].heroSlug);
   if (!hero) return 0;
-  return fighter === 'hero' ? hero.hp : (hero.sidekick && hero.sidekick.hp ? hero.sidekick.hp : 1);
+  return isHeroFighter(fighter) ? hero.hp : (hero.sidekick && hero.sidekick.hp ? hero.sidekick.hp : 1);
 }
 
 function currentHp(player, fighter) {
@@ -522,6 +546,15 @@ function renderCardList(grid, cardType, opts) {
 function renderHpPanel(grid) {
   const player = actingPlayer();
   const fighters = fightersForPlayer(player);
+
+  // The default/leftover selection may not exist for this hero (e.g. a
+  // pack hero like Raptors has no 'hero' key at all) — fall back to the
+  // first available fighter instead of leaving the selection empty.
+  const validKeys = new Set(fighters.map((f) => f.fighter));
+  const hasValidTarget = Array.from(nav.hp.targets).some((t) => validKeys.has(t));
+  if (!hasValidTarget && fighters.length > 0) {
+    nav.hp.targets = new Set([fighters[0].fighter]);
+  }
 
   const wrap = document.createElement('div');
   wrap.className = 'hp-panel';
