@@ -637,15 +637,6 @@ h2 {
   cursor: pointer;
 }
 
-.history-row.open {
-  border-color: var(--accent);
-}
-
-.history-log {
-  max-height: 220px;
-  margin-top: 4px;
-}
-
 .history-players {
   display: flex;
   align-items: center;

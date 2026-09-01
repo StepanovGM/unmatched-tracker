@@ -712,7 +712,20 @@ function matchWinner(match) {
   return null;
 }
 
-let expandedHistoryId = null;
+// Opens a past match exactly like pasting its single-match JSON would:
+// it becomes the current match (fully live — Undo, more actions, etc.
+// all work on it), and whatever was current gets archived into history.
+function openHistoryMatch(matchId) {
+  const idx = state.history.findIndex((m) => m.id === matchId);
+  if (idx === -1) return;
+  const match = state.history[idx];
+  state.history.splice(idx, 1);
+  if (state.current) state.history.unshift(state.current);
+  state.current = match;
+  resetNav();
+  saveState();
+  render();
+}
 
 function renderHistory() {
   const card = document.getElementById('history-card');
@@ -723,14 +736,10 @@ function renderHistory() {
   state.history.forEach((match) => {
     const winner = matchWinner(match);
     const { turnNumber } = deriveTurnState(match.log);
-    const isOpen = match.id === expandedHistoryId;
 
     const row = document.createElement('div');
-    row.className = 'history-row' + (isOpen ? ' open' : '');
-    row.addEventListener('click', () => {
-      expandedHistoryId = isOpen ? null : match.id;
-      renderHistory();
-    });
+    row.className = 'history-row';
+    row.addEventListener('click', () => openHistoryMatch(match.id));
     bindPress(row);
 
     const playersRow = document.createElement('div');
@@ -770,34 +779,6 @@ function renderHistory() {
 
     row.appendChild(playersRow);
     row.appendChild(meta);
-
-    if (isOpen) {
-      const logEl = document.createElement('ul');
-      logEl.className = 'action-log history-log';
-      match.log.slice().reverse().forEach((entry) => {
-        const li = document.createElement('li');
-
-        const turnSpan = document.createElement('span');
-        turnSpan.className = 'log-turn';
-        turnSpan.textContent = 'T' + entry.turnNumber;
-
-        const textSpan = document.createElement('span');
-        textSpan.textContent = describeEntry(entry, match);
-
-        li.appendChild(turnSpan);
-        li.appendChild(textSpan);
-        logEl.appendChild(li);
-      });
-      if (match.log.length === 0) {
-        const empty = document.createElement('p');
-        empty.className = 'hint';
-        empty.textContent = 'No actions logged in this match.';
-        row.appendChild(empty);
-      } else {
-        row.appendChild(logEl);
-      }
-    }
-
     list.appendChild(row);
   });
 }
@@ -837,7 +818,6 @@ function wireEvents() {
   clearHistoryBtn.addEventListener('click', () => {
     showConfirm('Delete all match history? This cannot be undone.', () => {
       state.history = [];
-      expandedHistoryId = null;
       saveState();
       render();
     });
