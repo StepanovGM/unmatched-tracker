@@ -104,10 +104,14 @@ function fighterLabel(match, player, fighterKey) {
   return count > 1 ? `${name} ${fighterKey + 1}` : name;
 }
 
-function startingHp(player, fighter) {
-  const hero = heroBySlug(state.current.players[player].heroSlug);
+function startingHpFor(match, player, fighter) {
+  const hero = heroBySlug(match.players[player].heroSlug);
   if (!hero) return 0;
   return isHeroFighter(fighter) ? hero.hp : (hero.sidekick && hero.sidekick.hp ? hero.sidekick.hp : 1);
+}
+
+function startingHp(player, fighter) {
+  return startingHpFor(state.current, player, fighter);
 }
 
 function currentHp(player, fighter) {
@@ -116,6 +120,20 @@ function currentHp(player, fighter) {
     .filter((e) => e.type === 'hp' && e.player === player && e.target.fighter === fighter)
     .reduce((sum, e) => sum + e.delta, 0);
   return startingHp(player, fighter) + delta;
+}
+
+// Running HP total right after a specific 'hp' log entry was applied —
+// used to show "current HP" in the log without needing a separate,
+// always-visible HP display (per Gleb's minimalism call).
+function hpAfterEntry(match, targetEntry) {
+  const idx = match.log.indexOf(targetEntry);
+  const { player } = targetEntry;
+  const fighter = targetEntry.target.fighter;
+  const delta = match.log
+    .slice(0, idx + 1)
+    .filter((e) => e.type === 'hp' && e.player === player && e.target.fighter === fighter)
+    .reduce((sum, e) => sum + e.delta, 0);
+  return startingHpFor(match, player, fighter) + delta;
 }
 
 function isDead(player, fighter) {
@@ -344,7 +362,8 @@ function describeEntry(entry, match) {
     case 'hp': {
       const who = fighterLabel(match, entry.player, entry.target.fighter);
       const sign = entry.delta >= 0 ? '+' : '';
-      return `${who} ${sign}${entry.delta} HP`;
+      const hpNow = hpAfterEntry(match, entry);
+      return `${who} ${sign}${entry.delta} HP → ${hpNow}`;
     }
     case 'death':
       return `${fighterLabel(match, entry.player, entry.target.fighter)} defeated`;
