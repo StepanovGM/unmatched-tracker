@@ -1,11 +1,18 @@
 :root {
   color-scheme: dark;
-  --bg: #121317;
-  --card-bg: #1c1e24;
-  --text: #f2f2f5;
+  --bg: #101114;
+  --surface: #191b21;
+  --surface-raised: #23262e;
+  --border-subtle: rgba(255, 255, 255, 0.07);
+  --text: #f4f4f6;
   --text-secondary: #9a9ea8;
+  --text-tertiary: #6d7078;
   --accent: #4f8cff;
-  --border: #2a2d35;
+  --color-attack: #dc3034;
+  --color-versatile: #6c4e8d;
+  --color-defense: #2c76ac;
+  --color-scheme: #fcbd71;
+  --color-reply: #ff9f43;
 }
 
 * {
@@ -31,13 +38,13 @@ html, body {
   padding: env(safe-area-inset-top, 24px) 20px calc(env(safe-area-inset-bottom, 24px) + 24px);
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
 }
 
 h1 {
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   text-align: center;
-  margin: 12px 0 0;
+  margin: 8px 0 0;
 }
 
 h2 {
@@ -49,8 +56,8 @@ h2 {
 }
 
 .card {
-  background: var(--card-bg);
-  border: 1px solid var(--border);
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
   border-radius: 16px;
   padding: 16px;
 }
@@ -61,18 +68,30 @@ h2 {
   margin: 0 0 14px;
 }
 
-.counter-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 24px;
+/* Tap/press feedback — every interactive control gives an immediate visual
+   response, since CSS :active is unreliable on mobile touch and a commit
+   action (e.g. logging a play) may not otherwise change the visible menu. */
+.btn,
+.menu-btn,
+.card-item,
+.hero-item,
+.fighter-toggle,
+.sign-btn,
+.status-chip,
+.type-tile {
+  transition: transform 0.08s ease, filter 0.08s ease;
 }
 
-.counter-value {
-  font-size: 2rem;
-  font-variant-numeric: tabular-nums;
-  min-width: 48px;
-  text-align: center;
+.btn.pressed,
+.menu-btn.pressed,
+.card-item.pressed,
+.hero-item.pressed,
+.fighter-toggle.pressed,
+.sign-btn.pressed,
+.status-chip.pressed,
+.type-tile.pressed {
+  transform: scale(0.95);
+  filter: brightness(0.8);
 }
 
 .btn {
@@ -87,10 +106,6 @@ h2 {
   justify-content: center;
 }
 
-.btn:active {
-  opacity: 0.75;
-}
-
 .btn-primary {
   background: var(--accent);
   color: white;
@@ -98,8 +113,9 @@ h2 {
 }
 
 .btn-secondary {
-  background: var(--border);
+  background: var(--surface-raised);
   color: var(--text);
+  border: 1px solid var(--border-subtle);
 }
 
 .btn-stack {
@@ -113,7 +129,7 @@ h2 {
   resize: vertical;
   background: var(--bg);
   color: var(--text);
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-subtle);
   border-radius: 12px;
   padding: 10px 12px;
   font-family: ui-monospace, monospace;
@@ -144,7 +160,7 @@ h2 {
 }
 
 .hero-item {
-  background: none;
+  background: var(--surface-raised);
   border: 2px solid transparent;
   border-radius: 12px;
   padding: 4px;
@@ -153,7 +169,7 @@ h2 {
   align-items: center;
   gap: 4px;
   cursor: pointer;
-  color: var(--text);
+  color: var(--text-secondary);
 }
 
 .hero-item img {
@@ -161,17 +177,20 @@ h2 {
   aspect-ratio: 1 / 1;
   object-fit: cover;
   border-radius: 8px;
-  background: var(--border);
+  background: var(--bg);
 }
 
 .hero-item span {
   font-size: 0.7rem;
+  font-weight: 600;
   text-align: center;
   line-height: 1.1;
 }
 
 .hero-item.selected {
+  background: var(--accent);
   border-color: var(--accent);
+  color: #fff;
 }
 
 .hero-item:disabled {
@@ -179,75 +198,64 @@ h2 {
   cursor: not-allowed;
 }
 
-.turn-banner {
-  text-align: center;
-  margin-bottom: 16px;
-}
-
-.turn-banner #turn-number-label {
-  display: block;
-  font-size: 0.8rem;
-  color: var(--text-secondary);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-
-.turn-banner #active-player-label {
-  display: block;
-  font-size: 1.3rem;
-  font-weight: 700;
-  margin-top: 2px;
-}
-
-.players-row {
+/* Compact status bar: player chips + turn counter in one row, replacing
+   the old stacked turn-banner + players-row (which cost ~280px of a
+   phone screen before any actionable button was reachable). */
+.status-bar {
   display: flex;
-  gap: 12px;
-  margin-bottom: 16px;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
 }
 
-.player-panel {
+.status-chip {
   flex: 1;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 6px;
-  padding: 10px;
+  gap: 8px;
+  background: var(--surface-raised);
+  border: 1px solid var(--border-subtle);
   border-radius: 12px;
-  border: 2px solid var(--border);
-  opacity: 0.5;
+  padding: 6px 10px;
+  cursor: pointer;
+  color: var(--text-secondary);
+  min-width: 0;
 }
 
-.player-panel.active {
-  border-color: var(--accent);
-  opacity: 1;
-}
-
-.player-avatar {
-  width: 64px;
-  height: 64px;
+.status-avatar {
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   object-fit: cover;
-  background: var(--border);
+  background: var(--bg);
+  flex-shrink: 0;
 }
 
-.player-name {
-  font-size: 0.85rem;
-  font-weight: 600;
-  text-align: center;
+.status-name {
+  font-size: 0.82rem;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.player-panel {
-  cursor: pointer;
+.status-chip.active {
+  background: var(--accent);
+  color: #fff;
 }
 
-.player-panel.replying {
-  border-color: #ff9f43;
+.status-chip.replying {
+  background: var(--color-reply);
+  color: #1a1a1a;
 }
 
-.player-panel.replying .player-name::after {
-  content: ' (reply)';
-  color: #ff9f43;
-  font-weight: 500;
+.status-turn {
+  flex-shrink: 0;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-tertiary);
+  padding: 4px 6px;
+  font-variant-numeric: tabular-nums;
 }
 
 .menu-area {
@@ -259,6 +267,24 @@ h2 {
   align-items: center;
   gap: 10px;
   margin-bottom: 8px;
+}
+
+.menu-header.reply-active {
+  background: var(--color-reply);
+  border-radius: 10px;
+  padding: 8px 10px;
+  margin: 0 0 8px;
+}
+
+.menu-header.reply-active .menu-breadcrumb {
+  color: #1a1a1a;
+  font-weight: 700;
+}
+
+.menu-header.reply-active .btn-cancel {
+  background: rgba(0, 0, 0, 0.18);
+  color: #1a1a1a;
+  border-color: transparent;
 }
 
 .btn-cancel {
@@ -280,9 +306,42 @@ h2 {
   gap: 8px;
 }
 
+/* Root menu: tiered layout, sized by expected tap frequency rather than
+   a uniform grid — frequent actions (Maneuver/Play/HP/Discard/End Turn)
+   get large tiles, rare ones (Draw/Returns/Spawn/Ability) small tiles. */
+.menu-grid.root-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Reply mode: every button in the current menu gets an orange border so
+   the "this input will be attributed to the other player" state stays
+   visible everywhere you tap, not just in the header banner. */
+.menu-grid.reply-context .menu-btn,
+.menu-grid.reply-context .card-item,
+.menu-grid.reply-context .fighter-toggle,
+.menu-grid.reply-context .sign-btn {
+  border-color: var(--color-reply);
+}
+
+.menu-grid.reply-context .type-tile {
+  box-shadow: inset 0 0 0 2px var(--color-reply);
+}
+
+.tile-row {
+  display: flex;
+  gap: 10px;
+}
+
+.tile-row > * {
+  flex: 1;
+  min-width: 0;
+}
+
 .menu-btn {
-  background: var(--card-bg);
-  border: 1px solid var(--border);
+  background: var(--surface-raised);
+  border: 1px solid var(--border-subtle);
   color: var(--text);
   border-radius: 12px;
   padding: 18px 8px;
@@ -291,20 +350,136 @@ h2 {
   min-height: 64px;
 }
 
-.menu-btn:active {
-  background: var(--accent);
-  border-color: var(--accent);
+.menu-btn.icon-only {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.menu-btn .icon {
+  width: 26px;
+  height: 26px;
+  display: block;
+}
+
+.icon-caption {
+  font-size: 0.66rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.menu-btn.tile-lg {
+  min-height: 96px;
+  font-size: 1rem;
+}
+
+.menu-btn.tile-lg .icon {
+  width: 32px;
+  height: 32px;
+}
+
+.menu-btn.tile-sm {
+  min-height: 66px;
+  padding: 8px 4px;
+}
+
+.menu-btn.tile-sm .icon {
+  width: 22px;
+  height: 22px;
+}
+
+.menu-btn.tile-sm .icon-caption {
+  font-size: 0.58rem;
+}
+
+.menu-btn.tile-full {
+  width: 100%;
 }
 
 .menu-btn:disabled {
   opacity: 0.3;
 }
 
+/* Sidekick Spawn tile: sidekick token art as background + a small plus
+   badge and caption, disabled entirely when the hero has no sidekick. */
+.menu-btn.spawn-tile {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+
+.menu-btn.spawn-tile::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0) 60%);
+}
+
+.menu-btn.spawn-tile .spawn-badge {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 20px;
+  height: 20px;
+  background: var(--accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.menu-btn.spawn-tile .spawn-badge .icon {
+  width: 12px;
+  height: 12px;
+}
+
+.menu-btn.spawn-tile .spawn-caption {
+  position: absolute;
+  left: 6px;
+  bottom: 4px;
+  z-index: 2;
+  font-size: 0.58rem;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.menu-btn.spawn-tile:disabled {
+  opacity: 0.3;
+  filter: grayscale(1);
+}
+
+/* Card-type tiles (Attack/Scheme/Defense/Versatile) — colored + iconed
+   per the community-standard Unmatched card-type symbols, so the type
+   is recognized by color/shape before the label is read. Kept fully
+   saturated on purpose (matches the physical card system). */
+.type-tile {
+  border: none;
+  border-radius: 12px;
+  min-height: 92px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.type-tile .icon {
+  width: 40px;
+  height: 40px;
+}
+
 .card-item {
-  background: var(--card-bg);
-  border: 2px solid var(--border);
+  background: var(--surface-raised);
+  border: 1px solid var(--border-subtle);
   border-radius: 10px;
-  padding: 4px;
+  padding: 3px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -316,10 +491,14 @@ h2 {
 
 .card-item img {
   width: 100%;
-  aspect-ratio: 5 / 7;
+  /* Card art fills roughly the top 220px of the 250x349 source image;
+     the rest is the text/frame box, which isn't legible at grid size
+     anyway — crop to the art region so thumbnails can run bigger. */
+  aspect-ratio: 25 / 22;
   object-fit: cover;
+  object-position: top;
   border-radius: 6px;
-  background: var(--border);
+  background: var(--bg);
 }
 
 .card-item span {
@@ -328,18 +507,15 @@ h2 {
   line-height: 1.15;
 }
 
-.card-item:active {
-  border-color: var(--accent);
-}
-
 .menu-grid.card-grid {
-  grid-template-columns: repeat(auto-fill, minmax(84px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(108px, 1fr));
 }
 
 .hp-panel {
+  grid-column: 1 / -1;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
 }
 
 .hp-targets {
@@ -349,11 +525,11 @@ h2 {
 }
 
 .fighter-toggle {
-  background: var(--card-bg);
-  border: 2px solid var(--border);
+  background: var(--surface-raised);
+  border: 1px solid var(--border-subtle);
   color: var(--text);
   border-radius: 10px;
-  padding: 10px 6px;
+  padding: 8px 6px;
   font-size: 0.8rem;
   font-weight: 600;
 }
@@ -361,6 +537,7 @@ h2 {
 .fighter-toggle.selected {
   border-color: var(--accent);
   background: var(--accent);
+  color: #fff;
 }
 
 .hp-sign-row {
@@ -370,24 +547,38 @@ h2 {
 
 .sign-btn {
   flex: 1;
-  background: var(--card-bg);
-  border: 2px solid var(--border);
+  background: var(--surface-raised);
+  border: 1px solid var(--border-subtle);
   color: var(--text);
   border-radius: 10px;
-  padding: 12px 8px;
-  font-size: 0.9rem;
+  padding: 9px 8px;
+  font-size: 0.88rem;
   font-weight: 600;
 }
 
 .sign-btn.active {
   border-color: var(--accent);
   background: var(--accent);
+  color: #fff;
 }
 
 .hp-amount-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 8px;
+  gap: 6px;
+}
+
+/* Single-digit value buttons don't need the full menu-btn tile size —
+   the default (min-height 64px, 18px padding) was built for icon tiles
+   and wasted most of a 5x2 grid's worth of vertical space here. */
+.hp-amount-btn {
+  min-height: 0;
+  aspect-ratio: 1;
+  padding: 0;
+  font-size: 1.05rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .control-row {
@@ -411,7 +602,7 @@ h2 {
   max-height: 260px;
   overflow-y: auto;
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   gap: 6px;
 }
 
@@ -419,7 +610,7 @@ h2 {
   font-size: 0.85rem;
   padding: 8px 10px;
   background: var(--bg);
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-subtle);
   border-radius: 8px;
   display: flex;
   justify-content: space-between;
@@ -443,8 +634,8 @@ h2 {
 }
 
 .overlay-card {
-  background: var(--card-bg);
-  border: 1px solid var(--border);
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
   border-radius: 16px;
   padding: 20px;
   width: 100%;

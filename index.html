@@ -5,15 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
   <title>Unmatched Tracker</title>
   <link rel="manifest" href="manifest.json" />
-  <meta name="theme-color" content="#121317" />
+  <meta name="theme-color" content="#101114" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <link rel="stylesheet" href="css/style.css?v=7" />
+  <link rel="stylesheet" href="css/style.css?v=9" />
 </head>
 <body>
   <main class="app">
-    <h1>Unmatched Tracker</h1>
+    <h1 id="app-title">Unmatched Tracker</h1>
 
     <section id="setup-screen" class="card">
       <h2>Start a Match</h2>
@@ -33,23 +33,17 @@
     </section>
 
     <section id="match-screen" class="card" hidden>
-      <div class="turn-banner">
-        <span id="turn-number-label"></span>
-        <span id="active-player-label"></span>
+      <div class="status-bar">
+        <button type="button" id="player-panel-0" class="status-chip">
+          <img id="player-avatar-0" class="status-avatar" alt="" />
+          <span id="player-name-0" class="status-name"></span>
+        </button>
+        <div id="turn-number-label" class="status-turn"></div>
+        <button type="button" id="player-panel-1" class="status-chip">
+          <img id="player-avatar-1" class="status-avatar" alt="" />
+          <span id="player-name-1" class="status-name"></span>
+        </button>
       </div>
-
-      <div class="players-row">
-        <div id="player-panel-0" class="player-panel">
-          <img id="player-avatar-0" class="player-avatar" alt="" />
-          <div id="player-name-0" class="player-name"></div>
-        </div>
-        <div id="player-panel-1" class="player-panel">
-          <img id="player-avatar-1" class="player-avatar" alt="" />
-          <div id="player-name-1" class="player-name"></div>
-        </div>
-      </div>
-      <p class="hint">Tap the other player's portrait to log their reply (defense/versatile).</p>
-
       <div class="menu-area">
         <div id="menu-header" class="menu-header" hidden>
           <button id="menu-cancel-btn" class="btn btn-secondary btn-cancel">&larr; Cancel</button>
@@ -92,6 +86,6 @@
     </div>
   </div>
 
-  <script src="js/app.js?v=4"></script>
+  <script src="js/app.js?v=6"></script>
 </body>
 </html>

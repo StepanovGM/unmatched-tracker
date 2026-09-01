@@ -206,6 +206,66 @@ function setStatus(message) {
   document.getElementById('status').textContent = message;
 }
 
+// --- Press feedback -------------------------------------------------------
+// CSS :active is unreliable on mobile touch, and a commit action (e.g.
+// logging a play) may not otherwise change what's on screen — every
+// interactive control needs an explicit, immediate visual response.
+function bindPress(el) {
+  const on = () => el.classList.add('pressed');
+  const off = () => el.classList.remove('pressed');
+  el.addEventListener('pointerdown', on);
+  el.addEventListener('pointerup', off);
+  el.addEventListener('pointerleave', off);
+  el.addEventListener('pointercancel', off);
+}
+
+// --- Icons ------------------------------------------------------------
+// Custom icons are authored inline (simple, generic symbols — not sourced
+// from any card/game asset) and encoded as data URIs. Card-type icons are
+// hotlinked from unmatched.cards' community symbol set (see TYPE_META),
+// same "hotlink, never download" policy as hero/card art.
+function svgDataUri(svg) {
+  return 'data:image/svg+xml,' + encodeURIComponent(svg);
+}
+
+const ICONS = {
+  heart: svgDataUri(
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#f2f2f5" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>'
+  ),
+  hourglass: svgDataUri(
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#f2f2f5" d="M6 2h12v2c0 2.5-2 4.2-4.2 5.5L13 10l.8.5C16 11.8 18 13.5 18 16v2H6v-2c0-2.5 2-4.2 4.2-5.5L11 10l-.8-.5C8 8.2 6 6.5 6 4V2zm2 2v.3c0 1.4 1.3 2.6 3.2 3.8L12 8.5l.8-.4C14.7 6.9 16 5.7 16 4.3V4H8zm0 16v-.3c0-1.4 1.3-2.6 3.2-3.8l.8-.4.8.4c1.9 1.2 3.2 2.4 3.2 3.8v.3H8z"/></svg>'
+  ),
+  boot: svgDataUri(
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="#f2f2f5" d="M272.5 18.906c-12.775.17-26.23 2.553-40.344 7.594-30.165 55.31-68.313 120.904-125.72 178.5-21.19 21.26-39.23 44.94-52.28 68.313 1.294 6.312 4.984 11.65 10.72 17.406 10.992 11.032 30.86 21.618 54.593 33.25 46.313 22.695 107.284 50.39 146.374 108.467l195.625.032c-20.198-70.834-100.276-101.12-159.064-83.94-.073.03-.145.066-.22.095-1.61.633-3.27 1.138-4.967 1.563-.024.005-.04.025-.064.03-8.86 2.204-18.82 1.68-29.125-.406-24.79-5.02-52.76-19.695-61.342-45.687-28.615-86.673 16.65-179.742 78.156-223.28 23.064-16.328 49.06-25.848 74.47-24.47.144.008.29.023.436.03-24.19-22.74-53.33-37.95-87.25-37.5zm81.75 56c-19.213.01-39.414 7.59-58.625 21.188-54.644 38.682-96.652 125.024-71.188 202.156 5.127 15.53 27.25 29.162 47.282 33.22 10.015 2.027 19.218 1.518 23.717-.283 2.25-.9 3.173-1.84 3.594-2.562.422-.72.81-1.663.25-4.375-9.08-44.167-2.743-84.61 22.533-114.47 23.586-27.863 62.753-45.462 117.406-50.686-15.014-47.145-37.47-71.226-61.314-80.03-6.407-2.368-13.032-3.706-19.812-4.064-1.272-.067-2.563-.094-3.844-.094zM43.78 294.22c-5.405 12.554-9.136 24.756-10.905 36.186 7.178 27.76 51.898 55.43 91.094 61.344 1.703-5.973 5.832-11.475 10.28-14.25 51.01 28.844 86.18 60.704 102 101h229.594c.697-9.613.44-18.712-.625-27.344l-204.314-.03h-5.125l-2.75-4.345c-35.405-55.575-93.93-82.58-141.78-106.03-23.925-11.724-45.17-22.336-59.625-36.844-2.978-2.99-5.618-6.225-7.844-9.687z"/></svg>'
+  ),
+  play: svgDataUri(
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="#f2f2f5"><rect x="2.3" y="9" width="7.4" height="11.2" rx="1.6" transform="rotate(-14 6 14.6)"/><rect x="8.3" y="6.8" width="7.4" height="12.4" rx="1.6"/><rect x="14.3" y="9" width="7.4" height="11.2" rx="1.6" transform="rotate(14 18 14.6)"/></g></svg>'
+  ),
+  discard: svgDataUri(
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect fill="#f2f2f5" x="2" y="5" width="9.5" height="14" rx="1.8"/><path fill="#f2f2f5" d="M13.5 10.2h4.2v-2.7l5 4.5-5 4.5v-2.7h-4.2z"/></svg>'
+  ),
+  draw: svgDataUri(
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect fill="#f2f2f5" opacity="0.45" x="3.3" y="8.5" width="9.5" height="14" rx="1.8"/><rect fill="#f2f2f5" x="6.3" y="5.5" width="9.5" height="14" rx="1.8"/><path fill="#f2f2f5" d="M19.3 3.2l4 5.2h-2.7v4.6h-2.6V8.4h-2.7z"/></svg>'
+  ),
+  returnCard: svgDataUri(
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect fill="#f2f2f5" x="12.5" y="5" width="9.5" height="14" rx="1.8"/><path fill="#f2f2f5" d="M10.5 10.2H6.3v-2.7l-5 4.5 5 4.5v-2.7h4.2z"/></svg>'
+  ),
+  plus: svgDataUri(
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#fff" d="M11 3h2v8h8v2h-8v8h-2v-8H3v-2h8z"/></svg>'
+  ),
+  star: svgDataUri(
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#f2f2f5" d="M12 2l2.9 6.6 7.1.7-5.4 4.7 1.6 7-6.2-3.8L5.8 21l1.6-7L2 9.3l7.1-.7z"/></svg>'
+  ),
+};
+
+// Community-standard Unmatched card-type colors/icons (unmatched.cards).
+const TYPE_META = {
+  attack: { color: '#dc3034', icon: 'https://unmatched.cards/img/attack.3856f1fe.svg', label: 'Attack' },
+  versatile: { color: '#6c4e8d', icon: 'https://unmatched.cards/img/versatile.25641eb0.svg', label: 'Versatile' },
+  defense: { color: '#2c76ac', icon: 'https://unmatched.cards/img/defence.e13b40d0.svg', label: 'Defense' },
+  scheme: { color: '#fcbd71', icon: 'https://unmatched.cards/img/scheme.9b22b426.svg', label: 'Scheme' },
+};
+
 function renderHeroGrid(slotIndex) {
   const grid = document.getElementById('hero-grid-' + slotIndex);
   grid.innerHTML = '';
@@ -231,6 +291,7 @@ function renderHeroGrid(slotIndex) {
       draft[slotIndex] = hero.slug;
       renderSetup();
     });
+    bindPress(btn);
 
     grid.appendChild(btn);
   });
@@ -251,6 +312,8 @@ function describeEntry(entry, match) {
       return heroName + ' passed turn';
     case 'action':
       return heroName + ' — Maneuver';
+    case 'draw':
+      return heroName + ' — Draw a card';
     case 'play': {
       const mechLabel = { attack: 'Attack', scheme: 'Scheme', defense: 'Defense' }[entry.mechanic] || entry.mechanic;
       return `${heroName} — ${mechLabel}: ${entry.cardName}`;
@@ -308,6 +371,7 @@ function bindTapOrHold(el, onTap, onHold, holdMs) {
   let held = false;
   const start = () => {
     held = false;
+    el.classList.add('pressed');
     timer = setTimeout(() => {
       held = true;
       onHold();
@@ -316,6 +380,7 @@ function bindTapOrHold(el, onTap, onHold, holdMs) {
   const cancel = () => {
     if (timer) clearTimeout(timer);
     timer = null;
+    el.classList.remove('pressed');
   };
   const end = () => {
     const wasHeld = held;
@@ -335,39 +400,113 @@ function makeMenuButton(label, onClick) {
   btn.className = 'menu-btn';
   btn.textContent = label;
   btn.addEventListener('click', onClick);
+  bindPress(btn);
+  return btn;
+}
+
+function makeIconButton(sizeClass, iconKey, caption, onClick) {
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'menu-btn icon-only ' + sizeClass;
+  const img = document.createElement('img');
+  img.className = 'icon';
+  img.src = ICONS[iconKey];
+  img.alt = '';
+  btn.appendChild(img);
+  const label = document.createElement('span');
+  label.className = 'icon-caption';
+  label.textContent = caption;
+  btn.appendChild(label);
+  btn.addEventListener('click', onClick);
+  bindPress(btn);
+  return btn;
+}
+
+function makeTypeTile(cardType, onClick) {
+  const meta = TYPE_META[cardType];
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'type-tile';
+  btn.style.background = meta.color;
+  const img = document.createElement('img');
+  img.className = 'icon';
+  img.src = meta.icon;
+  img.alt = meta.label;
+  btn.appendChild(img);
+  btn.addEventListener('click', onClick);
+  bindPress(btn);
   return btn;
 }
 
 function renderRootMenu(grid) {
-  grid.appendChild(makeMenuButton('End Turn', () => commitSimple({ type: 'pass' })));
-  grid.appendChild(makeMenuButton('Maneuver', () => commitSimple({ type: 'action', mechanic: 'maneuver' })));
-  grid.appendChild(makeMenuButton('Play', () => { nav.path = ['play']; renderMenu(); }));
-  grid.appendChild(makeMenuButton('Discard', () => { nav.path = ['discard']; renderMenu(); }));
-  grid.appendChild(makeMenuButton('HP', () => { nav.path = ['hp']; renderMenu(); }));
-  grid.appendChild(makeMenuButton('Sidekick Spawn', () => commitSimple({ type: 'spawn' })));
-  grid.appendChild(makeMenuButton('Special Ability', () => commitSimple({ type: 'ability' })));
-  grid.appendChild(makeMenuButton('Card Returns', () => { nav.path = ['return']; renderMenu(); }));
+  const player = actingPlayer();
+  const hero = heroBySlug(state.current.players[player].heroSlug);
+  const hasSidekick = !!(hero && hero.sidekick && hero.sidekick.count > 0);
+
+  const row1 = document.createElement('div');
+  row1.className = 'tile-row';
+  row1.appendChild(makeIconButton('tile-lg', 'boot', 'Maneuver', () => commitSimple({ type: 'action', mechanic: 'maneuver' })));
+  row1.appendChild(makeIconButton('tile-lg', 'play', 'Play', () => { nav.path = ['play']; renderMenu(); }));
+  grid.appendChild(row1);
+
+  grid.appendChild(makeIconButton('tile-lg tile-full', 'heart', 'HP', () => { nav.path = ['hp']; renderMenu(); }));
+
+  const row2 = document.createElement('div');
+  row2.className = 'tile-row';
+  row2.appendChild(makeIconButton('tile-lg', 'discard', 'Discard', () => { nav.path = ['discard']; renderMenu(); }));
+  row2.appendChild(makeIconButton('tile-lg', 'hourglass', 'End Turn', () => commitSimple({ type: 'pass' })));
+  grid.appendChild(row2);
+
+  const row3 = document.createElement('div');
+  row3.className = 'tile-row';
+  row3.appendChild(makeIconButton('tile-sm', 'draw', 'Draw', () => commitSimple({ type: 'draw' })));
+  row3.appendChild(makeIconButton('tile-sm', 'returnCard', 'Returns', () => { nav.path = ['return']; renderMenu(); }));
+
+  const spawnBtn = document.createElement('button');
+  spawnBtn.type = 'button';
+  spawnBtn.className = 'menu-btn tile-sm spawn-tile';
+  if (hasSidekick) {
+    spawnBtn.style.backgroundImage = `url("${hero.sidekick.tokenImages[0]}")`;
+    const badge = document.createElement('span');
+    badge.className = 'spawn-badge';
+    const badgeIcon = document.createElement('img');
+    badgeIcon.className = 'icon';
+    badgeIcon.src = ICONS.plus;
+    badgeIcon.alt = '';
+    badge.appendChild(badgeIcon);
+    spawnBtn.appendChild(badge);
+    const caption = document.createElement('span');
+    caption.className = 'spawn-caption';
+    caption.textContent = 'Spawn';
+    spawnBtn.appendChild(caption);
+    spawnBtn.addEventListener('click', () => commitSimple({ type: 'spawn' }));
+    bindPress(spawnBtn);
+  } else {
+    spawnBtn.disabled = true;
+  }
+  row3.appendChild(spawnBtn);
+
+  row3.appendChild(makeIconButton('tile-sm', 'star', 'Ability', () => commitSimple({ type: 'ability' })));
+  grid.appendChild(row3);
 }
 
 function renderPlayMenu(grid) {
-  if (!nav.reply) grid.appendChild(makeMenuButton('Attack', () => { nav.path = ['play', 'attack']; renderMenu(); }));
-  grid.appendChild(makeMenuButton('Versatile', () => { nav.path = ['play', 'versatile']; renderMenu(); }));
-  if (!nav.reply) grid.appendChild(makeMenuButton('Scheme', () => { nav.path = ['play', 'scheme']; renderMenu(); }));
-  if (nav.reply) grid.appendChild(makeMenuButton('Defend', () => { nav.path = ['play', 'defend']; renderMenu(); }));
+  if (!nav.reply) grid.appendChild(makeTypeTile('attack', () => { nav.path = ['play', 'attack']; renderMenu(); }));
+  grid.appendChild(makeTypeTile('versatile', () => { nav.path = ['play', 'versatile']; renderMenu(); }));
+  if (!nav.reply) grid.appendChild(makeTypeTile('scheme', () => { nav.path = ['play', 'scheme']; renderMenu(); }));
+  if (nav.reply) grid.appendChild(makeTypeTile('defense', () => { nav.path = ['play', 'defend']; renderMenu(); }));
 }
 
 function renderDiscardMenu(grid) {
-  grid.appendChild(makeMenuButton('Attack', () => { nav.path = ['discard', 'd-attack']; renderMenu(); }));
-  grid.appendChild(makeMenuButton('Versatile', () => { nav.path = ['discard', 'd-versatile']; renderMenu(); }));
-  grid.appendChild(makeMenuButton('Scheme', () => { nav.path = ['discard', 'd-scheme']; renderMenu(); }));
-  grid.appendChild(makeMenuButton('Defense', () => { nav.path = ['discard', 'd-defense']; renderMenu(); }));
+  ['attack', 'versatile', 'scheme', 'defense'].forEach((t) => {
+    grid.appendChild(makeTypeTile(t, () => { nav.path = ['discard', 'd-' + t]; renderMenu(); }));
+  });
 }
 
 function renderReturnMenu(grid) {
-  grid.appendChild(makeMenuButton('Attack', () => { nav.path = ['return', 'r-attack']; renderMenu(); }));
-  grid.appendChild(makeMenuButton('Versatile', () => { nav.path = ['return', 'r-versatile']; renderMenu(); }));
-  grid.appendChild(makeMenuButton('Scheme', () => { nav.path = ['return', 'r-scheme']; renderMenu(); }));
-  grid.appendChild(makeMenuButton('Defense', () => { nav.path = ['return', 'r-defense']; renderMenu(); }));
+  ['attack', 'versatile', 'scheme', 'defense'].forEach((t) => {
+    grid.appendChild(makeTypeTile(t, () => { nav.path = ['return', 'r-' + t]; renderMenu(); }));
+  });
 }
 
 function renderCardList(grid, cardType, opts) {
@@ -405,6 +544,7 @@ function renderCardList(grid, cardType, opts) {
       );
     } else {
       btn.addEventListener('click', () => commitSimple(payload()));
+      bindPress(btn);
     }
 
     grid.appendChild(btn);
@@ -431,6 +571,7 @@ function renderHpPanel(grid) {
       else nav.hp.targets.add(f.fighter);
       renderMenu();
     });
+    bindPress(btn);
     targetsRow.appendChild(btn);
   });
 
@@ -448,6 +589,7 @@ function renderHpPanel(grid) {
       nav.hp.sign = sign;
       renderMenu();
     });
+    bindPress(btn);
     signRow.appendChild(btn);
   });
 
@@ -456,10 +598,11 @@ function renderHpPanel(grid) {
   for (let n = 1; n <= 10; n++) {
     const btn = document.createElement('button');
     btn.type = 'button';
-    btn.className = 'menu-btn';
+    btn.className = 'menu-btn hp-amount-btn';
     btn.textContent = String(n);
     btn.disabled = nav.hp.targets.size === 0;
     btn.addEventListener('click', () => commitHp(n));
+    bindPress(btn);
     amountGrid.appendChild(btn);
   }
 
@@ -483,9 +626,12 @@ function renderMenu() {
 
   const showHeader = nav.path.length > 0 || nav.reply;
   header.hidden = !showHeader;
+  header.classList.toggle('reply-active', nav.reply);
   breadcrumb.textContent = breadcrumbText();
 
   const key = nav.path.join('.');
+  grid.classList.toggle('root-menu', key === '');
+  grid.classList.toggle('reply-context', nav.reply);
   const isCardList =
     (nav.path[0] === 'play' && PLAY_LEAF[nav.path[1]]) ||
     (nav.path[0] === 'discard' && DISCARD_LEAF[nav.path[1]]) ||
@@ -520,12 +666,8 @@ function renderMenu() {
 function renderMatch() {
   const match = state.current;
   const { turnNumber, activePlayer } = deriveTurnState(match.log);
-  const activeSlug = match.players[activePlayer].heroSlug;
-  const activeHero = heroBySlug(activeSlug);
 
-  document.getElementById('turn-number-label').textContent = 'Turn ' + turnNumber;
-  document.getElementById('active-player-label').textContent =
-    (activeHero ? activeHero.name : activeSlug) + "'s turn";
+  document.getElementById('turn-number-label').textContent = 'T' + turnNumber;
 
   for (let i = 0; i < 2; i++) {
     const hero = heroBySlug(match.players[i].heroSlug);
@@ -540,7 +682,10 @@ function renderMatch() {
 
   const logEl = document.getElementById('action-log');
   logEl.innerHTML = '';
-  match.log.forEach((entry) => {
+  // Newest entry first in the DOM (not CSS column-reverse, which doesn't
+  // reliably keep overflow scrolled to "the start" across browsers) —
+  // so the freshly-logged action is always what's visible after a commit.
+  match.log.slice().reverse().forEach((entry) => {
     const li = document.createElement('li');
 
     const turnSpan = document.createElement('span');
@@ -554,10 +699,12 @@ function renderMatch() {
     li.appendChild(textSpan);
     logEl.appendChild(li);
   });
+  logEl.scrollTop = 0;
 }
 
 function render() {
   const hasMatch = !!state.current;
+  document.getElementById('app-title').hidden = hasMatch;
   document.getElementById('setup-screen').hidden = hasMatch;
   document.getElementById('match-screen').hidden = !hasMatch;
   if (hasMatch) {
@@ -568,32 +715,55 @@ function render() {
 }
 
 function wireEvents() {
-  document.getElementById('start-match-btn').addEventListener('click', () => {
+  const startBtn = document.getElementById('start-match-btn');
+  startBtn.addEventListener('click', () => {
     if (draft[0] && draft[1] && draft[0] !== draft[1]) {
       startMatch(draft[0], draft[1]);
     }
   });
+  bindPress(startBtn);
 
-  document.getElementById('undo-btn').addEventListener('click', undoLast);
-  document.getElementById('new-match-btn').addEventListener('click', requestNewMatch);
+  const undoBtn = document.getElementById('undo-btn');
+  undoBtn.addEventListener('click', undoLast);
+  bindPress(undoBtn);
 
-  document.getElementById('menu-cancel-btn').addEventListener('click', () => {
+  const newMatchBtn = document.getElementById('new-match-btn');
+  newMatchBtn.addEventListener('click', requestNewMatch);
+  bindPress(newMatchBtn);
+
+  const cancelBtn = document.getElementById('menu-cancel-btn');
+  cancelBtn.addEventListener('click', () => {
     resetNav();
     render();
   });
+  bindPress(cancelBtn);
 
   [0, 1].forEach((i) => {
-    document.getElementById('player-panel-' + i).addEventListener('click', () => {
+    const panel = document.getElementById('player-panel-' + i);
+    panel.addEventListener('click', () => {
       if (!state.current) return;
       const { activePlayer } = deriveTurnState(state.current.log);
-      if (i === activePlayer) return;
+      if (i === activePlayer) {
+        // Tapping the active player's own portrait can only ever exit
+        // reply mode (there's nothing to toggle "into" for yourself) —
+        // gives a way out of reply mode from either portrait, not just
+        // the one that turned it on.
+        if (nav.reply) {
+          nav.reply = false;
+          nav.path = [];
+          render();
+        }
+        return;
+      }
       nav.reply = !nav.reply;
       nav.path = [];
       render();
     });
+    bindPress(panel);
   });
 
-  document.getElementById('share-btn').addEventListener('click', async () => {
+  const shareBtn = document.getElementById('share-btn');
+  shareBtn.addEventListener('click', async () => {
     const json = JSON.stringify(state, null, 2);
     try {
       await navigator.clipboard.writeText(json);
@@ -602,16 +772,19 @@ function wireEvents() {
       setStatus('Copy failed: ' + e.message);
     }
   });
+  bindPress(shareBtn);
 
   const pasteArea = document.getElementById('paste-area');
   const loadPastedBtn = document.getElementById('load-pasted-btn');
 
-  document.getElementById('paste-btn').addEventListener('click', () => {
+  const pasteBtn = document.getElementById('paste-btn');
+  pasteBtn.addEventListener('click', () => {
     const show = pasteArea.hidden;
     pasteArea.hidden = !show;
     loadPastedBtn.hidden = !show;
     if (show) pasteArea.focus();
   });
+  bindPress(pasteBtn);
 
   function applyImportedState(text) {
     const imported = JSON.parse(text);
@@ -632,6 +805,7 @@ function wireEvents() {
       setStatus('Import failed: ' + e.message);
     }
   });
+  bindPress(loadPastedBtn);
 
   document.getElementById('import-input').addEventListener('change', async (event) => {
     const file = event.target.files[0];
