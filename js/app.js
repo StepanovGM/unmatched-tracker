@@ -369,9 +369,16 @@ const MENU_LABELS = {
 function bindTapOrHold(el, onTap, onHold, holdMs) {
   let timer = null;
   let held = false;
-  const start = () => {
+  const start = (e) => {
     held = false;
     el.classList.add('pressed');
+    // Suppress the browser's compatibility "click" event that follows a
+    // touch pointerup — without this, that click fires slightly later
+    // against whatever now occupies the same screen position, since
+    // onTap()/onHold() below re-render the whole menu synchronously and
+    // replace this element. On mobile that stray click was landing on
+    // root-menu tiles (e.g. HP) that ended up at this card's coordinates.
+    if (e.cancelable) e.preventDefault();
     timer = setTimeout(() => {
       held = true;
       onHold();
@@ -382,7 +389,8 @@ function bindTapOrHold(el, onTap, onHold, holdMs) {
     timer = null;
     el.classList.remove('pressed');
   };
-  const end = () => {
+  const end = (e) => {
+    if (e.cancelable) e.preventDefault();
     const wasHeld = held;
     cancel();
     if (!wasHeld) onTap();
@@ -624,7 +632,7 @@ function renderMenu() {
   const breadcrumb = document.getElementById('menu-breadcrumb');
   grid.innerHTML = '';
 
-  const showHeader = nav.path.length > 0 || nav.reply;
+  const showHeader = nav.path.length > 0;
   header.hidden = !showHeader;
   header.classList.toggle('reply-active', nav.reply);
   breadcrumb.textContent = breadcrumbText();
