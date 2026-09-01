@@ -176,7 +176,14 @@ function commitHp(amount) {
   const groupId = at + '-' + Math.random().toString(36).slice(2, 8);
 
   nav.hp.targets.forEach((fighter) => {
-    match.log.push({ type: 'hp', target: { fighter }, delta: sign * amount, player, turnNumber, at, groupId });
+    let delta = sign * amount;
+    if (sign > 0) {
+      // Healing never pushes a fighter above their starting/max HP.
+      const room = startingHp(player, fighter) - currentHp(player, fighter);
+      delta = Math.max(0, Math.min(delta, room));
+      if (delta === 0) return;
+    }
+    match.log.push({ type: 'hp', target: { fighter }, delta, player, turnNumber, at, groupId });
     if (!isDead(player, fighter) && currentHp(player, fighter) < 1) {
       match.log.push({ type: 'death', target: { fighter }, player, turnNumber, at, groupId });
     }
