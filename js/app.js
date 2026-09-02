@@ -880,28 +880,35 @@ function wireEvents() {
     bindPress(panel);
   });
 
+  function downloadJSON(data, filename) {
+    const json = JSON.stringify(data, null, 2);
+    const blob = new Blob([json], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  function timestampForFilename() {
+    return new Date().toISOString().replace(/[:.]/g, '-');
+  }
+
   const shareCurrentBtn = document.getElementById('share-current-btn');
-  shareCurrentBtn.addEventListener('click', async () => {
+  shareCurrentBtn.addEventListener('click', () => {
     if (!state.current) return;
-    const json = JSON.stringify(state.current, null, 2);
-    try {
-      await navigator.clipboard.writeText(json);
-      setStatus('Copied current match JSON to clipboard.');
-    } catch (e) {
-      setStatus('Copy failed: ' + e.message);
-    }
+    downloadJSON(state.current, `unmatched-match-${timestampForFilename()}.json`);
+    setStatus('Downloaded current match JSON.');
   });
   bindPress(shareCurrentBtn);
 
   const shareBtn = document.getElementById('share-btn');
-  shareBtn.addEventListener('click', async () => {
-    const json = JSON.stringify(state, null, 2);
-    try {
-      await navigator.clipboard.writeText(json);
-      setStatus('Copied full backup (current match + history) JSON to clipboard.');
-    } catch (e) {
-      setStatus('Copy failed: ' + e.message);
-    }
+  shareBtn.addEventListener('click', () => {
+    downloadJSON(state, `unmatched-backup-${timestampForFilename()}.json`);
+    setStatus('Downloaded full backup (current match + history) JSON.');
   });
   bindPress(shareBtn);
 
@@ -926,7 +933,7 @@ function wireEvents() {
         history: Array.isArray(imported.history) ? imported.history : [],
       };
     } else if (imported && Array.isArray(imported.players) && Array.isArray(imported.log)) {
-      // Single-match shape (from "Copy Current Match") — drop it in as the
+      // Single-match shape (from "Download Current Match") — drop it in as the
       // current match, archiving whatever was already in progress here.
       if (state.current) {
         state.history.unshift(state.current);
