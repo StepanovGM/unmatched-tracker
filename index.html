@@ -9,7 +9,7 @@
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <link rel="stylesheet" href="css/style.css?v=10" />
+  <link rel="stylesheet" href="css/style.css?v=11" />
 </head>
 <body>
   <main class="app">
@@ -57,8 +57,15 @@
         <button id="new-match-btn" class="btn btn-secondary">New Match</button>
       </div>
 
-      <h2 class="log-heading">Log</h2>
-      <ul id="action-log" class="action-log"></ul>
+      <div class="log-header">
+        <h2 class="log-heading">Log</h2>
+        <div class="log-view-toggle">
+          <button type="button" id="log-view-timeline-btn" class="log-view-btn">Timeline</button>
+          <button type="button" id="log-view-text-btn" class="log-view-btn">Text</button>
+        </div>
+      </div>
+      <div id="match-log" class="match-log"></div>
+      <ul id="match-log-text" class="match-log-text" hidden></ul>
     </section>
 
     <section id="history-card" class="card" hidden>
@@ -94,6 +101,6 @@
     </div>
   </div>
 
-  <script src="js/app.js?v=14"></script>
+  <script src="js/app.js?v=15"></script>
 </body>
 </html>

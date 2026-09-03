@@ -122,20 +122,6 @@ function currentHp(player, fighter) {
   return startingHp(player, fighter) + delta;
 }
 
-// Running HP total right after a specific 'hp' log entry was applied —
-// used to show "current HP" in the log without needing a separate,
-// always-visible HP display (per Gleb's minimalism call).
-function hpAfterEntry(match, targetEntry) {
-  const idx = match.log.indexOf(targetEntry);
-  const { player } = targetEntry;
-  const fighter = targetEntry.target.fighter;
-  const delta = match.log
-    .slice(0, idx + 1)
-    .filter((e) => e.type === 'hp' && e.player === player && e.target.fighter === fighter)
-    .reduce((sum, e) => sum + e.delta, 0);
-  return startingHpFor(match, player, fighter) + delta;
-}
-
 function isDead(player, fighter) {
   return state.current.log.some((e) => e.type === 'death' && e.player === player && e.target.fighter === fighter);
 }
@@ -347,41 +333,6 @@ function renderSetup() {
   renderHeroGrid(1);
   const startBtn = document.getElementById('start-match-btn');
   startBtn.disabled = !(draft[0] && draft[1] && draft[0] !== draft[1]);
-}
-
-function describeEntry(entry, match) {
-  const hero = heroBySlug(match.players[entry.player].heroSlug);
-  const heroName = hero ? hero.name : 'P' + (entry.player + 1);
-  switch (entry.type) {
-    case 'pass':
-      return heroName + ' passed turn';
-    case 'action':
-      return heroName + ' — Maneuver';
-    case 'draw':
-      return heroName + ' — Draw a card';
-    case 'play': {
-      const mechLabel = { attack: 'Attack', scheme: 'Scheme', defense: 'Defense' }[entry.mechanic] || entry.mechanic;
-      return `${heroName} — ${mechLabel}: ${entry.cardName}`;
-    }
-    case 'discard':
-      return `${heroName} — Discard: ${entry.cardName}${entry.boosted ? ' (Boost)' : ''}`;
-    case 'hp': {
-      const who = fighterLabel(match, entry.player, entry.target.fighter);
-      const sign = entry.delta >= 0 ? '+' : '';
-      const hpNow = hpAfterEntry(match, entry);
-      return `${who} ${sign}${entry.delta} HP → ${hpNow}`;
-    }
-    case 'death':
-      return `${fighterLabel(match, entry.player, entry.target.fighter)} defeated`;
-    case 'spawn':
-      return `${heroName} — Sidekick spawn`;
-    case 'ability':
-      return `${heroName} — Special ability`;
-    case 'return':
-      return `${heroName} — Card returns: ${entry.cardName}`;
-    default:
-      return heroName + ' — ' + entry.type;
-  }
 }
 
 const PLAY_LEAF = {
@@ -686,6 +637,836 @@ function renderMenu() {
   }
 }
 
+// --- Match log chronology ---------------------------------------------
+// Mirrors the "Ход матча" timeline on the tournament site (see
+// Tournament webpage/js/match-log.js + scripts/import-match-log.mjs),
+// rebuilt live from match.log on every render instead of pre-baked
+// offline. Same grouping rules: a maneuver, an ability by its own
+// owner, or a card played by the turn owner opens a new row; every
+// other event (draw/discard/return/spawn/hp/death) never happens "on
+// its own" and attaches to whichever row is currently open.
+
+const LOG_ICONS = {
+  boot: '<svg viewBox="0 0 512 512" fill="currentColor"><path d="M272.5 18.906c-12.775.17-26.23 2.553-40.344 7.594-30.165 55.31-68.313 120.904-125.72 178.5-21.19 21.26-39.23 44.94-52.28 68.313 1.294 6.312 4.984 11.65 10.72 17.406 10.992 11.032 30.86 21.618 54.593 33.25 46.313 22.695 107.284 50.39 146.374 108.467l195.625.032c-20.198-70.834-100.276-101.12-159.064-83.94-.073.03-.145.066-.22.095-1.61.633-3.27 1.138-4.967 1.563-.024.005-.04.025-.064.03-8.86 2.204-18.82 1.68-29.125-.406-24.79-5.02-52.76-19.695-61.342-45.687-28.615-86.673 16.65-179.742 78.156-223.28 23.064-16.328 49.06-25.848 74.47-24.47.144.008.29.023.436.03-24.19-22.74-53.33-37.95-87.25-37.5zm81.75 56c-19.213.01-39.414 7.59-58.625 21.188-54.644 38.682-96.652 125.024-71.188 202.156 5.127 15.53 27.25 29.162 47.282 33.22 10.015 2.027 19.218 1.518 23.717-.283 2.25-.9 3.173-1.84 3.594-2.562.422-.72.81-1.663.25-4.375-9.08-44.167-2.743-84.61 22.533-114.47 23.586-27.863 62.753-45.462 117.406-50.686-15.014-47.145-37.47-71.226-61.314-80.03-6.407-2.368-13.032-3.706-19.812-4.064-1.272-.067-2.563-.094-3.844-.094zM43.78 294.22c-5.405 12.554-9.136 24.756-10.905 36.186 7.178 27.76 51.898 55.43 91.094 61.344 1.703-5.973 5.832-11.475 10.28-14.25 51.01 28.844 86.18 60.704 102 101h229.594c.697-9.613.44-18.712-.625-27.344l-204.314-.03h-5.125l-2.75-4.345c-35.405-55.575-93.93-82.58-141.78-106.03-23.925-11.724-45.17-22.336-59.625-36.844-2.978-2.99-5.618-6.225-7.844-9.687z"/></svg>',
+  star: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.7-4.9 4.6 1.3 6.6L12 17l-5.9 3.5 1.3-6.6-4.9-4.6 6.6-.7L12 2.5z"/></svg>',
+  heart: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.5s-7.5-4.6-9.8-9.3C.7 7.8 2.4 4.5 5.6 4c2.1-.3 3.9.7 6.4 3.4C14.5 4.7 16.3 3.7 18.4 4c3.2.5 4.9 3.8 3.4 7.2C19.5 15.9 12 20.5 12 20.5z"/></svg>',
+  skull: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3C7.6 3 5 6.2 5 10c0 2.4 1 3.9 2 5v2.5c0 .8.7 1.5 1.5 1.5H10v-2h1v2h2v-2h1v2h1.5c.8 0 1.5-.7 1.5-1.5V15c1-1.1 2-2.6 2-5 0-3.8-2.6-7-7-7z"/><circle cx="9.3" cy="10.5" r="1.3" fill="currentColor" stroke="none"/><circle cx="14.7" cy="10.5" r="1.3" fill="currentColor" stroke="none"/></svg>',
+  plus: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M11 3h2v8h8v2h-8v8h-2v-8H3v-2h8z"/></svg>',
+  grip: '<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="8" cy="5" r="1.7"/><circle cx="16" cy="5" r="1.7"/><circle cx="8" cy="12" r="1.7"/><circle cx="16" cy="12" r="1.7"/><circle cx="8" cy="19" r="1.7"/><circle cx="16" cy="19" r="1.7"/></svg>',
+};
+
+function logIcon(name, extraClass) {
+  const span = document.createElement('span');
+  span.className = 'log-icon' + (extraClass ? ' ' + extraClass : '');
+  span.innerHTML = LOG_ICONS[name] || '';
+  return span;
+}
+
+const LOG_CHIP_LABEL = { maneuver: 'Maneuver', ability: 'Ability' };
+const LOG_CHIP_ICON = { maneuver: 'boot', ability: 'star' };
+const LOG_ATTACH_KINDS = new Set(['draw', 'discard', 'return', 'spawn']);
+
+function heroFighterKeys(match, player) {
+  const hero = heroBySlug(match.players[player].heroSlug);
+  const count = heroFigureCount(hero);
+  if (count > 1) return Array.from({ length: count }, (_, i) => 'hero-' + i);
+  return ['hero'];
+}
+
+function sidePlayer(side) {
+  return side === 'A' ? 0 : 1;
+}
+
+function heroForSide(match, side) {
+  return heroBySlug(match.players[sidePlayer(side)].heroSlug);
+}
+
+function cardImageFor(match, side, cardId) {
+  const hero = heroForSide(match, side);
+  const card = hero && hero.cards ? hero.cards.find((c) => c.id === cardId) : null;
+  return card ? card.image : null;
+}
+
+// Groups the flat match.log into rounds/segments/reactions, the same
+// shape scripts/import-match-log.mjs bakes for the tournament site.
+function buildLogRounds(match) {
+  const roundsMap = new Map();
+  const roundOrder = [];
+  function roundSegments(round) {
+    if (!roundsMap.has(round)) {
+      roundsMap.set(round, []);
+      roundOrder.push(round);
+    }
+    return roundsMap.get(round);
+  }
+
+  const hpTotals = new Map();
+  function liveHp(player, fighter) {
+    const k = player + ':' + fighter;
+    if (!hpTotals.has(k)) hpTotals.set(k, startingHpFor(match, player, fighter));
+    return hpTotals.get(k);
+  }
+  function applyDelta(player, fighter, delta) {
+    const next = liveHp(player, fighter) + delta;
+    hpTotals.set(player + ':' + fighter, next);
+    return next;
+  }
+  function heroHpSnapshot() {
+    const sumFor = (player) => heroFighterKeys(match, player).reduce((sum, k) => sum + liveHp(player, k), 0);
+    return { A: sumFor(0), B: sumFor(1) };
+  }
+
+  let activePlayer = 0;
+  let currentSegment = null;
+  const groupBundles = new Map();
+  let lastRound = null;
+  const heroHpByRound = new Map();
+
+  match.log.forEach((entry) => {
+    const ownerIdx = entry.player;
+    const isTurnOwner = ownerIdx === activePlayer;
+    const side = ownerIdx === 0 ? 'A' : 'B';
+    const round = entry.turnNumber;
+
+    if (round !== lastRound) {
+      // Round just started — snapshot HP as it stood before this
+      // round's own events (i.e. at the end of the previous one).
+      heroHpByRound.set(round, heroHpSnapshot());
+      lastRound = round;
+    }
+
+    if (entry.type === 'pass') {
+      activePlayer = 1 - activePlayer;
+      return;
+    }
+
+    if (entry.type === 'hp' || entry.type === 'death') {
+      const fighter = entry.target.fighter;
+      const label = fighterLabel(match, ownerIdx, fighter);
+      let bundle = entry.groupId ? groupBundles.get(entry.groupId) : null;
+
+      if (entry.type === 'hp') {
+        const total = applyDelta(ownerIdx, fighter, entry.delta);
+        const hit = { fighterLabel: label, delta: entry.delta, total, dead: false };
+        if (!bundle) {
+          bundle = { side, kind: 'hp', hits: [hit], reactions: [] };
+          if (entry.groupId) groupBundles.set(entry.groupId, bundle);
+          // HP changes never happen "on their own" — attach to
+          // whichever row is currently open, not a new one.
+          if (currentSegment) {
+            currentSegment.reactions.push(bundle);
+          } else {
+            roundSegments(round).push(bundle);
+            currentSegment = bundle;
+          }
+        } else {
+          bundle.hits.push(hit);
+        }
+      } else {
+        if (bundle) {
+          const hit = [...bundle.hits].reverse().find((h) => h.fighterLabel === label && !h.dead);
+          if (hit) hit.dead = true;
+          else bundle.hits.push({ fighterLabel: label, delta: 0, total: liveHp(ownerIdx, fighter), dead: true });
+        }
+      }
+      return;
+    }
+
+    // Anchor (opens a new row) — only a maneuver, an ability by its
+    // own owner, or a card played by the turn owner. Discard/draw/
+    // return/spawn always attach to the currently open row.
+    let seg;
+    let isAnchor;
+    switch (entry.type) {
+      case 'action':
+        seg = { side, kind: 'maneuver', reactions: [] };
+        isAnchor = true;
+        break;
+      case 'ability':
+        seg = { side, kind: 'ability', reactions: [] };
+        isAnchor = isTurnOwner;
+        break;
+      case 'spawn':
+        seg = { side, kind: 'spawn', reactions: [] };
+        isAnchor = false;
+        break;
+      case 'draw':
+        seg = { side, kind: 'draw', reactions: [] };
+        isAnchor = false;
+        break;
+      case 'play':
+      case 'discard':
+      case 'return':
+        seg = {
+          side,
+          kind: entry.type,
+          cardType: entry.cardType,
+          mechanic: entry.mechanic || null,
+          cardId: entry.cardId,
+          cardName: entry.cardName,
+          boosted: entry.type === 'discard' ? !!entry.boosted : undefined,
+          reactions: [],
+        };
+        isAnchor = entry.type === 'play' && isTurnOwner;
+        break;
+      default:
+        return;
+    }
+
+    if (isAnchor) {
+      roundSegments(round).push(seg);
+      currentSegment = seg;
+    } else if (currentSegment) {
+      currentSegment.reactions.push(seg);
+    } else {
+      roundSegments(round).push(seg);
+      currentSegment = seg;
+    }
+  });
+
+  return roundOrder.map((round) => ({
+    round,
+    heroHp: heroHpByRound.get(round) || heroHpSnapshot(),
+    segments: roundSegments(round),
+  }));
+}
+
+// ---- Lightbox: tap a card to see it larger ----
+
+let logLightboxEl = null;
+
+function ensureLogLightbox() {
+  if (logLightboxEl) return logLightboxEl;
+  logLightboxEl = document.createElement('div');
+  logLightboxEl.className = 'log-lightbox';
+  const img = document.createElement('img');
+  logLightboxEl.appendChild(img);
+  logLightboxEl.addEventListener('click', () => logLightboxEl.classList.remove('is-open'));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && logLightboxEl) logLightboxEl.classList.remove('is-open');
+  });
+  document.body.appendChild(logLightboxEl);
+  return logLightboxEl;
+}
+
+function openLogLightbox(src, alt) {
+  const el = ensureLogLightbox();
+  const img = el.querySelector('img');
+  img.src = src;
+  img.alt = alt || '';
+  el.classList.add('is-open');
+}
+
+function makeLogCardClickable(img) {
+  img.classList.add('log-card-clickable');
+  img.addEventListener('click', (e) => {
+    e.stopPropagation();
+    openLogLightbox(img.src, img.alt);
+  });
+}
+
+// ---- Individual event visuals ----
+
+function buildLogChip(kind) {
+  const chip = document.createElement('div');
+  chip.className = 'log-chip';
+  chip.appendChild(logIcon(LOG_CHIP_ICON[kind], 'log-chip-icon'));
+  const label = document.createElement('span');
+  label.textContent = LOG_CHIP_LABEL[kind];
+  chip.appendChild(label);
+  return chip;
+}
+
+function buildLogPlaceholder(name) {
+  const span = document.createElement('span');
+  span.className = 'log-card-placeholder';
+  span.textContent = (name || '?').charAt(0).toUpperCase();
+  return span;
+}
+
+function buildLogPlayCard(entry, match) {
+  const wrap = document.createElement('div');
+  wrap.className = 'log-card';
+  wrap.title = entry.cardName || '';
+
+  const placeholder = buildLogPlaceholder(entry.cardName);
+  const img = document.createElement('img');
+  img.src = cardImageFor(match, entry.side, entry.cardId) || '';
+  img.alt = entry.cardName || '';
+  img.onerror = () => img.replaceWith(placeholder);
+  makeLogCardClickable(img);
+
+  wrap.appendChild(img);
+  return wrap;
+}
+
+function buildLogAttachBase(extraClass) {
+  const wrap = document.createElement('div');
+  wrap.className = 'log-attach-card' + (extraClass ? ' ' + extraClass : '');
+  return wrap;
+}
+
+function buildLogOverlaySymbol(char) {
+  const overlay = document.createElement('span');
+  overlay.className = 'log-attach-overlay';
+  const text = document.createElement('span');
+  text.className = 'log-attach-overlay-text';
+  text.textContent = char;
+  overlay.appendChild(text);
+  return overlay;
+}
+
+function buildLogDrawEntry(entry, match) {
+  const wrap = buildLogAttachBase();
+  wrap.title = 'Drew a card';
+  const hero = heroForSide(match, entry.side);
+  const placeholder = buildLogPlaceholder(hero ? hero.name : '?');
+  const img = document.createElement('img');
+  img.src = (hero && hero.cardBackImage) || '';
+  img.alt = '';
+  img.onerror = () => img.replaceWith(placeholder);
+  wrap.appendChild(img);
+  wrap.appendChild(buildLogOverlaySymbol('+'));
+  return wrap;
+}
+
+function buildLogDiscardEntry(entry, match) {
+  const wrap = buildLogAttachBase();
+  wrap.title = entry.cardName || 'Discard';
+
+  const placeholder = buildLogPlaceholder(entry.cardName);
+  const img = document.createElement('img');
+  img.src = cardImageFor(match, entry.side, entry.cardId) || '';
+  img.alt = entry.cardName || '';
+  img.onerror = () => img.replaceWith(placeholder);
+  makeLogCardClickable(img);
+  wrap.appendChild(img);
+
+  // Direction the card left the hand — A discards leftward, B rightward.
+  wrap.appendChild(buildLogOverlaySymbol(entry.side === 'A' ? '↩' : '↪'));
+
+  if (entry.boosted) {
+    const badge = document.createElement('span');
+    badge.className = 'log-attach-badge log-attach-badge-boost';
+    badge.appendChild(logIcon('star'));
+    wrap.appendChild(badge);
+  }
+
+  return wrap;
+}
+
+function buildLogReturnEntry(entry, match) {
+  const wrap = buildLogAttachBase();
+  wrap.title = entry.cardName || 'Returns to hand';
+
+  const placeholder = buildLogPlaceholder(entry.cardName);
+  const img = document.createElement('img');
+  img.src = cardImageFor(match, entry.side, entry.cardId) || '';
+  img.alt = entry.cardName || '';
+  img.onerror = () => img.replaceWith(placeholder);
+  makeLogCardClickable(img);
+  wrap.appendChild(img);
+  wrap.appendChild(buildLogOverlaySymbol('⇧'));
+
+  return wrap;
+}
+
+function buildLogSpawnEntry(entry, match) {
+  const wrap = document.createElement('div');
+  wrap.className = 'log-spawn';
+  wrap.title = 'Sidekick spawn';
+
+  const hero = heroForSide(match, entry.side);
+  const tokenImage = hero && hero.sidekick && hero.sidekick.tokenImages ? hero.sidekick.tokenImages[0] : null;
+  const placeholder = document.createElement('span');
+  placeholder.className = 'log-spawn-placeholder';
+  placeholder.textContent = '+';
+
+  if (tokenImage) {
+    const img = document.createElement('img');
+    img.src = tokenImage;
+    img.alt = '';
+    img.onerror = () => img.replaceWith(placeholder);
+    wrap.appendChild(img);
+  } else {
+    wrap.appendChild(placeholder);
+  }
+
+  const badge = document.createElement('span');
+  badge.className = 'log-attach-badge log-attach-badge-spawn';
+  badge.appendChild(logIcon('plus'));
+  wrap.appendChild(badge);
+
+  return wrap;
+}
+
+function buildLogAttachContent(entry, match) {
+  switch (entry.kind) {
+    case 'draw':
+      return buildLogDrawEntry(entry, match);
+    case 'discard':
+      return buildLogDiscardEntry(entry, match);
+    case 'return':
+      return buildLogReturnEntry(entry, match);
+    case 'spawn':
+      return buildLogSpawnEntry(entry, match);
+    default:
+      return document.createElement('span');
+  }
+}
+
+function buildLogHpLine(hit) {
+  const line = document.createElement('div');
+  line.className = 'log-hp-hit' + (hit.dead ? ' log-hp-dead' : '');
+
+  const label = document.createElement('span');
+  label.className = 'log-hp-label';
+  label.textContent = hit.fighterLabel;
+  line.appendChild(label);
+
+  const delta = document.createElement('span');
+  delta.className = 'log-hp-delta ' + (hit.delta < 0 ? 'log-hp-dmg' : hit.delta > 0 ? 'log-hp-heal' : 'log-hp-flat');
+  delta.textContent = `${hit.delta > 0 ? '+' : ''}${hit.delta} → ${hit.total}`;
+  line.appendChild(delta);
+
+  if (hit.dead) line.appendChild(logIcon('skull', 'log-hp-skull'));
+
+  return line;
+}
+
+// ---- Overlapped stack (hover/tap brings a card to the front) ----
+
+function buildLogAttachStack(items, match) {
+  const stack = document.createElement('div');
+  stack.className = 'log-attach-stack';
+
+  items.forEach((item, i) => {
+    const holder = document.createElement('div');
+    holder.className = 'log-attach-item';
+    holder.style.setProperty('--i', String(i));
+    holder.tabIndex = 0;
+    holder.appendChild(buildLogAttachContent(item, match));
+    holder.addEventListener('click', () => {
+      stack.querySelectorAll('.log-attach-item.is-front').forEach((el) => el.classList.remove('is-front'));
+      holder.classList.add('is-front');
+    });
+    holder.addEventListener('focus', () => holder.classList.add('is-front'));
+    holder.addEventListener('blur', () => holder.classList.remove('is-front'));
+    stack.appendChild(holder);
+  });
+
+  return stack;
+}
+
+// ---- One cell (one side of one row) ----
+
+function classifyLogSide(segment, side) {
+  const all = [segment, ...(segment.reactions || [])].filter((e) => e.side === side);
+  const primary = [];
+  const attach = [];
+  const hp = [];
+  all.forEach((e) => {
+    if (e.kind === 'hp') hp.push(...e.hits);
+    else if (LOG_ATTACH_KINDS.has(e.kind)) attach.push(e);
+    else primary.push(e);
+  });
+  return { primary, attach, hp };
+}
+
+function buildLogCell(segment, side, match) {
+  const cell = document.createElement('div');
+  cell.className = 'log-cell log-cell-' + side.toLowerCase();
+
+  const { primary, attach, hp } = classifyLogSide(segment, side);
+
+  if (primary.length || attach.length) {
+    const main = document.createElement('div');
+    main.className = 'log-cell-main';
+
+    const buildPrimaryEls = () =>
+      primary.map((entry) => {
+        const el = entry.kind === 'play' ? buildLogPlayCard(entry, match) : buildLogChip(entry.kind);
+        if (entry === segment && segment.kind === 'play' && segment.mechanic === 'attack') {
+          el.classList.add('log-attack-source');
+        }
+        return el;
+      });
+
+    if (side === 'A') {
+      if (attach.length) main.appendChild(buildLogAttachStack(attach, match));
+      buildPrimaryEls().forEach((el) => main.appendChild(el));
+    } else {
+      buildPrimaryEls().forEach((el) => main.appendChild(el));
+      if (attach.length) main.appendChild(buildLogAttachStack(attach, match));
+    }
+
+    cell.appendChild(main);
+  }
+
+  if (hp.length) {
+    const hpWrap = document.createElement('div');
+    hpWrap.className = 'log-cell-hp';
+    hp.forEach((hit) => hpWrap.appendChild(buildLogHpLine(hit)));
+    cell.appendChild(hpWrap);
+  }
+
+  return cell;
+}
+
+function logRowHasDeath(segment) {
+  const all = [segment, ...(segment.reactions || [])];
+  return all.some((e) => e.kind === 'hp' && e.hits.some((h) => h.dead));
+}
+
+function logRowHasCard(segment) {
+  const all = [segment, ...(segment.reactions || [])];
+  return all.some((e) => e.kind === 'play');
+}
+
+function buildLogRow(segment, match) {
+  const row = document.createElement('div');
+  row.className = 'log-row';
+  if (logRowHasDeath(segment)) row.classList.add('log-row-death');
+  if (logRowHasCard(segment)) row.classList.add('log-row-card');
+
+  const cellA = buildLogCell(segment, 'A', match);
+  const cellB = buildLogCell(segment, 'B', match);
+
+  if (segment.kind === 'play' && segment.mechanic === 'attack') {
+    const arrow = document.createElement('div');
+    arrow.className = 'log-attack-arrow ' + (segment.side === 'A' ? 'log-attack-a2b' : 'log-attack-b2a');
+    row.appendChild(arrow);
+  }
+
+  row.appendChild(cellA);
+  row.appendChild(cellB);
+  return row;
+}
+
+function buildLogHeroHpBadge(hp, side) {
+  const el = document.createElement('span');
+  el.className = 'log-round-hp log-round-hp-' + side.toLowerCase();
+  el.appendChild(logIcon('heart', 'log-round-hp-icon'));
+  const value = document.createElement('span');
+  value.textContent = Math.max(0, hp);
+  el.appendChild(value);
+  return el;
+}
+
+// Attack arrows sit at the height of the attacking card, not centered
+// on the whole row (which can be taller/shorter on either side due to
+// attach stacks) — measured after the row is actually in the DOM.
+function positionLogAttackArrows(root) {
+  root.querySelectorAll('.log-attack-arrow').forEach((arrow) => {
+    const row = arrow.closest('.log-row');
+    const source = row && row.querySelector('.log-attack-source');
+    if (!source) return;
+    arrow.style.top = source.offsetTop + source.offsetHeight / 2 + 'px';
+  });
+}
+
+// --- Text view: one line per raw log entry, reorderable -----------------
+// Same underlying entries as the timeline above, just flattened — with
+// up/down controls so a forgotten action (e.g. a missed discard) can be
+// logged now and moved back to where it should have happened, instead
+// of undoing everything since.
+
+function hpTotalThroughIndex(match, index) {
+  const entry = match.log[index];
+  const { player } = entry;
+  const fighter = entry.target.fighter;
+  const delta = match.log
+    .slice(0, index + 1)
+    .filter((e) => e.type === 'hp' && e.player === player && e.target.fighter === fighter)
+    .reduce((sum, e) => sum + e.delta, 0);
+  return startingHpFor(match, player, fighter) + delta;
+}
+
+function describeLogEntry(entry, index, match) {
+  const hero = heroBySlug(match.players[entry.player].heroSlug);
+  const heroName = hero ? hero.name : 'P' + (entry.player + 1);
+  switch (entry.type) {
+    case 'pass':
+      return heroName + ' passed turn';
+    case 'action':
+      return heroName + ' — Maneuver';
+    case 'draw':
+      return heroName + ' — Draw a card';
+    case 'play': {
+      const mechLabel = { attack: 'Attack', scheme: 'Scheme', defense: 'Defense' }[entry.mechanic] || entry.mechanic;
+      return `${heroName} — ${mechLabel}: ${entry.cardName}`;
+    }
+    case 'discard':
+      return `${heroName} — Discard: ${entry.cardName}${entry.boosted ? ' (Boost)' : ''}`;
+    case 'hp': {
+      const who = fighterLabel(match, entry.player, entry.target.fighter);
+      const sign = entry.delta >= 0 ? '+' : '';
+      const hpNow = hpTotalThroughIndex(match, index);
+      return `${who} ${sign}${entry.delta} HP → ${hpNow}`;
+    }
+    case 'death':
+      return `${fighterLabel(match, entry.player, entry.target.fighter)} defeated`;
+    case 'spawn':
+      return `${heroName} — Sidekick spawn`;
+    case 'ability':
+      return `${heroName} — Special ability`;
+    case 'return':
+      return `${heroName} — Card returns: ${entry.cardName}`;
+    default:
+      return heroName + ' — ' + entry.type;
+  }
+}
+
+// --- Drag-to-reorder ---------------------------------------------------
+// Pointer Events, not the HTML5 Drag and Drop API — mobile browsers
+// (this is a touch-first PWA) don't fire native drag events from touch
+// input. Grab the handle, drag up/down; the row follows the finger and
+// a highlighted edge on another row shows where it will land. Reflow
+// only happens once, on release — entries keep whatever turnNumber/
+// player they were logged with, only their position (and so their
+// grouping/attach order in the timeline view) changes.
+
+let logDrag = null;
+
+// Distance from the list's edge (px) that triggers auto-scroll, and the
+// fastest it scrolls right at the edge (px/frame).
+const LOG_DRAG_EDGE = 36;
+const LOG_DRAG_MAX_SPEED = 14;
+
+function clearLogDropIndicator() {
+  document.querySelectorAll('.log-text-row-drop-before, .log-text-row-drop-after').forEach((el) => {
+    el.classList.remove('log-text-row-drop-before', 'log-text-row-drop-after');
+  });
+}
+
+// Repositions the dragged row under the pointer — accounting for any
+// auto-scroll that has happened since the drag started, not just raw
+// finger movement, so the row doesn't drift once the list starts
+// scrolling under a stationary finger — then re-does hit-testing
+// against every other row's *current* (post-scroll) position.
+function updateLogDrag() {
+  if (!logDrag) return;
+  const root = document.getElementById('match-log-text');
+  const pointerDelta = logDrag.lastClientY - logDrag.startClientY;
+  const scrollDelta = root.scrollTop - logDrag.startScrollTop;
+  logDrag.li.style.transform = `translateY(${pointerDelta + scrollDelta}px)`;
+
+  const draggedRect = logDrag.li.getBoundingClientRect();
+  const draggedMid = draggedRect.top + draggedRect.height / 2;
+
+  clearLogDropIndicator();
+  const rows = Array.from(root.querySelectorAll('.log-text-row'));
+  let target = null;
+  let after = true;
+  for (let i = 0; i < rows.length; i++) {
+    const el = rows[i];
+    if (el === logDrag.li) continue;
+    const r = el.getBoundingClientRect();
+    if (draggedMid < r.top + r.height / 2) {
+      target = { index: i, el };
+      after = false;
+      break;
+    }
+    target = { index: i, el };
+    after = true;
+  }
+  if (!target) return; // the dragged row is the only row
+
+  logDrag.dropIndex = after ? target.index + 1 : target.index;
+  target.el.classList.add(after ? 'log-text-row-drop-after' : 'log-text-row-drop-before');
+}
+
+// Ticks on a timer (not requestAnimationFrame) so the list keeps
+// scrolling even when the finger is held still near an edge, not just
+// on pointermove — and keeps working if the tab is backgrounded
+// mid-drag, since browsers suspend rAF for hidden pages far more
+// aggressively than a short-lived interval.
+function logDragAutoScrollTick() {
+  if (!logDrag) return;
+  const root = document.getElementById('match-log-text');
+  const rect = root.getBoundingClientRect();
+  const y = logDrag.lastClientY;
+
+  let speed = 0;
+  if (y < rect.top + LOG_DRAG_EDGE) {
+    speed = -Math.ceil(((rect.top + LOG_DRAG_EDGE - y) / LOG_DRAG_EDGE) * LOG_DRAG_MAX_SPEED);
+  } else if (y > rect.bottom - LOG_DRAG_EDGE) {
+    speed = Math.ceil(((y - (rect.bottom - LOG_DRAG_EDGE)) / LOG_DRAG_EDGE) * LOG_DRAG_MAX_SPEED);
+  }
+
+  if (speed !== 0) {
+    const maxScroll = root.scrollHeight - root.clientHeight;
+    const next = Math.max(0, Math.min(maxScroll, root.scrollTop + speed));
+    if (next !== root.scrollTop) {
+      root.scrollTop = next;
+      updateLogDrag();
+    }
+  }
+
+}
+
+function onLogDragMove(e) {
+  if (!logDrag || e.pointerId !== logDrag.pointerId) return;
+  e.preventDefault();
+  logDrag.lastClientY = e.clientY;
+  updateLogDrag();
+}
+
+function onLogDragEnd(e) {
+  if (!logDrag || e.pointerId !== logDrag.pointerId) return;
+  const { li, fromIndex, dropIndex } = logDrag;
+  const commit = e.type === 'pointerup';
+
+  clearInterval(logDrag.scrollTimer);
+  li.classList.remove('log-text-row-dragging');
+  li.style.transform = '';
+  clearLogDropIndicator();
+  document.removeEventListener('pointermove', onLogDragMove);
+  document.removeEventListener('pointerup', onLogDragEnd);
+  document.removeEventListener('pointercancel', onLogDragEnd);
+  logDrag = null;
+
+  // A cancelled gesture (e.g. an OS/browser interruption) discards the
+  // reorder instead of committing it.
+  if (!commit || dropIndex == null || dropIndex === fromIndex || dropIndex === fromIndex + 1) return;
+  const log = state.current.log;
+  const [entry] = log.splice(fromIndex, 1);
+  const insertAt = dropIndex > fromIndex ? dropIndex - 1 : dropIndex;
+  log.splice(insertAt, 0, entry);
+  saveState();
+  render();
+}
+
+function startLogDrag(li, handle, index, e) {
+  if (e.button !== undefined && e.button !== 0) return;
+  e.preventDefault();
+
+  const root = document.getElementById('match-log-text');
+  logDrag = {
+    li,
+    pointerId: e.pointerId,
+    fromIndex: index,
+    dropIndex: index,
+    startClientY: e.clientY,
+    lastClientY: e.clientY,
+    startScrollTop: root.scrollTop,
+    scrollTimer: null,
+  };
+
+  li.classList.add('log-text-row-dragging');
+  handle.setPointerCapture(e.pointerId);
+  document.addEventListener('pointermove', onLogDragMove);
+  document.addEventListener('pointerup', onLogDragEnd);
+  document.addEventListener('pointercancel', onLogDragEnd);
+  logDrag.scrollTimer = setInterval(logDragAutoScrollTick, 16);
+}
+
+function buildLogTextRow(entry, index, match) {
+  const li = document.createElement('li');
+  li.className = 'log-text-row';
+
+  const handle = document.createElement('button');
+  handle.type = 'button';
+  handle.className = 'log-text-handle';
+  handle.setAttribute('aria-label', 'Drag to reorder');
+  handle.appendChild(logIcon('grip'));
+  handle.addEventListener('pointerdown', (e) => startLogDrag(li, handle, index, e));
+
+  const turnSpan = document.createElement('span');
+  turnSpan.className = 'log-text-turn';
+  turnSpan.textContent = 'T' + entry.turnNumber;
+
+  const textSpan = document.createElement('span');
+  textSpan.className = 'log-text-desc';
+  textSpan.textContent = describeLogEntry(entry, index, match);
+
+  li.appendChild(handle);
+  li.appendChild(turnSpan);
+  li.appendChild(textSpan);
+  return li;
+}
+
+function renderMatchLogText(match) {
+  const root = document.getElementById('match-log-text');
+  if (!root) return;
+  const wasNearBottom = root.scrollHeight - root.scrollTop - root.clientHeight < 40;
+  root.innerHTML = '';
+  match.log.forEach((entry, index) => root.appendChild(buildLogTextRow(entry, index, match)));
+  if (wasNearBottom || match.log.length <= 1) root.scrollTop = root.scrollHeight;
+}
+
+// ---- View toggle ----
+
+let logViewMode = 'timeline'; // 'timeline' | 'text'
+
+function renderLog(match) {
+  const timelineRoot = document.getElementById('match-log');
+  const textRoot = document.getElementById('match-log-text');
+  const timelineBtn = document.getElementById('log-view-timeline-btn');
+  const textBtn = document.getElementById('log-view-text-btn');
+  const showTimeline = logViewMode === 'timeline';
+
+  timelineRoot.hidden = !showTimeline;
+  textRoot.hidden = showTimeline;
+  timelineBtn.classList.toggle('active', showTimeline);
+  textBtn.classList.toggle('active', !showTimeline);
+
+  if (showTimeline) renderMatchLog(match);
+  else renderMatchLogText(match);
+}
+
+function setLogViewMode(mode) {
+  if (logViewMode === mode) return;
+  logViewMode = mode;
+  if (state.current) renderLog(state.current);
+}
+
+// ---- Entry point ----
+
+function renderMatchLog(match) {
+  const root = document.getElementById('match-log');
+  if (!root) return;
+
+  const rounds = buildLogRounds(match);
+  // New rows land at the bottom — keep pinned there like a chat log,
+  // unless the reader scrolled up to look at earlier rounds.
+  const wasNearBottom = root.scrollHeight - root.scrollTop - root.clientHeight < 40;
+  root.innerHTML = '';
+
+  rounds.forEach((round) => {
+    const roundWrap = document.createElement('div');
+    roundWrap.className = 'log-round';
+
+    const divider = document.createElement('div');
+    divider.className = 'log-round-divider';
+    divider.appendChild(buildLogHeroHpBadge(round.heroHp.A, 'A'));
+    const line1 = document.createElement('span');
+    line1.className = 'log-round-line';
+    divider.appendChild(line1);
+    const num = document.createElement('span');
+    num.className = 'log-round-number';
+    num.textContent = `Round ${round.round}`;
+    divider.appendChild(num);
+    const line2 = document.createElement('span');
+    line2.className = 'log-round-line';
+    divider.appendChild(line2);
+    divider.appendChild(buildLogHeroHpBadge(round.heroHp.B, 'B'));
+    roundWrap.appendChild(divider);
+
+    const body = document.createElement('div');
+    body.className = 'log-round-body';
+    round.segments.forEach((segment) => body.appendChild(buildLogRow(segment, match)));
+    roundWrap.appendChild(body);
+
+    root.appendChild(roundWrap);
+  });
+
+  requestAnimationFrame(() => positionLogAttackArrows(root));
+  if (wasNearBottom || rounds.length <= 1) {
+    root.scrollTop = root.scrollHeight;
+  }
+}
+
 function renderMatch() {
   const match = state.current;
   const { turnNumber, activePlayer } = deriveTurnState(match.log);
@@ -703,26 +1484,7 @@ function renderMatch() {
 
   renderMenu();
 
-  const logEl = document.getElementById('action-log');
-  logEl.innerHTML = '';
-  // Newest entry first in the DOM (not CSS column-reverse, which doesn't
-  // reliably keep overflow scrolled to "the start" across browsers) —
-  // so the freshly-logged action is always what's visible after a commit.
-  match.log.slice().reverse().forEach((entry) => {
-    const li = document.createElement('li');
-
-    const turnSpan = document.createElement('span');
-    turnSpan.className = 'log-turn';
-    turnSpan.textContent = 'T' + entry.turnNumber;
-
-    const textSpan = document.createElement('span');
-    textSpan.textContent = describeEntry(entry, match);
-
-    li.appendChild(turnSpan);
-    li.appendChild(textSpan);
-    logEl.appendChild(li);
-  });
-  logEl.scrollTop = 0;
+  renderLog(match);
 }
 
 // A match counts as decided if exactly one player's hero died (pack
@@ -855,6 +1617,13 @@ function wireEvents() {
     render();
   });
   bindPress(cancelBtn);
+
+  const logTimelineBtn = document.getElementById('log-view-timeline-btn');
+  const logTextBtn = document.getElementById('log-view-text-btn');
+  logTimelineBtn.addEventListener('click', () => setLogViewMode('timeline'));
+  logTextBtn.addEventListener('click', () => setLogViewMode('text'));
+  bindPress(logTimelineBtn);
+  bindPress(logTextBtn);
 
   [0, 1].forEach((i) => {
     const panel = document.getElementById('player-panel-' + i);
