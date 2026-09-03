@@ -743,7 +743,6 @@ h2 {
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  flex-wrap: wrap;
 }
 
 .log-cell-a .log-cell-main {
@@ -939,8 +938,11 @@ h2 {
   border-radius: 8px;
 }
 
+/* Overlap grows with the number of cards in the stack (--n, see
+   buildLogAttachStack) so the stack widens much slower than the item
+   count and never pushes the row onto a second line. */
 .log-attach-item:not(:first-child) {
-  margin-left: calc(var(--log-attach-w) * -0.5);
+  margin-left: calc(var(--log-attach-w) * -1 * min(0.5 + 0.15 * (var(--n) - 2), 0.8));
 }
 
 .log-attach-item:hover,

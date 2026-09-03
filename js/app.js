@@ -1039,6 +1039,7 @@ function buildLogHpLine(hit) {
 function buildLogAttachStack(items, match) {
   const stack = document.createElement('div');
   stack.className = 'log-attach-stack';
+  stack.style.setProperty('--n', String(items.length));
 
   items.forEach((item, i) => {
     const holder = document.createElement('div');
@@ -1162,6 +1163,47 @@ function positionLogAttackArrows(root) {
     const source = row && row.querySelector('.log-attack-source');
     if (!source) return;
     arrow.style.top = source.offsetTop + source.offsetHeight / 2 + 'px';
+  });
+}
+
+// Base overlap from CSS (the --n variable) is just an eyeball estimate —
+// on narrow screens with 3+ attached cards it can still be too little,
+// pushing the row past its column's width, which gets clipped away
+// (the card just vanishes). Measure the rendered result and, if it's
+// still overflowing, tighten the overlap further, down to minReveal so
+// the card stays visible and tappable.
+function fitLogAttachStacks(root) {
+  root.querySelectorAll('.log-cell-main').forEach((main) => {
+    const cell = main.closest('.log-cell');
+    if (!cell) return;
+
+    const items = Array.from(main.querySelectorAll('.log-attach-item'));
+    if (items.length >= 2) {
+      const overflow = main.scrollWidth - cell.clientWidth;
+      if (overflow > 0) {
+        // Push the overlap past the CSS baseline (--n) up to fully
+        // overlapped if needed — a card can end up entirely behind its
+        // neighbor, but stays put (hover/click still bring it forward).
+        const itemWidth = items[1].getBoundingClientRect().width;
+        const minMargin = -itemWidth;
+        const perGap = overflow / (items.length - 1) + 1;
+        items.slice(1).forEach((item) => {
+          const current = parseFloat(getComputedStyle(item).marginLeft) || 0;
+          item.style.marginLeft = Math.max(minMargin, current - perGap) + 'px';
+        });
+      }
+    }
+
+    // Safety net: if even full overlap isn't enough (very narrow screen
+    // + a large stack), scale the whole group down slightly, anchored
+    // to its outer edge (right for side A, left for side B), instead of
+    // letting .log-full { overflow: hidden } clip the card away entirely.
+    const remaining = main.scrollWidth - cell.clientWidth;
+    if (remaining > 0) {
+      const scale = Math.max(0.01, cell.clientWidth / main.scrollWidth);
+      main.style.transformOrigin = cell.classList.contains('log-cell-a') ? 'right center' : 'left center';
+      main.style.transform = `scale(${scale})`;
+    }
   });
 }
 
@@ -1461,7 +1503,10 @@ function renderMatchLog(match) {
     root.appendChild(roundWrap);
   });
 
-  requestAnimationFrame(() => positionLogAttackArrows(root));
+  requestAnimationFrame(() => {
+    fitLogAttachStacks(root);
+    positionLogAttackArrows(root);
+  });
   if (wasNearBottom || rounds.length <= 1) {
     root.scrollTop = root.scrollHeight;
   }
